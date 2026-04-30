@@ -7,8 +7,9 @@ stays easy to trust.
 
 - Add difficulty labels inside each `.tidal` section if the metadata headers are
   not enough for instructors.
-- Add a compact `resources/kindohm-study-notes.md` with transformation menus,
-  sample-index recipes, and `whenmod` arrangements.
+- Use [`vocabulary-atlas.md`](vocabulary-atlas.md) as the compact reference for
+  transformation menus, sample-index recipes, bounded glitch, modulation, and
+  `whenmod` arrangements.
 - Add a visual grid for the section-logic examples in
   `tidal/kindohm-04-time-effects-and-sections.tidal`.
 

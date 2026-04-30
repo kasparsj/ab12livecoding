@@ -8,6 +8,13 @@
 - Eight study module plans.
 - Tidal teaching pack with orientation, map, and five study files.
 - Source map from upstream files to local teaching files.
+- Vocabulary atlas for instructor-facing technique lookup.
+
+## Documentation-Only
+
+- `vocabulary-atlas.md` is documentation-only and does not need live Tidal
+  verification. It points to existing practice files, which remain listed below
+  until they are tested in the class environment.
 
 ## Not Yet Verified Live
 
