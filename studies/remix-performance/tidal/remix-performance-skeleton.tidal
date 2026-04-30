@@ -1,0 +1,115 @@
+-- Remix performance skeleton
+-- Level: advanced
+-- Time: 35-55 minutes
+-- Prerequisites: p/named patterns, stack, struct, loopAt, gain, orbit
+-- Key functions: setcps, p, loopAt, jux, accelerate, struct, stack, slow
+-- Source caveat:
+-- This is inspired by remix-performance architecture, not by source audio.
+-- Use only stock samples here, then replace roles with your own material.
+-- Sample fallbacks:
+-- arpy -> superpiano -> feel
+-- superpiano -> arpy -> feel
+-- bass -> arpy -> superpiano
+-- drum -> bd/sn/hh/cp
+
+hush
+
+-- 1. Sound check.
+d1 $ sound "bd ~ sn ~" # gain 0.75
+d2 $ sound "hh*8" # gain 0.4
+
+hush
+
+-- 2. Local setup.
+-- This follows the source idea of grouping related parts with one prefix.
+-- If your Tidal setup does not expose p/named patterns, use d1-d4 with the
+-- same four roles: hook, build, percussion, bass.
+setcps (180/60/4)
+
+let t = "rmx"
+
+-- 3. Hook stem: a memorable loop role.
+p (t ++ "-hook")
+  $ loopAt 2
+  $ n "0 2 4 7"
+  # sound "arpy"
+  # gain 0.6
+  # legato 1
+  # orbit 0
+
+-- 4. Build stem: a wider supporting layer with subtle drift.
+p (t ++ "-build")
+  $ jux (# accelerate 0.03)
+  $ loopAt 2
+  $ n "7 9 11 14"
+  # sound "superpiano"
+  # gain 0.45
+  # legato 1
+  # orbit 1
+
+-- 5. Percussion stem: several gated parts in one named slot.
+p (t ++ "-perc")
+  $ stack [
+      struct "t ~ ~ ~" $ sound "bd" # gain 0.75,
+      struct "~ ~ t ~" $ sound "sn" # gain 0.55,
+      struct "t*8" $ sound "hh" # gain 0.35,
+      struct "~ t ~ [~ t]" $ sound "cp" # gain 0.45,
+      struct "[~ t]*2" $ n "0 2" # sound "drum" # gain 0.35
+    ]
+  # orbit 2
+
+-- 6. Bass stem: simple motion under the upper stems.
+p (t ++ "-bass")
+  $ struct "t*4"
+  $ slow 4
+  $ n "[0 2] [0 2]"
+  # sound "bass"
+  # gain 0.65
+  # legato 0.8
+  # room 0.25
+  # size 0.35
+  # orbit 3
+
+-- 7. Full four-stem state.
+-- Evaluate sections 3-6 together to rebuild the full state.
+
+-- 8. Breakdown state: remove percussion and make the hook thinner.
+p (t ++ "-perc") $ silence
+
+p (t ++ "-hook")
+  $ loopAt 2
+  $ n "0 ~ 4 ~"
+  # sound "arpy"
+  # gain 0.45
+  # legato 1
+  # orbit 0
+
+-- 9. Return state: restore the full rhythmic shape.
+p (t ++ "-hook")
+  $ loopAt 2
+  $ n "0 2 4 7"
+  # sound "arpy"
+  # gain 0.6
+  # legato 1
+  # orbit 0
+
+p (t ++ "-perc")
+  $ stack [
+      struct "t ~ ~ ~" $ sound "bd" # gain 0.75,
+      struct "~ ~ t ~" $ sound "sn" # gain 0.55,
+      struct "t*8" $ sound "hh" # gain 0.35,
+      struct "~ t ~ [~ t]" $ sound "cp" # gain 0.45
+    ]
+  # orbit 2
+
+-- 10. Safe subtractive ending.
+p (t ++ "-build") $ silence
+p (t ++ "-hook") $ silence
+p (t ++ "-perc") $ silence
+
+p (t ++ "-bass")
+  $ sound "bd ~ ~ ~"
+  # gain 0.6
+  # orbit 3
+
+hush
