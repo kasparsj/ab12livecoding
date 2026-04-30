@@ -1,4 +1,9 @@
 -- ndr-brt study 03 — Probability and rhythm logic
+-- Level: intermediate
+-- Time: 35-55 minutes
+-- Prerequisites: Euclidean notation, gain, simple layers
+-- Key functions: degradeBy, rand, irand, sometimes, euclid, mask, every
+-- Sample fallbacks: arpy -> superpiano -> gtr
 -- Themes from studies/ndr-brt/study-module-plans.md:
 -- Study 4: Probability With Boundaries
 -- Study 5: Boolean Rhythm Lab

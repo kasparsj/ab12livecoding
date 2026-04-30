@@ -1,4 +1,9 @@
 -- Kindohm / 365 Tidal Patterns study track - teaching map
+-- Level: orientation
+-- Time: 5-10 minutes
+-- Prerequisites: Tidal running, SuperDirt running, basic patterns
+-- Key functions: hush, sound, n, gain
+-- Sample fallbacks: arpy -> superpiano -> gtr
 -- Source study plans: studies/kindohm/*.md
 -- Use these files as optional artist-sketchbook studies.
 -- Evaluate one block at a time. If a sample is missing, replace it with bd, sn, hh, cp, arpy, bass, drum, or feel.

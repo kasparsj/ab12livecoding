@@ -1,4 +1,9 @@
 -- ndr-brt study 01 — Personal dialect and transformation chains
+-- Level: intermediate
+-- Time: 35-50 minutes
+-- Prerequisites: every, slow, fast, rev, basic layering
+-- Key functions: let aliases, superimpose, every, chunk, iter, foldEvery, whenmod
+-- Sample fallbacks: none required for bd/sn/cp/hh examples
 -- Themes from studies/ndr-brt/study-module-plans.md:
 -- Study 1: Build Your Livecoding Dialect
 -- Study 3: Transformation Chains as Composition

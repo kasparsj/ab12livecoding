@@ -1,4 +1,9 @@
 -- Kindohm study 03 - Sample-index machines
+-- Level: intermediate
+-- Time: 30-45 minutes
+-- Prerequisites: sound, n, gain, run, basic sample families
+-- Key functions: samples, run, slow, every, jux, speed
+-- Sample fallbacks: drum -> feel -> arpy; feel -> drum -> breaks125
 -- Themes from studies/kindohm/study-module-plans.md:
 -- Study 4: Sample-Index Machines
 --

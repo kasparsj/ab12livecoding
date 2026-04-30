@@ -1,4 +1,9 @@
 -- ndr-brt study 05 — Live set architecture
+-- Level: intermediate to advanced
+-- Time: 50-75 minutes
+-- Prerequisites: layers, silence, effects, sections, performance rehearsal
+-- Key functions: silence, slow, chop, degradeBy, every, slice, all, hush
+-- Sample fallbacks: arpy -> feel -> bass -> gtr; superpiano -> arpy -> gtr
 -- Themes from studies/ndr-brt/study-module-plans.md:
 -- Study 2: One Sample, Many Bodies
 -- Study 8: Live Set Architecture

@@ -1,4 +1,9 @@
 -- Kindohm study 05 - Melody and hardware translation
+-- Level: intermediate to advanced
+-- Time: 35-55 minutes
+-- Prerequisites: n, octave, scale, simple drum layers
+-- Key functions: scale, run, slow, degradeBy, whenmod, range, sine
+-- Sample fallbacks: superpiano -> arpy -> gtr; bass -> superpiano -> arpy
 -- Themes from studies/kindohm/study-module-plans.md:
 -- Study 8: Melody and Hardware Translation
 --

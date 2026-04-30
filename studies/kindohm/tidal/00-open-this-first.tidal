@@ -1,4 +1,9 @@
 -- Kindohm / 365 Tidal Patterns study track - open this first
+-- Level: orientation
+-- Time: 5-10 minutes
+-- Prerequisites: Tidal running, SuperDirt running, basic d1/d2 evaluation
+-- Key functions: hush, sound, n, gain
+-- Sample fallbacks: arpy -> superpiano -> gtr
 --
 -- Tidal-first index for working from .tidal files.
 -- All files are designed as live teaching scripts: evaluate one block at a time,

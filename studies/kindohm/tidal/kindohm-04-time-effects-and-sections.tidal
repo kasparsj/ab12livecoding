@@ -1,4 +1,9 @@
 -- Kindohm study 04 - Time effects and section logic
+-- Level: intermediate to advanced
+-- Time: 45-60 minutes
+-- Prerequisites: stack/layers, every, gain, basic effects
+-- Key functions: within, striate, whenmod, stut, trunc, range, slow, sine
+-- Sample fallbacks: arpy -> feel -> drum; superpiano -> arpy -> gtr
 -- Themes from studies/kindohm/study-module-plans.md:
 -- Study 5: Break Slicing and Glitch Gestures
 -- Study 6: Modulation as Motion

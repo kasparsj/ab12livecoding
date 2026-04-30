@@ -1,4 +1,9 @@
 -- ndr-brt study 02 — One sample, many bodies
+-- Level: intermediate
+-- Time: 35-55 minutes
+-- Prerequisites: sample playback, n, speed, gain, layers
+-- Key functions: slow, chop, slice, degradeBy, every, all
+-- Sample fallbacks: arpy -> feel -> bass -> gtr -> bd
 -- Themes from studies/ndr-brt/study-module-plans.md:
 -- Study 2: One Sample, Many Bodies
 -- Study 3: Transformation Chains as Composition

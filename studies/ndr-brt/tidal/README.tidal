@@ -1,4 +1,9 @@
 -- ndr-brt / sc-adente Tidal teaching pack
+-- Level: orientation
+-- Time: 5 minutes
+-- Prerequisites: Tidal running, SuperDirt running
+-- Key functions: hush, sound, gain
+-- Sample fallbacks: none required for bd/sn/hh sound check
 --
 -- This folder is the canonical ndr-brt Tidal teaching pack.
 -- Work directly from these files rather than duplicated copies in examples/.

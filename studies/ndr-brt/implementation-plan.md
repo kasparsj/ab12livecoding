@@ -6,6 +6,9 @@ Use the original `sc-adente` code as an artist-code research source, then create
 
 Do **not** assume students have the original sample library, custom synthdefs, Olbos effects, Mutable UGens, or MIDI devices.
 
+Current completion and live-test status now live in [`status.md`](status.md).
+Future additions now live in [`roadmap.md`](roadmap.md).
+
 ## Phase 1 - Add study index and references
 
 **Goal:** Make the case study visible without changing the core course sequence.

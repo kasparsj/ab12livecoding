@@ -1,4 +1,9 @@
 -- Kindohm study 02 - Transformation chains and menus
+-- Level: intermediate
+-- Time: 35-50 minutes
+-- Prerequisites: every, slow, rev, basic mini-notation
+-- Key functions: every, whenmod, foldEvery, slowspread, jux, density, trunc
+-- Sample fallbacks: none required for bd/sn/cp/hh examples
 -- Themes from studies/kindohm/study-module-plans.md:
 -- Study 2: Transformation Chains
 -- Study 3: Transformation Menus

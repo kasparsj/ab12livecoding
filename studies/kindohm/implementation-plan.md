@@ -7,6 +7,9 @@ vocabulary, sample-indexing, glitch gestures, modulation, and section logic. Do
 not copy the original pattern files into the beginner course. Translate the
 methods into stock-sample course examples.
 
+Current completion and live-test status now live in [`status.md`](status.md).
+Future additions now live in [`roadmap.md`](roadmap.md).
+
 ## Phase 1 - Add study index and references
 
 - [x] Create `studies/kindohm/README.md`.

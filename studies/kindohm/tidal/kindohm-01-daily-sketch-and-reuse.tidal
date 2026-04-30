@@ -1,4 +1,9 @@
 -- Kindohm study 01 - Daily sketch and reuse
+-- Level: intermediate warm-up
+-- Time: 20-30 minutes
+-- Prerequisites: sound patterns, d1/d2/d3, gain, n
+-- Key functions: resetCycles, every, rev, range, slow, sine
+-- Sample fallbacks: arpy -> superpiano -> gtr
 -- Themes from studies/kindohm/study-module-plans.md:
 -- Study 1: Daily Pattern Practice
 --

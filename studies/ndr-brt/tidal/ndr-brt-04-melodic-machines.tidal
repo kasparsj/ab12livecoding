@@ -1,4 +1,9 @@
 -- ndr-brt study 04 — Melodic machines
+-- Level: intermediate to advanced
+-- Time: 40-60 minutes
+-- Prerequisites: n, scale, octave, slow, fast
+-- Key functions: scale, run, choose syntax, degradeBy, segment, round, jux
+-- Sample fallbacks: superpiano -> arpy -> gtr; bass -> superpiano -> arpy
 -- Themes from studies/ndr-brt/study-module-plans.md:
 -- Study 6: Melodic Machines
 -- Study 4: Probability With Boundaries
