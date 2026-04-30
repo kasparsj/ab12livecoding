@@ -47,3 +47,5 @@ d1 $ jux rev $ off 0.125 (|+ 7) $ arp "<up down>" $ n "<c'maj'4 e'min'4>" # soun
 ## Broader function coverage
 
 For functions beyond the core 3-week path, use [`function-coverage-map.md`](function-coverage-map.md) and the topic files in [`../examples/topics/`](../examples/topics/).
+
+For a dense practice reference, use [`tidalcycles-cheatsheet.md`](tidalcycles-cheatsheet.md).
