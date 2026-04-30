@@ -1,0 +1,123 @@
+-- MIDI hardware performance study
+-- Level: intermediate to advanced
+-- Time: 35-55 minutes
+-- Prerequisites: struct, stack, every, gain, basic control patterns
+-- Key functions: setcps, struct, stack, midichan, cF, cI, degradeBy, sometimesBy, ccn, ccv
+-- Caveats:
+-- Stock-sample examples are primary. MIDI output and controller input are
+-- optional translations that require local SuperDirt setup.
+-- Sample fallbacks:
+-- bd -> drum
+-- sn -> cp -> drum
+-- hh -> cp -> drum
+-- arpy -> superpiano -> bass
+
+hush
+
+-- 1. Sound check.
+d1 $ sound "bd ~ sn ~" # gain 0.75
+d2 $ sound "hh*8" # gain 0.4
+
+hush
+
+-- 2. Tempo.
+setcps (140/60/4)
+
+-- 3. Struct basics: use a rhythm as a gate over one role.
+d1 $ struct "t(3,8)" $ sound "bd" # gain 0.75
+
+d2 $ struct "~ t ~ [~ t]" $ sound "cp" # gain 0.45
+
+d3 $ struct "t*8" $ sound "hh" # gain 0.35
+
+-- Optional generic MIDI equivalent:
+-- d1 $ struct "t(3,8)" $ s "mydevice" # midichan 0 # note "c3" # gain 0.7
+
+-- 4. Drum role mapping with local stock aliases.
+let kick = sound "bd" # gain 0.75
+    snare = sound "sn" # gain 0.55
+    clap = sound "cp" # gain 0.45
+    hat = sound "hh" # gain 0.35
+    perc = sound "drum" # gain 0.4
+    pad = slow 4 $ n "0 2 4 7" # sound "arpy" # gain 0.45
+
+d1
+  $ stack [
+      struct "t(3,8)" kick,
+      struct "~ ~ t ~" snare,
+      struct "~ t ~ [~ t]" clap,
+      struct "t*8" hat,
+      struct "[~ t]*2" perc
+    ]
+
+-- Optional generic MIDI role mapping:
+-- let midiKick = s "mydevice" # midichan 0 # note "c3"
+--     midiSnare = s "mydevice" # midichan 1 # note "c3"
+--     midiClap = s "mydevice" # midichan 2 # note "c3"
+--     midiHat = s "mydevice" # midichan 3 # note "c3"
+-- d1
+--   $ stack [
+--       struct "t(3,8)" midiKick,
+--       struct "~ ~ t ~" midiSnare,
+--       struct "~ t ~ [~ t]" midiClap,
+--       struct "t*8" midiHat
+--     ]
+
+-- 5. Controller input as gain control.
+-- The default value keeps this usable without a connected controller.
+d1 $ sound "hh*8" # gain (range 0.2 0.8 $ cF 0.5 "88")
+
+-- 6. Controller input as density reduction.
+d1
+  $ degradeBy (cF 0.2 "96")
+  $ sound "bd [sn cp] hh*8"
+  # gain 0.7
+
+-- 7. Controller input as bounded variation probability.
+d1
+  $ sometimesBy (cF 0.2 "96") (off "1s" (|+| speed 0.5))
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.65
+
+-- 8. Optional integer controller transform.
+-- The default integer keeps the part predictable without hardware.
+let useIter p = every (cI 4 "89") (iter 8) p
+
+d1
+  $ useIter
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.65
+
+-- Optional part-toggle idea:
+-- Keep this commented until your controller bridge is configured.
+-- d2 $ every (cI 1 "89") (const silence) $ struct "t*8" hat
+
+-- 9. Performance stack: stable roles first, controller variation second.
+let mainGate = "t(<3 5>,8)"
+    clapGate = "~ t ~ [~ t]"
+    percGate = "[~ t]*2"
+    hatGate = "t*8"
+
+d1
+  $ stack [
+      pad,
+      struct mainGate kick,
+      struct clapGate clap,
+      struct percGate perc,
+      struct hatGate hat,
+      degradeBy (cF 0.15 "96") $ struct mainGate $ sound "drum" # gain 0.35
+    ]
+
+-- 10. Optional scene or patch CC output.
+-- Use only after configuring mydevice in SuperDirt and confirming the target
+-- control number is safe for the receiving instrument.
+-- d1 $ s "mydevice" # midichan 0 # ccn 92 # ccv (range 0 64 $ cF 0 "90")
+
+-- 11. Subtractive ending.
+d4 $ silence
+d3 $ silence
+d2 $ silence
+
+d1 $ sound "bd ~ ~ ~" # gain 0.65
+
+hush
