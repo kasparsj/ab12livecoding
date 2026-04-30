@@ -253,7 +253,7 @@ or why `struct` is not only for sounds, but also for shaping parameter patterns.
 
 ### 11. Godfried Toussaint paper: **The Euclidean Algorithm Generates Traditional Musical Rhythms**
 
-This is the classic paper behind the idea. It explains rhythms as binary sequences where `1` is an attack/onset and `0` is a silence/unaccented note, then defines Euclidean rhythms as `E(k,n)`, where `k` is the number of onsets and `n` is the total sequence length. It gives examples like `E(3,8)` as `[x . . x . . x .]`, the tresillo rhythm.
+This is the classic paper behind the idea. It explains rhythms as binary sequences where `1` is an attack/onset and `0` is a silence/unaccented note, then defines Euclidean rhythms as `E(k,n)`, where `k` is the number of onsets and `n` is the total sequence length. It gives examples like `E(3,8)` as `[x . . x . . x .]`, the tresillo rhythm. The paper appeared in the 2005 Bridges proceedings and is available as a PDF from Toussaint's McGill publication archive. ([Toussaint][9])
 
 Use this if you want the math/history background behind:
 
@@ -267,7 +267,7 @@ bd(3,8)
 
 ### 12. Strudel docs: **Euclid / EuclidRot**
 
-Strudel is Tidal-inspired rather than Tidal itself, but its docs explain Euclidean rhythms clearly: `euclid(3,8)` means three onsets over eight steps, and `euclidRot(3,8,1)` rotates the pattern. It also explicitly maps mini-notation like `"x(3,8)"` to `.euclid(3,8)`. ([strudel.cc][9])
+Strudel is Tidal-inspired rather than Tidal itself, but its docs explain Euclidean rhythms clearly: `euclid(3,8)` means three onsets over eight steps, and `euclidRot(3,8,1)` rotates the pattern. It also explicitly maps mini-notation like `"x(3,8)"` to `.euclid(3,8)`. ([strudel.cc][10])
 
 Useful when Tidal’s docs feel too terse.
 
@@ -329,6 +329,7 @@ And the main caveat:
 [6]: https://uzu.lurk.org/t/changing-sounds-within-euclidean-rhythms/747/8 "Changing sounds within Euclidean Rhythms - #8 by DanD - TidalCycles - Uzu"
 [7]: https://userbase.tidalcycles.org/binary.html "binary - TidalCycles userbase"
 [8]: https://uzu.lurk.org/t/week-4-lesson-1-continuous-patterns-sine-square-tri-saw-and-random-functions/608 "Week 4 lesson 1 - continuous patterns - sine, square, tri, saw and random functions - Week 4 - waveforms, randomness - Uzu"
-[9]: https://strudel.cc/learn/time-modifiers/ "
+[9]: https://cgm.cs.mcgill.ca/~godfried/publications/banff.pdf "The Euclidean Algorithm Generates Traditional Musical Rhythms"
+[10]: https://strudel.cc/learn/time-modifiers/ "
       Time Modifiers  Strudel
     "
