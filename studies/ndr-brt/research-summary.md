@@ -8,6 +8,7 @@ The `tidal/` folder contains performance material organized roughly as:
 
 - `practices/` — sketches, experiments, technique studies, and rehearsal fragments.
 - `live/` — complete or semi-complete live set files.
+- `compilations/` — compilation and themed release pieces.
 - `published/` — shorter published track/performance materials.
 - `records/` — album/split/release code grouped by recording project.
 - `video/` — concise pieces and video-oriented sketches.

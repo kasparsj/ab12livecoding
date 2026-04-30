@@ -135,13 +135,14 @@ Teaching themes:
 
 ## Quantitative scan
 
-A lightweight scan of the cloned source showed especially frequent use of:
+A lightweight line-count scan of the current cloned source showed especially
+frequent use of:
 
 - `every` - 519 matches
 - `whenmod` - 370 matches
 - `stack` - 364 matches
 - `bps` - 337 matches
-- `samples` - 336 matches
+- `samples` - 338 matches
 - `run` - 303 matches
 - `rev` - 290 matches
 - `striate` - 269 matches
@@ -152,6 +153,8 @@ A lightweight scan of the cloned source showed especially frequent use of:
 - `stut` - 186 matches
 - `trunc` - 190 matches
 - `slowspread` - 149 matches
+- `foldEvery` - 57 matches
+- `sometimesBy` - 4 matches
 
 This supports teaching the archive as a study in transformation scheduling,
 sample-indexing, time-local glitch, and repeated daily variation.

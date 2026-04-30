@@ -23,7 +23,7 @@ quick references, and optional artist-code study tracks.
 - [05 - Euclid and Binary Rhythms](lessons/05-euclid-and-binary-rhythms.md)
 - [06 - Conditionals](lessons/06-conditionals.md)
 - [07 - Multi-User Tidal and Ableton Link](lessons/07-multi-user-ableton-link.md)
-- [08 - Alex McLean: Tidal 2.0 beatMode](lessons/08-tidal-2-beatmode.md)
+- [20 - Alex McLean: Tidal 2.0 beatMode](lessons/20-tidal-2.0-beatmode.md)
 - [10 - Alternate Timelines Pattern Model](lessons/10-alternate-timelines-pattern-model.md)
 
 ## Also check
