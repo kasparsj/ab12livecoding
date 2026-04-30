@@ -1,6 +1,6 @@
 # ndr-brt Themed Study Module Plans
 
-These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into curriculum-ready studies. Each module can become a short lesson sidebar, a 30–45 minute lab, or an extension workshop.
+These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into curriculum-ready studies. Each module can become a lesson sidebar, a lab, or an extension workshop.
 
 ---
 
@@ -19,7 +19,7 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Rewrite verbose patterns using a personal shorthand.
 - Design 3–5 safe helper aliases for performance.
 
-**Curriculum placement:** Week 1 sidebar, Week 3 rehearsal tool, or optional extension lab.
+**Curriculum placement:** Dialect sidebar, rehearsal tool, or optional extension lab.
 
 **Planned deliverables:**
 
@@ -51,12 +51,12 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Use `loopAt`, `chop`, `slice`, `striateBy`, `speed`, `begin`, and `end`.
 - Design contrast through register, density, direction, and filtering.
 
-**Curriculum placement:** Week 3 main extension or Week 3 capstone option.
+**Curriculum placement:** Main extension or capstone option.
 
 **Planned deliverables:**
 
 - `studies/ndr-brt/tidal/ndr-brt-02-one-sample-many-bodies.tidal`
-- Assignment option: 90-second single-sample study.
+- Assignment option: single-sample study.
 - Instructor demo notes on layer roles: anchor, grain cloud, bass/low-speed layer, accent layer.
 
 **Exercise sketch:**
@@ -83,11 +83,11 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Use `every`, `chunk`, `iter`, `ply`, `jux`, `juxBy`, `superimpose`, and `layer`.
 - Maintain a stable musical anchor while transforming another dimension.
 
-**Curriculum placement:** Week 2 extension, Week 3 layering lab.
+**Curriculum placement:** Extension or layering lab.
 
 **Planned deliverables:**
 
-- Week 2 optional challenge block.
+- Optional challenge block.
 - Example file showing three versions of the same loop: basic, transformed, performance-ready.
 
 **Exercise sketch:**
@@ -115,7 +115,7 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Restrict randomness to specific musical roles.
 - Compare random variation with planned periodic variation.
 
-**Curriculum placement:** Week 2 and Week 3 extension.
+**Curriculum placement:** Extension lab.
 
 **Planned deliverables:**
 
@@ -147,12 +147,12 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Explain OR, AND, offset, and inversion musically.
 - Compose drums from multiple logical rhythm layers.
 
-**Curriculum placement:** Week 3 optional algorithmic composition extension.
+**Curriculum placement:** Optional algorithmic composition extension.
 
 **Planned deliverables:**
 
 - Explanation note with visual grids.
-- Beginner-safe examples using `euclid` first, then optional custom sieve helpers.
+- Course examples using `euclid` first, then optional custom sieve helpers.
 - Assignment: boolean drum machine.
 
 **Exercise sketch:**
@@ -178,7 +178,7 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Layer one generated source across registers.
 - Understand a Markov pattern as weighted musical memory.
 
-**Curriculum placement:** Week 3 extension.
+**Curriculum placement:** Extension lab.
 
 **Planned deliverables:**
 
@@ -209,12 +209,12 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Translate custom-parameter ideas into stock SuperDirt equivalents when needed.
 - Use slow LFOs to shape timbre over time.
 
-**Curriculum placement:** Week 3 optional advanced sound-design lab.
+**Curriculum placement:** Optional advanced sound-design lab.
 
 **Planned deliverables:**
 
 - Setup note distinguishing stock-compatible vs custom-dependent examples.
-- Beginner-safe translation using `cutoff`, `resonance`, `room`, `delay`, `shape`, `crush`.
+- Stock translation using `cutoff`, `resonance`, `room`, `delay`, `shape`, `crush`.
 - Advanced appendix for `clouds`, `rings`, `timbre`, `color`, and related parameters.
 
 **Exercise sketch:**
@@ -241,7 +241,7 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 - Use `hush`, `silence`, `resetCycles`, and `all` responsibly.
 - Rehearse a global ending gesture.
 
-**Curriculum placement:** Week 3 final performance preparation.
+**Curriculum placement:** Final performance preparation.
 
 **Planned deliverables:**
 
@@ -251,9 +251,9 @@ These module plans translate recurring ideas from `ndr-brt/sc-adente/tidal` into
 
 **Exercise sketch:**
 
-1. Create a three-section timeline.
+1. Create a section plan.
 2. Decide what changes in each section: density, register, effects, sample choice, or global transform.
-3. Rehearse the ending separately three times.
+3. Rehearse the ending separately.
 
 ---
 

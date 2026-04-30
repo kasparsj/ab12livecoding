@@ -1,13 +1,12 @@
 # Artist-Code Studies
 
-This folder contains optional artist-code study tracks for the TidalCycles
-curriculum. Each study extracts reusable teaching themes from an existing
-livecoding codebase or archive and translates them into curriculum notes,
-assignments, and stock-sample `.tidal` teaching files.
+Optional artist-code study tracks for the TidalCycles curriculum. Each study
+pulls reusable techniques from an existing livecoding codebase or archive and
+turns them into notes, assignments, and stock-sample `.tidal` files.
 
-The studies are not intended to copy artist set files directly into beginner
-lessons. Use them as intermediate extensions, case-study sidebars, or capstone
-prompts after students are comfortable with the core course examples.
+These studies do not copy artist set files into beginner lessons. Use them as
+intermediate extensions, case-study sidebars, or capstone prompts after the core
+course examples are comfortable.
 
 ## Study Tracks
 

@@ -5,7 +5,7 @@
 Use `kindohm/365tidalpatterns` as a study of daily practice, transformation
 vocabulary, sample-indexing, glitch gestures, modulation, and section logic. Do
 not copy the original pattern files into the beginner course. Translate the
-methods into stock-sample, beginner-safe teaching examples.
+methods into stock-sample course examples.
 
 ## Phase 1 - Add study index and references
 
@@ -15,7 +15,7 @@ methods into stock-sample, beginner-safe teaching examples.
 - [x] Create `studies/kindohm/study-module-plans.md`.
 - [x] Create `studies/kindohm/implementation-plan.md`.
 
-## Phase 2 - Create beginner-safe Tidal files
+## Phase 2 - Create course Tidal files
 
 Created canonical Tidal-first files in `studies/kindohm/tidal/`:
 
@@ -31,7 +31,7 @@ The examples should remain:
 
 - Stock-sample-compatible.
 - Short enough to teach block by block.
-- Clearly connected to the source techniques.
+- Connected to the source techniques.
 - Independent from Kindohm's custom sample folders and MIDI hardware setup.
 
 ## Phase 3 - Patch lessons with optional case-study blocks
@@ -53,9 +53,9 @@ Potential future lesson additions:
 
 Suggested assignment additions:
 
-- Five-day sketchbook:
+- Sketchbook:
   - Create five short `.tidal` files from one seed rhythm.
-  - Each file changes exactly one dimension: rhythm, sample index, speed, modulation, or section logic.
+  - Each file changes one dimension: rhythm, sample index, speed, modulation, or section logic.
 - Sample-index lab:
   - Scan a sample family with `run`.
   - Replace the scan with a curated index pattern.
@@ -66,7 +66,7 @@ Suggested assignment additions:
 - Conditional arrangement:
   - Use `whenmod` for one fill, one dropout, and one return.
 - Capstone:
-  - Perform a 60-90 second daily-pattern piece with a planned ending.
+  - Perform a daily-pattern piece with a planned ending.
 
 ## Phase 5 - Advanced appendices
 
@@ -82,8 +82,8 @@ Keep optional:
 
 1. Teach from `studies/kindohm/tidal/00-open-this-first.tidal`.
 2. Use the daily sketch file before any dense transformation material.
-3. Add transformation chains and sample-index machines as Week 1/2 extensions.
-4. Use time/effects/section logic as Week 3 performance preparation.
+3. Add transformation chains and sample-index machines as rhythm and sampling extensions.
+4. Use time/effects/section logic as performance preparation.
 5. Use melody/hardware translation only after students understand note patterns.
 
 ## Risk checklist

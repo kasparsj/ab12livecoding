@@ -8,7 +8,7 @@ Do **not** assume students have the original sample library, custom synthdefs, O
 
 ## Phase 1 — Add study index and references
 
-**Goal:** Make the case study visible without changing the core course flow.
+**Goal:** Make the case study visible without changing the core course sequence.
 
 Tasks:
 
@@ -24,10 +24,10 @@ Tasks:
 
 Acceptance criteria:
 
-- Existing 3-week course remains unchanged for students who ignore the optional study.
+- Required course material remains unchanged for students who ignore the optional study.
 - Instructors can find the ndr-brt study plans from the course index.
 
-## Phase 2 — Create beginner-safe example files
+## Phase 2 - Create course example files
 
 **Goal:** Convert extracted idioms into runnable examples using stock samples/effects.
 
@@ -48,25 +48,25 @@ Example constraints:
 
 Acceptance criteria:
 
-- Each example file can be used as a 15–45 minute lab.
+- Each example file can be used as a focused lab.
 - Each file contains progressive sections: basic, variation, challenge.
 - No example requires the original `sc-adente` private sample pack.
 
 ## Phase 3 — Patch lessons with optional case-study blocks
 
-**Goal:** Integrate the study track into the 3-week course as optional Tidal-first case-study blocks.
+**Goal:** Integrate the study track as optional Tidal-first case-study blocks.
 
 Tasks:
 
-- [x] Week 1: add a small note about personal shorthand/dialect.
-- [x] Week 2: add optional “transformation chain inspired by sc-adente” block.
-- [x] Week 3: add “one sample, many bodies” lab reference.
-- [x] Week 3: add algorithmic extension for boolean rhythm and Markov-style melody.
-- [x] Week 3: add live-set architecture checklist and single-sample capstone option.
+- [x] Add a small note about personal shorthand/dialect.
+- [x] Add optional "transformation chain inspired by sc-adente" block.
+- [x] Add "one sample, many bodies" lab reference.
+- [x] Add algorithmic extension for boolean rhythm and Markov-style melody.
+- [x] Add live-set architecture checklist and single-sample capstone option.
 
 Acceptance criteria:
 
-- Optional blocks are clearly labelled as extensions.
+- Optional blocks are labelled as extensions.
 - Beginner learning goals remain primary.
 - Each block links to one relevant ndr-brt example file.
 
@@ -76,7 +76,7 @@ Acceptance criteria:
 
 Tasks:
 
-- [x] Add optional weekly extension prompts to `assignments/weekly-assignments.md`.
+- [x] Add optional extension prompts to assignments.
 - [x] Add capstone variant to `assignments/final-project.md`: “single-sample live set.”
 - [x] Add rubric notes for evaluating limited-material pieces:
   - transformation variety
@@ -101,7 +101,7 @@ Potential files:
 Content boundaries:
 
 - Custom synth parameters from `Parameters.hs` should be explained as environment-specific.
-- MIDI setup should be optional and clearly labelled as hardware-dependent.
+- MIDI setup should be optional and labelled as hardware-dependent.
 - Include warnings about gain, distortion, and feedback-heavy effects.
 
 Acceptance criteria:

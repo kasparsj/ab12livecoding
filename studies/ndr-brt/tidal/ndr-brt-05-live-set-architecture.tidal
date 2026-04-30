@@ -4,7 +4,7 @@
 -- Study 8: Live Set Architecture
 -- Study 9: External Control and MIDI, kept as optional discussion only
 --
--- Teaching aim:
+-- Goal:
 -- Treat a performance as a sequence of code states. Rehearse the states, not just the loops.
 
 hush
@@ -153,8 +153,8 @@ all $ (# cutoff 700)
 hush
 
 -- Rehearsal checklist in Tidal comments:
--- [ ] Can you start from silence?
--- [ ] Can you reach Section 3 without looking lost?
--- [ ] Can you recover if one pattern becomes too dense?
--- [ ] Can you perform the ending without panic?
--- [ ] Can you explain which layer is anchor, texture, melody, or accent?
+-- [ ] Start from silence.
+-- [ ] Reach Section 3 with clear transitions.
+-- [ ] Recover if one pattern becomes too dense.
+-- [ ] Perform the ending cleanly.
+-- [ ] Identify each layer: anchor, texture, melody, or accent.

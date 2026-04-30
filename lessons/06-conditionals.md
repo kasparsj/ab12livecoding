@@ -1,75 +1,58 @@
-# Best sources on conditionals
+# Conditionals
 
-## 1. Official Tidal docs: **Conditions**
+Tidal conditionals combine three parts:
 
-This is the main source for deterministic conditionals.
-
-It covers:
-
-```haskell
-every
-every'
-foldEvery
-when
-whenT
-whenmod
-ifp
-fix
-contrast
-struct
-mask
-sew
-stitch
+```text
+condition + transformation + pattern
 ```
 
-Best parts:
+They are used for variation, fills, dropouts, and structured changes over
+cycles or events.
+
+## Deterministic Cycle Conditions
+
+`every` applies a transformation on a repeating cycle count:
+([Tidal Cycles][1])
 
 ```haskell
-d1 $ every 3 rev $ n "0 1 [~ 2] 3" # sound "arpy"
+d1 $ every 3 rev $ n "0 1 [~ 2] 3" # s "arpy"
 ```
 
-`every 3 rev` means: apply `rev` every third cycle, otherwise leave the pattern alone. The docs also explain that when the function has arguments, you need parentheses:
+This applies `rev` every third cycle. Other cycles play normally.
+
+When the transformation takes arguments, wrap it in parentheses:
 
 ```haskell
-d1 $ every 3 (fast 2) $ n "0 1 [~ 2] 3" # sound "arpy"
+d1 $ every 3 (fast 2) $ n "0 1 [~ 2] 3" # s "arpy"
 ```
 
-For `when`, the docs explain that it receives the **current cycle number** and applies the transformation only when your test returns `True`:
+`when` receives the current cycle number and applies the transformation when
+the test returns `True`:
 
 ```haskell
-d1 $ when ((elem '4').show) (striate 4) $ sound "hh hc"
+d1 $ when ((elem '4') . show) (striate 4) $ s "hh hc"
 ```
 
-That means: apply `striate 4` only on cycles whose cycle number contains the digit `4`. The same page explains `whenmod`, `ifp`, and control-pattern conditionals like `fix` and `contrast`. ([tidalcycles.org][1])
-
----
-
-## 2. Official Tidal docs: **Randomness**
-
-This is the main source for `sometimes`.
-
-It covers the “sometimes family”:
+`whenmod` applies a transformation during part of a repeating cycle block:
 
 ```haskell
-always
-almostAlways
-often
-sometimes
-rarely
-almostNever
-never
-sometimesBy
-someCycles
-someCyclesBy
+d1 $ whenmod 8 6 rev $ s "bd*2 arpy*2 cp hh*4"
 ```
 
-The docs define `sometimes` as applying a function to a pattern **around 50% of the time**, randomly:
+Read it as: in each 8-cycle block, apply `rev` when the cycle position is 6
+or higher. That gives six normal cycles followed by two transformed cycles.
+([Tidal Cycles][3])
+
+## Random Event Conditions
+
+The "sometimes" family applies transformations with different probabilities:
+([Tidal Cycles][2])
 
 ```haskell
-d1 $ sometimes (# crush 2) $ n "0 1 [~ 2] 3" # sound "arpy"
+d1 $ sometimes (# crush 2) $ n "0 1 [~ 2] 3" # s "arpy"
 ```
 
-It also gives the probability aliases:
+Common aliases:
 
 ```text
 always        100%
@@ -81,160 +64,95 @@ almostNever   10%
 never          0%
 ```
 
-Important distinction: `sometimes` applies the function to **random events**, while `someCycles` applies it to **whole random cycles**. So `someCycles (# crush 2)` either crushes the whole cycle or leaves the whole cycle unchanged. ([tidalcycles.org][2])
+Use `sometimesBy` for an explicit probability:
 
----
+```haskell
+d1 $ sometimesBy 0.35 (# crush 2) $ s "bd sn cp hh"
+```
 
-## 3. Official Tidal tutorial: **Creating Variation / Fills**
+## Event vs Cycle Randomness
 
-This is the best practical source for using conditionals musically.
+`sometimes` works at the event level. It can affect some events and leave
+others unchanged:
 
-It shows how to layer deterministic conditionals:
+```haskell
+d1 $ sometimes (# crush 2) $ s "bd sn cp hh"
+```
+
+`someCycles` works at the cycle level. It transforms whole cycles or leaves
+whole cycles unchanged:
+
+```haskell
+d1 $ someCycles (# crush 2) $ s "bd sn cp hh"
+```
+
+This distinction matters in performance. Use `sometimes` for scattered detail.
+Use `someCycles` for larger phrase-level changes.
+
+## Fills and Replacements
+
+Layer conditionals to build fills:
 
 ```haskell
 d1 $ every 5 (|+| speed "0.5") $ every 4 (0.25 <~) $ every 3 rev $
-  sound "bd sn arpy*2 cp"
+  s "bd sn arpy*2 cp"
   # speed "[1 1.25 0.75 -1.5]/3"
 ```
 
-It also explains `whenmod` as a fill tool. Example:
+Use `whenmod` for predictable fills:
 
 ```haskell
-d1 $ whenmod 8 6 rev $ sound "bd*2 arpy*2 cp hh*4"
+d1 $ whenmod 8 6 rev $ s "bd*2 arpy*2 cp hh*4"
 ```
 
-This means: play normally for six cycles, then reverse for two cycles, then repeat. The same tutorial shows using `every` and `whenmod` with `const` to completely replace a pattern for fills. ([tidalcycles.org][3])
-
----
-
-## 4. Uzu / Tidal Club lesson: **Random marathon part 2**
-
-This is the best community/tutorial source for `sometimes`, `someCycles`, `degrade`, and related random functions.
-
-The lesson is structured as a video/worksheet and explicitly covers:
-
-```text
-degrade
-degradeBy
-sometimes
-sometimesBy
-rarely
-often
-almostNever
-almostAlways
-someCycles
-randslice
-```
-
-The timestamps are useful: it lists `sometimes` at 11:21, `sometimesBy` at 12:10, the shorthand variants at 13:38, and `someCycles` at 14:16. ([Uzu][4])
-
-This is probably the best learning source after the official docs.
-
----
-
-## 5. Official Tidal docs: **Boolean / pattern conditions**
-
-This is still part of the Conditions page, but it is worth treating separately because it explains a different kind of conditional: boolean pattern gates.
-
-Important functions:
+Use `const` when the fill should replace the pattern:
 
 ```haskell
-struct
-mask
-sew
-stitch
+d1 $ whenmod 8 7 (const $ s "cp*8") $ s "bd sn"
 ```
 
-Example:
+## Boolean Pattern Conditions
+
+Conditionals are not limited to "every N cycles." Boolean rhythm patterns can
+gate events:
+([Tidal Cycles][1])
 
 ```haskell
-d1 $ struct (every 3 inv "t(3,8)") $ sound "cp"
+d1 $ struct (every 3 inv "t(3,8)") $ s "cp"
+d1 $ mask "t t f t" $ s "bd*8"
 ```
 
-This combines `every` with a boolean Euclidean rhythm. Every third cycle, `inv` flips the true/false structure, so the rhythm changes conditionally. The same section explains that boolean patterns can use `t/f` or `1/0`, and that Euclidean patterns like `"t(3,8)"` produce true/false values. ([tidalcycles.org][1])
+`struct` applies a true/false rhythm to another pattern. `mask` filters events
+through a true/false pattern. `sew` and `stitch` switch between patterns using
+boolean conditions.
 
-This is important because Tidal conditionals are not only “every N cycles”; they can also be **event masks**, **boolean gates**, and **pattern switches**.
-
----
-
-## 6. Learning Tidal Fundamentals
-
-This is not the best beginner source, but it is the best deep/internals source. It explains Tidal’s pattern model, types, and APIs. The author says the goal is to understand Tidal’s expressions and values, not just make sound, and that it is especially useful for people writing their own Tidal libraries. ([Mzadel][5])
-
-Use this when you want to understand why functions like:
+## Practical Examples
 
 ```haskell
-every 3 rev
-sometimes (# crush 2)
-when ((== 0) . (`mod` 4)) (fast 2)
+-- Reverse every fourth cycle.
+d1 $ every 4 rev $ s "bd sn hh cp"
+
+-- Speed up during the second half of each 8-cycle phrase.
+d1 $ whenmod 8 4 (fast 2) $ s "bd sn"
+
+-- Choose one transform on even cycles and another on odd cycles.
+d1 $ ifp ((== 0) . (`mod` 2)) rev (fast 2) $ s "bd sn cp hh"
+
+-- Add random event-level distortion.
+d1 $ sometimes (# crush 2) $ s "bd sn hh cp"
+
+-- Add random cycle-level room.
+d1 $ someCycles (# room 0.8) $ s "arpy*8"
 ```
 
-are all just transformations of a `Pattern`.
+## Reading Order
 
----
-
-## Practical explanation
-
-In Tidal, most conditionals are really:
-
-```haskell
-condition + transformation + pattern
-```
-
-For example:
-
-```haskell
-every 4 rev $ s "bd sn hh cp"
-```
-
-means:
-
-```text
-Every 4 cycles, apply rev to the pattern.
-Otherwise, play it normally.
-```
-
-```haskell
-whenmod 8 6 rev $ s "bd sn hh cp"
-```
-
-means:
-
-```text
-In an 8-cycle block, apply rev when the cycle position is 6 or higher.
-So: 6 normal-ish cycles, then 2 transformed cycles.
-```
-
-```haskell
-sometimes (# crush 2) $ s "bd sn hh cp"
-```
-
-means:
-
-```text
-Randomly apply # crush 2 to some events.
-```
-
-```haskell
-someCycles (# crush 2) $ s "bd sn hh cp"
-```
-
-means:
-
-```text
-Randomly apply # crush 2 to whole cycles.
-```
-
-## Best reading order
-
-1. **Official Conditions** — `every`, `when`, `whenmod`, `ifp`, `struct`, `mask`.
-2. **Official Randomness** — `sometimes`, `sometimesBy`, `someCycles`, `degrade`.
-3. **Official Tutorial** — musical fills and layered variation.
-4. **Uzu random marathon lesson** — hands-on random conditionals.
-5. **Learning Tidal Fundamentals** — internals, if you want to go deeper.
+1. Conditions docs: `every`, `when`, `whenmod`, `ifp`, `struct`, and `mask`.
+2. Randomness docs: `sometimes`, `sometimesBy`, `someCycles`, and `degrade`.
+3. Official tutorial: musical fills and layered variation.
+4. Learning Tidal Fundamentals: internals for pattern types and APIs.
 
 [1]: https://tidalcycles.org/docs/reference/conditions/ "Conditions | Tidal Cycles"
-[2]: https://tidalcycles.org/docs/reference/randomness/?utm_source=chatgpt.com "Randomness"
+[2]: https://tidalcycles.org/docs/reference/randomness/ "Randomness | Tidal Cycles"
 [3]: https://tidalcycles.org/docs/getting-started/tutorial/ "Tutorial | Tidal Cycles"
-[4]: https://uzu.lurk.org/t/week-4-lesson-3-random-marathon-part-2-randcat-stripe-degrade-sometimes-somecycles-randslice-more/690 "Week 4, lesson 3 - random marathon part 2: randcat, stripe, degrade, sometimes, someCycles, randslice + more - Week 4 - waveforms, randomness - Uzu"
 [5]: https://mzadel.github.io/tidalfundamentals/ "Learning Tidal Fundamentals"

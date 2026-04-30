@@ -1,8 +1,8 @@
 # Kindohm Themed Study Module Plans
 
 These module plans translate recurring ideas from `kindohm/365tidalpatterns`
-into curriculum-ready studies. Each module can become a short lesson sidebar, a
-30-45 minute lab, or an extension workshop.
+into curriculum-ready studies. Each module can become a lesson sidebar, a lab,
+or an extension workshop.
 
 ---
 
@@ -22,7 +22,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Create one small sketch with a clear anchor and one transformation idea.
 - Refactor a sketch into a reusable template.
 
-**Curriculum placement:** Week 1 sidebar or Week 3 capstone preparation.
+**Curriculum placement:** Rhythm sidebar or capstone preparation.
 
 **Planned deliverables:**
 
@@ -34,7 +34,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 
 1. Start with one drum anchor.
 2. Add one melodic or textural layer.
-3. Add one scheduled transformation.
+3. Add one periodic transformation.
 4. Save the file with a date or sequence number and a one-line comment about the idea.
 
 ---
@@ -55,7 +55,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Distinguish periodic changes from random changes.
 - Debug a dense line by removing transformations one at a time.
 
-**Curriculum placement:** Week 1 rhythm extension or Week 3 arrangement lab.
+**Curriculum placement:** Rhythm extension or arrangement lab.
 
 **Planned deliverables:**
 
@@ -89,7 +89,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Build variation without editing the base pattern.
 - Compare random variation with ordered transformation menus.
 
-**Curriculum placement:** Week 3 performance extension.
+**Curriculum placement:** Performance extension.
 
 **Planned deliverables:**
 
@@ -122,7 +122,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Translate custom sample families into stock sample sets.
 - Pattern sample selection separately from rhythm.
 
-**Curriculum placement:** Week 2 sampling and effects lab.
+**Curriculum placement:** Sampling and effects lab.
 
 **Planned deliverables:**
 
@@ -155,7 +155,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Keep glitch gestures bounded to one time region.
 - Design a fill that returns to the groove.
 
-**Curriculum placement:** Week 2 sampling lab or Week 3 transition lab.
+**Curriculum placement:** Sampling lab or transition lab.
 
 **Planned deliverables:**
 
@@ -168,7 +168,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 1. Make a stable loop.
 2. Apply `striate` to one copy.
 3. Use `within` to limit the transformation.
-4. Use `whenmod` to schedule the gesture every 8 or 16 cycles.
+4. Use `whenmod` to place the gesture every 8 or 16 cycles.
 
 ---
 
@@ -188,7 +188,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Pattern `cutoff`, `resonance`, `delaytime`, `delayfeedback`, `pan`, and `shape`.
 - Separate rhythmic variation from timbral variation.
 
-**Curriculum placement:** Week 2 modulation lab.
+**Curriculum placement:** Modulation lab.
 
 **Planned deliverables:**
 
@@ -217,11 +217,11 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 
 **Learning outcomes:**
 
-- Use `whenmod` to schedule a section change.
+- Use `whenmod` to place a section change.
 - Use `const` to replace a layer during a window.
 - Build a short arrangement from repeated conditional rules.
 
-**Curriculum placement:** Week 3 arrangement and final performance.
+**Curriculum placement:** Arrangement and final performance.
 
 **Planned deliverables:**
 
@@ -254,7 +254,7 @@ into curriculum-ready studies. Each module can become a short lesson sidebar, a
 - Translate MIDI stream names like `keys`, `bass`, or `brute` into `d1`/`d2` examples.
 - Keep hardware setup as optional discussion, not a beginner dependency.
 
-**Curriculum placement:** Week 2 chords/arpeggios or Week 3 advanced extension.
+**Curriculum placement:** Chords/arpeggios or advanced extension.
 
 **Planned deliverables:**
 

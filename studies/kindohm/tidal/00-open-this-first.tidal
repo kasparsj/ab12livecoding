@@ -1,6 +1,6 @@
 -- Kindohm / 365 Tidal Patterns study track - open this first
 --
--- This is the Tidal-first index for teaching primarily from .tidal files.
+-- Tidal-first index for working from .tidal files.
 -- All files are designed as live teaching scripts: evaluate one block at a time,
 -- pause to listen, change one parameter, then continue.
 --
@@ -12,19 +12,19 @@ hush
 -- Teaching order:
 --
 -- 1. kindohm-01-daily-sketch-and-reuse.tidal
---    Teach daily sketch method, one idea per file, and safe reuse.
+--    Daily sketch method, one idea per file, and safe reuse.
 --
 -- 2. kindohm-02-transformer-chains.tidal
---    Teach every/whenmod/foldEvery, transformation chains, and menus.
+--    every/whenmod/foldEvery, transformation chains, and menus.
 --
 -- 3. kindohm-03-sample-index-machines.tidal
---    Teach sample families, sample index patterns, and stock translations.
+--    Sample families, sample index patterns, and stock translations.
 --
 -- 4. kindohm-04-time-effects-and-sections.tidal
---    Teach bounded glitch gestures, modulation, fills, dropouts, and returns.
+--    Bounded glitch gestures, modulation, fills, dropouts, and returns.
 --
 -- 5. kindohm-05-melody-and-hardware-translation.tidal
---    Teach scale mapping and hardware-to-stock translation.
+--    Scale mapping and hardware-to-stock translation.
 
 -- Quick sound check before class:
 d1 $ sound "bd ~ sn ~" # gain 0.8

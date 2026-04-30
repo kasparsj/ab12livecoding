@@ -1,8 +1,8 @@
 # TidalCycles Cheatsheet
 
-Use this as a dense practice sheet while live coding. It favors forms that are easy to type, easy to explain, and useful in performance.
+Use this as a compact practice sheet while live coding. The examples favor short forms that work well in performance.
 
-## Research Basis
+## References
 
 Checked against current Tidal documentation on 2026-04-30:
 
@@ -70,7 +70,7 @@ d1 $ s "bd sn" |+| n "0 2 4"                -- structure from both
 | `?` | randomly drop events | `s "bd? hh*4 sn?"` |
 | `?0.8` | drop with custom probability | `s "hh?0.8*8"` |
 | `_` | extend previous event | `s "bd _ _ ~ sn _"` |
-| `@` | repeat duration shorthand | `s "superpiano@3 superpiano"` |
+| `@` | repeat-length shorthand | `s "superpiano@3 superpiano"` |
 | `:` | sample index | `s "bd:3 sn:2"` |
 | `(k,n)` | Euclidean rhythm | `s "bd(3,8)"` |
 | `{ }` | polymetric sequence | `s "{bd bd bd, cp cp hh}"` |

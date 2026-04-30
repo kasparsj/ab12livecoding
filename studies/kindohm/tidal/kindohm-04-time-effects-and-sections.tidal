@@ -4,7 +4,7 @@
 -- Study 6: Modulation as Motion
 -- Study 7: Periodic Section Logic
 --
--- Teaching aim:
+-- Goal:
 -- Use bounded time effects, slow modulation, and cycle-count logic to create
 -- fills, dropouts, and returns while preserving a recoverable groove.
 
@@ -26,7 +26,7 @@ d3
   $ sound "arpy"
   # gain 0.35
 
--- 4. Schedule the glitch only near the end of an 8-cycle phrase.
+-- 4. Trigger the glitch only near the end of an 8-cycle phrase.
 d3
   $ whenmod 8 6 (within (0.25, 0.75) (striate 16 . rev))
   $ sound "arpy"

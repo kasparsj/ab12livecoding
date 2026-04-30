@@ -1,6 +1,6 @@
 -- ndr-brt / sc-adente study track — teaching map
 -- Source study plans: studies/ndr-brt/*.md
--- Use these files as optional artist-code studies after or alongside the 3-week course.
+-- Use these files as optional artist-code studies.
 -- Evaluate one block at a time. If a sample is missing, replace it with bd, sn, hh, cp, arpy, bass, or feel.
 
 hush
@@ -21,7 +21,7 @@ hush
 -- 5. ndr-brt-05-live-set-architecture.tidal
 --    Intro/build/dense/breakdown/ending states for a performable set.
 
--- 5-minute warm-up before any study:
+-- Warm-up before any study:
 d1 $ sound "bd ~ sn ~"
 d2 $ sound "hh*8" # gain 0.45
 d3 $ n "0 2 4 7" # sound "arpy" # gain 0.55

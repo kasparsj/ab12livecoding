@@ -3,9 +3,8 @@
 -- Study 1: Build Your Livecoding Dialect
 -- Study 3: Transformation Chains as Composition
 --
--- Teaching aim:
--- Students should feel how a performer creates a compact vocabulary, then uses
--- transformations as structure rather than decoration.
+-- Goal:
+-- Build a compact vocabulary and use transformations as structure.
 
 hush
 
@@ -15,7 +14,7 @@ d1 $ sound "bd ~ sn ~"
 d2 $ sound "hh*8" # gain 0.45
 
 -- 2. Same musical idea with a few local aliases.
--- Evaluate this let block before the next examples if you want the shorthand.
+-- Evaluate this let block before the shorthand examples.
 let g = gain
     sp = speed
     oc = octave
@@ -43,7 +42,7 @@ d2 $ every 4 rev $ sometimes (fast 2) $ sound "hh*8" # g 0.45
 d2 $ every 4 rev $ sometimes (fast 2) $ jux rev $ sound "hh*8" # g 0.35
 
 -- 5. Derived voices from one pattern using superimpose.
--- This is the beginner-safe version of sc-adente style layering.
+-- Stock-sample version of sc-adente-style layering.
 d1
   $ superimpose ((fast 2) . (# g 0.95) . (# pan 0.8))
   $ sound "bd ~ sn ~"
@@ -51,7 +50,7 @@ d1
   # pan 0.2
 
 -- 6. A transformation chain as a phrase.
--- Teach by removing one line at a time and asking what changed musically.
+-- Remove one line at a time and listen for the musical change.
 d1
   $ every 8 (slow 2)
   $ every 6 rev

@@ -2,9 +2,9 @@
 -- Themes from studies/kindohm/study-module-plans.md:
 -- Study 1: Daily Pattern Practice
 --
--- Teaching aim:
--- Students should understand a daily pattern as one small runnable idea, then
--- learn how to keep the anchor and change one dimension at a time.
+-- Goal:
+-- Treat a daily pattern as one small runnable idea.
+-- Keep the anchor and change one dimension at a time.
 
 hush
 
@@ -24,7 +24,7 @@ d3
   # speed "1 1.25 0.75 1.5"
   # gain 0.5
 
--- 4. Version C: change one dimension only - scheduled reversal.
+-- 4. Version C: change one dimension only - periodic reversal.
 d3
   $ every 4 rev
   $ sound "arpy*4"
@@ -47,11 +47,11 @@ do
   d2 $ sound "hh*8" # gain 0.45            -- pulse
   d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55 -- today's idea
 
--- 7. Five-day challenge.
--- Day 1: change rhythm only.
--- Day 2: change sample index only.
--- Day 3: change speed only.
--- Day 4: change modulation only.
--- Day 5: change section logic only.
+-- 7. Sketch challenge.
+-- Version 1: change rhythm only.
+-- Version 2: change sample index only.
+-- Version 3: change speed only.
+-- Version 4: change modulation only.
+-- Version 5: change section logic only.
 
 hush

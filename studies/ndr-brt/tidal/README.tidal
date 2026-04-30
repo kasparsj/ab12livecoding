@@ -1,7 +1,7 @@
 -- ndr-brt / sc-adente Tidal teaching pack
 --
 -- This folder is the canonical ndr-brt Tidal teaching pack.
--- Teach directly from these files rather than duplicated copies in examples/.
+-- Work directly from these files rather than duplicated copies in examples/.
 --
 -- Suggested order:
 -- 00-open-this-first.tidal

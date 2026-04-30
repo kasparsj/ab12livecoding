@@ -4,7 +4,7 @@
 -- Study 3: Transformation Chains as Composition
 -- Study 7: Modular Timbre and Effects, translated to stock effects
 --
--- Teaching aim:
+-- Goal:
 -- Build a complete miniature from one source sound. Change role through speed,
 -- chop/slice, filtering, space, density, and direction.
 
@@ -93,7 +93,7 @@ all $ (# cutoff 900)
 all $ (# room 0.5) . (# size 0.8)
 
 -- 8. Capstone prompt in code:
--- Make a 90-second piece with only one sample.
+-- Make a piece with only one sample.
 -- Required roles: anchor, slow body, grain body, accent body, planned ending.
 
 hush

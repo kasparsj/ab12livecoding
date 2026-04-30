@@ -15,7 +15,7 @@ The repository is a daily practice archive containing 461 `.tidal` files:
 - `scales.tidal` - scale/chord helpers and generated melodic mapping utilities.
 
 The source README describes the project as 365 Tidal patterns created over 365
-days starting on 2013-12-28, with listening links and a note that the patterns
+entries starting on 2013-12-28, with listening links and a note that the patterns
 depend on custom samples.
 
 ## Extracted recurring topics
@@ -32,7 +32,7 @@ Teaching themes:
 
 - Treat a short pattern as a complete daily sketch.
 - Keep one runnable idea per file.
-- Reuse successful gestures across days instead of starting from zero every time.
+- Reuse successful gestures across sketches instead of starting from zero every time.
 - Archive experiments so students can later extract their own vocabulary.
 
 ### 2. Transformation chains as the main form
@@ -46,7 +46,7 @@ Representative files:
 Teaching themes:
 
 - Build form by chaining `every`, `whenmod`, `foldEvery`, `rev`, `iter`, `density`, `slow`, `trunc`, and offsets.
-- Use transformations as scheduled musical events, not decoration.
+- Use transformations as periodic musical events, not decoration.
 - Teach students to remove one transformation at a time and name what changed.
 
 ### 3. `slowspread` and transformation menus

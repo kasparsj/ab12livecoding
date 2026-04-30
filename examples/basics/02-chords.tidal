@@ -3,7 +3,7 @@
 
 hush
 
--- Drum anchor from Week 1.
+-- Drum anchor from the rhythm examples.
 d1 $ sound "bd ~ sn ~"
 d2 $ sound "hh*8" # gain 0.45
 

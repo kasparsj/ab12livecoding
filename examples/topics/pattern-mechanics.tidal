@@ -1,5 +1,5 @@
 -- Pattern mechanics, rhythm logic, and safety
--- Use this after examples/basics/01-rhythm.tidal when students want deeper rhythm tools.
+-- Extension after examples/basics/01-rhythm.tidal for deeper rhythm tools.
 
 hush
 
@@ -60,7 +60,7 @@ d2 $ euclidInv 3 8 $ sound "hh" # gain 0.4
 
 d3 $ euclidFull 5 8 "cp" "~" # gain 0.5
 
--- Necklace and conditional timing.
+-- Necklace and conditional structure.
 d1 $ sound (necklace 3 8 "bd" "~")
 
 d2 $ every' 4 1 rev $ sound "hh*8" # gain 0.45

@@ -1,24 +1,24 @@
 # Curriculum Integration Plan: Kindohm / 365 Tidal Patterns Studies
 
-## Integration strategy
+## Integration Strategy
 
 Add Kindohm material in two layers:
 
-1. **Core-course enrichments** - short case-study boxes, mini-exercises, and optional demonstrations added to the existing 3-week beginner course.
-2. **Optional study track** - a separate artist-sketchbook study sequence for intermediate students who want to learn from a large practice archive.
+1. **Core-course enrichments** - short case-study boxes, mini-exercises, and optional demonstrations for relevant course modules.
+2. **Optional study track** - a separate artist-sketchbook sequence for intermediate students working from a large practice archive.
 
-This keeps the beginner path compact while giving instructors a practical model
-for turning daily sketches into performance vocabulary.
+The core path stays focused, and instructors get a practical model for turning
+daily sketches into performance vocabulary.
 
-## Fit with the existing 3-week course
+## Module Fit
 
-| Existing week | Current focus | Kindohm addition | Source study modules | Tidal teaching files |
+| Course area | Current focus | Kindohm addition | Source study modules | Tidal teaching files |
 | --- | --- | --- | --- | --- |
-| Week 1 - Starting Patterns and Building Rhythms | Pattern start/stop, rhythm syntax, transformations, alignment | Daily sketch method; transformation-chain listening lab. | Studies 1, 2 | `00-open-this-first.tidal`, `kindohm-01-daily-sketch-and-reuse.tidal`, `kindohm-02-transformer-chains.tidal` |
-| Week 2 - Chords, Arpeggios, and Musical Layers | Bass, chords, arpeggios, layers, parameters | Sample-index machines; LFO/effect modulation; stock translation of custom sample folders. | Studies 3, 4, 6 | `kindohm-03-sample-index-machines.tidal`, `kindohm-04-time-effects-and-sections.tidal` |
-| Week 3 - Arrangement, Improvisation, and Final Performance | Sections, performance safety, final recording/performance | `whenmod` section logic; daily-pattern capstone; MIDI/hardware translation discussion. | Studies 5, 7, 8 | `kindohm-04-time-effects-and-sections.tidal`, `kindohm-05-melody-and-hardware-translation.tidal` |
+| Starting patterns and rhythm | Pattern start/stop, rhythm syntax, transformations, alignment | Daily sketch method; transformation-chain listening lab. | Studies 1, 2 | `00-open-this-first.tidal`, `kindohm-01-daily-sketch-and-reuse.tidal`, `kindohm-02-transformer-chains.tidal` |
+| Musical layers and control | Bass, chords, arpeggios, layers, parameters | Sample-index machines; LFO/effect modulation; stock translation of custom sample folders. | Studies 3, 4, 6 | `kindohm-03-sample-index-machines.tidal`, `kindohm-04-time-effects-and-sections.tidal` |
+| Arrangement and performance | Sections, performance safety, final recording/performance | `whenmod` section logic; daily-pattern capstone; MIDI/hardware translation discussion. | Studies 5, 7, 8 | `kindohm-04-time-effects-and-sections.tidal`, `kindohm-05-melody-and-hardware-translation.tidal` |
 
-## Proposed additions by repository area
+## Proposed Additions By Repository Area
 
 ### Lessons
 
@@ -36,18 +36,18 @@ Create simplified, stock-sample-compatible examples based on extracted themes:
 - `studies/kindohm/tidal/kindohm-04-time-effects-and-sections.tidal`
 - `studies/kindohm/tidal/kindohm-05-melody-and-hardware-translation.tidal`
 
-Keep examples short, comment-rich, and runnable without Kindohm's custom sample
+Keep examples short, annotated, and runnable without Kindohm's custom sample
 library, hardware setup, or older BootTidal environment.
 
 ### Assignments
 
 Add optional extension assignments:
 
-- Week 1: make five small daily sketches from the same starting rhythm.
-- Week 2: build a stock sample-index machine using `samples`, `run`, and `slow`.
-- Week 2: turn one loop into three variations using `striate`, `stut`, and `trunc`.
-- Week 3: design a `whenmod` arrangement with a planned fill, dropout, and return.
-- Week 3: translate a hardware-specific melody idea into `n` and stock synth samples.
+- Make five small daily sketches from the same starting rhythm.
+- Build a stock sample-index machine using `samples`, `run`, and `slow`.
+- Turn one loop into three variations using `striate`, `stut`, and `trunc`.
+- Design a `whenmod` arrangement with a planned fill, dropout, and return.
+- Translate a hardware-specific melody idea into `n` and stock synth samples.
 
 ### Resources
 
@@ -64,9 +64,9 @@ Suggested sections:
 - `whenmod` arrangement patterns
 - Hardware-to-stock translation checklist
 
-## Scope boundaries
+## Scope Boundaries
 
-### Include in beginner-safe course additions
+### Include in course additions
 
 - Stock-sample translations of sample-index techniques.
 - Transformation chains using stock Tidal functions.
@@ -82,10 +82,9 @@ Suggested sections:
 - Custom helper functions that depend on old Tidal versions.
 - Long one-line source patterns that are hard for beginners to inspect.
 
-## Expected outcome
+## Expected Outcome
 
-After integration, the curriculum will still function as a compact 3-week
-beginner course, but instructors will also have:
+After integration, the curriculum includes:
 
 - A real daily-practice archive case study.
 - A path from one-line sketches to performable sections.
