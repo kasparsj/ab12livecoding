@@ -1,0 +1,151 @@
+-- Drum structure atlas
+-- Level: intermediate
+-- Time: 35-55 minutes
+-- Prerequisites: mini-notation, boolean patterns, struct, stack, gain
+-- Key functions: setcps, struct, stack, slow, fast, every, silence, hush
+-- Source caveat:
+-- This is inspired by Pattern Bool drum thinking, not by copied source modules.
+-- Use local stock-sample translations here, not source drum modules.
+-- Sample fallbacks:
+-- bd -> drum
+-- sn -> cp -> drum
+-- hh -> cp -> drum
+-- cp -> sn -> drum
+-- feel -> drum
+
+hush
+
+-- 1. Sound check.
+d1 $ sound "bd ~ sn ~" # gain 0.75
+d2 $ sound "hh*8" # gain 0.35
+
+hush
+
+-- 2. Tempo and local convention.
+setcps (120/60/4)
+
+-- In these rhythm strings, t means hit and ~ means rest.
+-- The rhythm is the gate. The sample is the instrument.
+d1 $ struct "t ~ t ~" $ sound "bd" # gain 0.7
+
+-- 3. Four-on-the-floor: steady anchor with offbeat lift.
+let fourKick = "t ~ ~ ~"
+let fourHat = "~ ~ t ~"
+
+d1
+  $ stack [
+      struct fourKick $ sound "bd" # gain 0.75,
+      struct fourHat $ sound "hh" # gain 0.35
+    ]
+
+-- 4. Amen-style break: role separation, not a copied break.
+let amenKick = "t ~ [~ t] ~"
+let amenSnare = "~ [t ~] ~ t"
+let amenHat = "t*8"
+let amenOpen = "~ ~ [~ t] ~"
+
+d1
+  $ stack [
+      struct amenKick $ sound "bd" # gain 0.7,
+      struct amenSnare $ sound "sn" # gain 0.55,
+      struct amenHat $ sound "hh" # gain 0.32,
+      struct amenOpen $ sound "hh" # gain 0.25
+    ]
+
+-- 5. Techno: stable pulse, backbeat pressure, and sparse hat color.
+let technoKick = "t ~ ~ ~"
+let technoClap = "~ t ~ t"
+let technoHat = "~ ~ t ~"
+let technoTick = "~ ~ ~ [~ t]"
+
+d1
+  $ stack [
+      struct technoKick $ sound "bd" # gain 0.75,
+      struct technoClap $ sound "cp" # gain 0.45,
+      struct technoHat $ sound "hh" # gain 0.35,
+      struct technoTick $ sound "drum" # gain 0.3
+    ]
+
+-- 6. Funk: syncopated kick around a plain backbeat.
+let funkKick = "t ~ ~ [~ t] ~ ~ t ~"
+let funkSnare = "~ ~ t ~ ~ ~ t ~"
+let funkHat = "t*8"
+
+d1
+  $ stack [
+      struct funkKick $ sound "bd" # gain 0.7,
+      struct funkSnare $ sound "sn" # gain 0.55,
+      struct funkHat $ sound "hh" # gain 0.3
+    ]
+
+-- 7. Bossa: light pulse with a cross-accent role.
+let bossaKick = "t ~ ~ ~ ~ ~ t ~"
+let bossaHat = "t ~ t ~ t ~ t ~"
+let bossaRim = "t ~ ~ t ~ t ~ ~"
+
+d1
+  $ stack [
+      struct bossaKick $ sound "bd" # gain 0.6,
+      struct bossaHat $ sound "hh" # gain 0.28,
+      struct bossaRim $ sound "cp" # gain 0.4
+    ]
+
+-- 8. Jungle/DnB: fast hats with displaced low and backbeat roles.
+let jungleKick = "t ~ ~ [~ t] ~ t ~ ~"
+let jungleSnare = "~ ~ t ~ ~ t ~ [~ t]"
+let jungleHat = "t*16"
+let jungleBreak = "~ t ~ ~ t ~ ~ t"
+
+d1
+  $ fast 2
+  $ stack [
+      struct jungleKick $ sound "bd" # gain 0.68,
+      struct jungleSnare $ sound "sn" # gain 0.52,
+      struct jungleHat $ sound "hh" # gain 0.25,
+      struct jungleBreak $ sound "drum" # gain 0.32
+    ]
+
+-- 9. Irregular: uneven gates with readable roles.
+let irregularKick = "t ~ t t ~ ~ t ~ ~ t ~ ~"
+let irregularSnare = "~ ~ ~ t ~ ~ ~ ~ t ~ ~ t"
+let irregularHat = "t ~ t ~ ~ t ~ t ~ ~ t ~"
+
+d1
+  $ stack [
+      struct irregularKick $ sound "bd" # gain 0.68,
+      struct irregularSnare $ sound "sn" # gain 0.5,
+      struct irregularHat $ sound "hh" # gain 0.28
+    ]
+
+-- 10. Ghost-note structures: quiet inner hits under stronger accents.
+let ghostAccent = "~ t ~ ~ ~ ~ ~ t"
+let ghostInner = "~ ~ t ~ ~ [t ~] ~ ~"
+let ghostKick = "t ~ ~ ~ t ~ ~ ~"
+let ghostHat = "t*8"
+
+d1
+  $ stack [
+      struct ghostKick $ sound "bd" # gain 0.68,
+      struct ghostAccent $ sound "sn" # gain 0.5,
+      struct ghostInner $ sound "sn" # gain 0.28,
+      struct ghostHat $ sound "hh" # gain 0.26
+    ]
+
+-- 11. Same gate, different instruments.
+let sharedGate = "t ~ t ~ ~ t ~ ~"
+
+d1
+  $ stack [
+      struct sharedGate $ sound "bd" # gain 0.65,
+      struct sharedGate $ sound "cp" # gain 0.38,
+      struct (every 2 inv sharedGate) $ sound "hh" # gain 0.25,
+      struct sharedGate $ sound "arpy" # gain 0.32
+    ]
+
+-- 12. Subtractive cleanup.
+d4 $ silence
+d3 $ silence
+d2 $ silence
+d1 $ sound "bd ~ ~ ~" # gain 0.65
+
+hush

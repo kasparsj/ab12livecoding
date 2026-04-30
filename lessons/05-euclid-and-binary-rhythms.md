@@ -124,6 +124,10 @@ do
 The result is easier to revise during performance: change `main`, and all
 parts using that rhythm change together.
 
+Optional study: the drum-structures atlas applies this same `Pattern Bool`
+idea to translated groove families without importing upstream drum modules:
+[`../studies/drum-structures/tidal/drum-structure-atlas.tidal`](../studies/drum-structures/tidal/drum-structure-atlas.tidal).
+
 ## Alignment Caveat
 
 `struct` does not behave like a hardware sequencer gate that advances the next

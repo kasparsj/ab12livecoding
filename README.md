@@ -26,6 +26,36 @@ quick references, and optional artist-code study tracks.
 - [20 - Alex McLean: Tidal 2.0 beatMode](lessons/20-tidal-2.0-beatmode.md)
 - [10 - Alternate Timelines Pattern Model](lessons/10-alternate-timelines-pattern-model.md)
 
-## Also check
+## Example Index
+
+Runnable `.tidal` files that use stock SuperDirt sample names.
+
+### Basics
+
+- [01 - Rhythm](examples/basics/01-rhythm.tidal) - rhythm construction, pattern slots, cycle reset, and clean stops.
+- [02 - Chords](examples/basics/02-chords.tidal) - chord names, voicings, bass layers, and arpeggios.
+- [03 - Improv](examples/basics/03-improv.tidal) - arrangement states for a short final performance.
+
+### Topic Labs
+
+- [Pattern Mechanics](examples/topics/pattern-mechanics.tidal) - deeper rhythm tools, mini-notation, structure, masks, Euclid, and conditionals.
+- [Modulation and Generative Patterns](examples/topics/modulation-generative-patterns.tidal) - scales, chord vocabulary, oscillators, weighted choice, selection, and Markov-style pitch.
+- [Sampling and Effects Lab](examples/topics/sampling-and-effects-lab.tidal) - sample slicing, granular tools, envelopes, effects, filters, and gain-safe distortion.
+- [Performance Transitions](examples/topics/performance-transitions.tidal) - layers, form, transformations, transitions, fades, and endings.
+
+## Study Index
+
+Artist-code and performance studies for intermediate extensions, sidebars, and
+capstone prompts. Start with [the studies README](studies/README.md) for shared
+teaching guidance and verification notes.
+
+| Study | Focus | Start here |
+| --- | --- | --- |
+| [Kindohm / 365 Tidal Patterns](studies/kindohm/) | Daily sketch practice, transformation menus, sample-index machines, glitch gestures, modulation, section logic, and hardware translation. | [00-open-this-first.tidal](studies/kindohm/tidal/00-open-this-first.tidal) |
+| [ndr-brt / sc-adente](studies/ndr-brt/) | Personal dialect, transformation chains, one-sample composition, probability, melodic machines, and live-set architecture. | [00-open-this-first.tidal](studies/ndr-brt/tidal/00-open-this-first.tidal) |
+| [MIDI Hardware Performance](studies/midi-hardware-performance/) | Hardware-style performance architecture, `struct` gates, MIDI channels, controller input, part toggles, and scene changes. | [midi-controller-performance.tidal](studies/midi-hardware-performance/tidal/midi-controller-performance.tidal) |
+| [Remix Performance](studies/remix-performance/) | Named parts, stem roles, per-layer routing, and compact remix-performance states. | [remix-performance-skeleton.tidal](studies/remix-performance/tidal/remix-performance-skeleton.tidal) |
+
+## Links
 
 - https://adamrenklint.com/tidalbits/
