@@ -1,0 +1,24 @@
+-- Album project boot template
+-- Level: final project
+-- Time: evaluate once before working on track files
+-- Prerequisites: sound, gain, orbit, setcps, silence, hush
+-- Source boundary: stock-safe classroom setup only.
+-- Do not import MIDI, hardware, Jarmlib, or artist-project helpers here.
+
+hush
+
+-- Course tempo convention: bpm / 60 / beatsPerCycle.
+setcps (120/60/4)
+
+-- Small, readable helper controls.
+let anchor = gain 0.7 # orbit 0
+let texture = gain 0.35 # orbit 1
+let low = gain 0.6 # orbit 2
+
+-- Recovery block. Keep this visible while rehearsing.
+d4 $ silence
+d3 $ silence
+d2 $ silence
+d1 $ sound "bd ~ ~ ~" # gain 0.65
+
+hush

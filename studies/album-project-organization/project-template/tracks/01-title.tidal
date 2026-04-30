@@ -1,0 +1,68 @@
+-- Track 01: Title
+-- Tempo: 120 BPM, four beats per cycle
+-- Samples used: bd, sn, hh, cp, drum, feel, arpy, bass, superpiano
+-- Sections: sound check, anchor, texture, full state, breakdown, return, ending
+-- Recording notes: record one full pass after rehearsing the ending twice.
+
+hush
+setcps (120/60/4)
+
+-- 1. Sound check.
+d1 $ sound "bd ~ sn ~" # gain 0.75
+d2 $ sound "hh*8" # gain 0.35
+
+hush
+
+-- 2. Anchor.
+d1
+  $ sound "bd ~ sn ~"
+  # gain 0.72
+  # orbit 0
+
+-- 3. Add a melodic texture.
+d2
+  $ slow 2
+  $ n "0 2 4 7"
+  # sound "arpy"
+  # gain 0.38
+  # orbit 1
+
+-- 4. Full state.
+d1
+  $ stack [
+      sound "bd ~ sn ~" # gain 0.72,
+      sound "hh*8" # gain 0.32,
+      sound "~ cp ~ [~ cp]" # gain 0.4,
+      slow 2 $ n "0 2 4 7" # sound "arpy" # gain 0.36,
+      slow 4 $ n "0 ~ 2 ~" # sound "bass" # gain 0.55
+    ]
+  # orbit 0
+
+-- 5. Breakdown.
+d1
+  $ stack [
+      sound "bd ~ ~ ~" # gain 0.65,
+      slow 4 $ n "0 ~ 2 ~" # sound "bass" # gain 0.5,
+      slow 2 $ n "7 ~ 4 ~" # sound "superpiano" # gain 0.32
+    ]
+  # orbit 0
+
+-- 6. Return.
+d1
+  $ stack [
+      sound "bd ~ sn ~" # gain 0.72,
+      sound "hh*8" # gain 0.32,
+      sound "~ cp ~ [~ cp]" # gain 0.4,
+      every 4 (jux rev) $ sound "drum*4" # gain 0.34,
+      slow 2 $ n "0 2 4 7" # sound "arpy" # gain 0.36,
+      slow 4 $ n "0 ~ 2 ~" # sound "bass" # gain 0.55
+    ]
+  # orbit 0
+
+-- 7. Subtractive ending.
+d4 $ silence
+d3 $ silence
+d2 $ silence
+d1 $ sound "bd ~ ~ ~" # gain 0.65
+
+hush
