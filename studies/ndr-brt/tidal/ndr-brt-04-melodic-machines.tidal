@@ -1,0 +1,115 @@
+-- ndr-brt study 04 — Melodic machines
+-- Themes from studies/ndr-brt/study-module-plans.md:
+-- Study 6: Melodic Machines
+-- Study 4: Probability With Boundaries
+--
+-- Teaching aim:
+-- Generate pitch material, map it into scales, and layer one melodic source across roles.
+
+hush
+
+-- 1. Fixed scale-degree melody.
+d1
+  $ n (scale "minor" "0 2 4 7")
+  # sound "superpiano"
+  # gain 0.7
+
+-- 2. Same degrees, different speed and octave.
+d1
+  $ n (scale "minor" "0 2 4 7")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+d2
+  $ slow 2
+  $ n (scale "minor" "0 2 4 7")
+  # sound "bass"
+  # octave 3
+  # gain 0.75
+
+-- 3. Generated pitch stream with run.
+d1
+  $ n (scale "minor" $ run 8)
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+-- 4. Limit the generated stream with structure and repetition.
+d1
+  $ every 4 rev
+  $ n (scale "minor" "0 2 4 7 6 4 2 0")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+-- 5. Pseudo-Markov idea for beginners.
+-- Instead of a full Markov function, use nearby choices that feel related.
+-- Teach this as: each state tends to move to a few familiar neighbors.
+d1
+  $ n (scale "minor" "[0|2] [2|4] [4|7] [7|6] [6|4] [4|2] [2|0] [0|3]")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+-- 6. Layer the same source in three roles: melody, bass, ghost octave.
+d1
+  $ every 4 rev
+  $ n (scale "minor" "[0|2] [2|4] [4|7] [7|6]")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+d2
+  $ slow 2
+  $ n (scale "minor" "0 0 3 2")
+  # sound "bass"
+  # octave 3
+  # gain 0.75
+
+d3
+  $ degradeBy 0.55
+  $ fast 2
+  $ n (scale "minor" "7 6 4 2")
+  # sound "arpy"
+  # octave 6
+  # gain 0.35
+  # room 0.4
+
+-- 7. Add rhythm without overcrowding the melody.
+d4 $ sound "bd ~ sn ~" # gain 0.8
+
+-- 8. Continuous modulation translated into melody.
+-- range creates smooth values; segment samples them into discrete moments.
+-- round turns the values into scale degrees.
+d1
+  $ n (scale "minor" $ round <$> segment 8 (range 0 7 sine))
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+-- 9. Challenge: one generated melody, three interpretations.
+-- A: lead, B: slow bass, C: sparse shimmer.
+d1
+  $ n (scale "minor" "0 2 [4|5] 7 6 [4|2] 3 0")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.65
+
+d2
+  $ slow 2
+  $ n (scale "minor" "0 0 3 2")
+  # sound "bass"
+  # octave 3
+  # gain 0.75
+
+d3
+  $ degradeBy 0.5
+  $ jux rev
+  $ n (scale "minor" "7 6 4 2")
+  # sound "arpy"
+  # octave 6
+  # gain 0.35
+  # room 0.5
+
+hush

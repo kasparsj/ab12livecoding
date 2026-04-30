@@ -1,0 +1,52 @@
+-- Harmony, modulation, selection, and generative patterns
+-- Use this after examples/basics/02-chords.tidal for students ready for more control.
+
+hush
+
+-- Scales and chord vocabulary.
+d1 $ n (scale "minor" "0 2 4 7") # sound "superpiano" # gain 0.7
+
+d1 $ n (toScale [0,2,3,5,7,8,10] "0 2 4 7") # sound "superpiano" # gain 0.7
+
+-- Inspect scaleList / scaleTable and chordList / chordTable in the REPL when appropriate.
+
+-- Rolled chords and voicings.
+d1 $ rolled 0.08 $ n "c'maj e'min f'maj" # sound "superpiano" # sustain 1.5 # gain 0.7
+d1 $ rolledBy 0.04 "0 1 2" $ n "c4'maj e4'min f4'maj'o" # sound "superpiano" # sustain 1.5 # gain 0.7
+
+-- Oscillators for movement.
+d2 $ sound "hh*8" # pan sine # gain 0.45
+d2 $ sound "hh*8" # pan cosine # gain 0.45
+d2 $ sound "hh*8" # pan (slow 2 tri) # gain 0.45
+d2 $ sound "hh*8" # speed (range 0.75 1.5 saw) # gain 0.45
+d2 $ sound "hh*8" # speed (rangex 0.75 2 isaw) # gain 0.45
+d2 $ sound "hh*8" # pan (smooth "0 1 0.5 1") # gain 0.45
+
+-- Random and weighted choice.
+d3 $ sound "arpy*8" # n (choose [0, 2, 4, 7]) # gain 0.6
+d3 $ sound "arpy*8" # n (chooseBy "0 0.25 0.5 0.75" [0, 2, 4, 7]) # gain 0.6
+d3 $ sound "arpy*8" # n (wchoose [(0,0.5), (2,0.2), (4,0.2), (7,0.1)]) # gain 0.6
+d3 $ sound "arpy*8" # n (wchooseBy sine [(0,0.5), (2,0.2), (4,0.2), (7,0.1)]) # gain 0.6
+
+-- Pattern and function selection.
+d1 $ select "0 0.5 0.9" [sound "bd sn", sound "bd*4", sound "bd [sn cp] hh*4"]
+d1 $ selectF "0 0.5 0.9" [rev, fast 2, slow 2] $ sound "bd [sn cp] hh*4"
+d1 $ pickF "0 1 2 1" [rev, fast 2, slow 2] $ sound "bd [sn cp] hh*4"
+d1 $ squeeze "0 1 2" [sound "bd sn", sound "hh*8", sound "cp*4"]
+
+-- Named pattern kit with inhabit.
+do
+  let drum = inhabit [("bd", s "bd"), ("hh", s "hh" # gain 0.45), ("sd", s "sn:3")]
+  d1 $ drum "[bd*4?, [~hh]*4, sd(6,16)]"
+
+-- Continuous/random processes.
+d2 $ sound "hh*8" # pan rand # gain 0.45
+d3 $ sound "arpy*8" # n (randrun 8) # gain 0.55
+d3 $ sound "arpy*8" # n (range 0 8 perlin) # gain 0.55
+d3 $ sound "arpy*8" # n (range 0 8 perlin2) # gain 0.55
+d3 $ sound "arpy*8" # n (cycleChoose [0, 2, 4, 7]) # gain 0.55
+
+-- Markov-style pitch as an advanced optional demo.
+d4 $ n (markovPat 0 [(0, [(2, 0.7), (4, 0.3)]), (2, [(4, 0.7), (0, 0.3)]), (4, [(7, 0.7), (2, 0.3)]), (7, [(0, 1.0)])]) # sound "superpiano" # gain 0.6
+
+hush

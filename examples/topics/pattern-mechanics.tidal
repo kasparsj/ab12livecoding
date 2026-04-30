@@ -1,0 +1,77 @@
+-- Pattern mechanics, rhythm logic, and safety
+-- Use this after examples/basics/01-rhythm.tidal when students want deeper rhythm tools.
+
+hush
+
+-- Tempo and performance safety.
+setcps 0.6
+
+d1 $ sound "bd hh sn hh"
+
+d2 $ sound "arpy cp arpy:2" # gain 0.55
+
+solo 1
+unsolo 1
+mute 2
+unmute 2
+unmuteAll
+
+-- Pause/restart trick from the workshop.
+setcps (-4)
+
+setcps 0.6
+
+-- Mini-notation expansion: divide, replicate, alternate, superpose, cycle choices.
+d1 $ sound "bd sn/2"
+
+d1 $ sound "bd!3 sn"
+
+d1 $ sound "[bd:0|bd:1] [sn|cp]"
+
+d1 $ sound "[sn,cp] bd [hh hh]"
+
+d1 $ sound "bd <sd cp arpy>"
+
+-- Step sequencer helpers.
+d1 $ s (step "sn" "x x 12 ")
+
+d2 $ s (step' ["superpiano", "supermandolin"] "0 1 000 1") # sustain 4 # n 0
+
+-- Structure and masks.
+d1 $ struct "t f t t f t t t" $ sound "bd*8"
+
+d2 $ substruct "t f t f" $ sound "hh*8" # gain 0.45
+
+d3 $ mask "t f f f f t f t" $ sound "cp*8" # gain 0.5
+
+-- Euclidean variants.
+d1 $ sound "bd(7,8)"
+
+d2 $ sound "sn(2,8)" # gain 0.7
+
+d3 $ sound "hh(5,8)" # gain 0.45
+
+d4 $ sound "cp(5,16,2)" # gain 0.5
+
+-- Reference functions for deeper Euclidean work.
+d1 $ euclid 3 8 $ sound "bd"
+
+d2 $ euclidInv 3 8 $ sound "hh" # gain 0.4
+
+d3 $ euclidFull 5 8 "cp" "~" # gain 0.5
+
+-- Necklace and conditional timing.
+d1 $ sound (necklace 3 8 "bd" "~")
+
+d2 $ every' 4 1 rev $ sound "hh*8" # gain 0.45
+
+d3 $ whenmod 8 6 (fast 2) $ sound "cp*4" # gain 1.0
+
+-- Conditional/function selection menu.
+d1 $ foldEvery [3, 5] rev $ sound "bd [sn cp] hh*4"
+
+d2 $ when (>= 0.5) (# speed 2) $ sound "arpy*4" # gain 0.5
+
+d3 $ contrast "t f t f" (fast 2) (slow 2) $ sound "hh*8" # gain 0.4
+
+hush

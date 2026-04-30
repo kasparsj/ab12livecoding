@@ -1,0 +1,39 @@
+-- ndr-brt / sc-adente study track — open this first
+--
+-- This is the Tidal-first index for teaching primarily from .tidal files.
+-- All files are designed as live teaching scripts: evaluate one block at a time,
+-- pause to listen, change one parameter, then continue.
+--
+-- Source inspiration: https://github.com/ndr-brt/sc-adente/tree/master/tidal
+-- Local study notes: studies/ndr-brt/*.md
+
+hush
+
+-- Teaching order:
+--
+-- 1. ndr-brt-01-dialect-and-transformations.tidal
+--    Teach personal aliases, stable anchors, and transformation chains.
+--
+-- 2. ndr-brt-02-one-sample-many-bodies.tidal
+--    Teach how one sample can become anchor, texture, grain, and accent.
+--
+-- 3. ndr-brt-03-probability-and-rhythm-logic.tidal
+--    Teach randomness boundaries, Euclidean rhythms, masks, and logic grooves.
+--
+-- 4. ndr-brt-04-melodic-machines.tidal
+--    Teach generated pitch, scale mapping, register layers, and pseudo-Markov motion.
+--
+-- 5. ndr-brt-05-live-set-architecture.tidal
+--    Teach section states, safe breakdowns, rebuilds, and rehearsed endings.
+
+-- Quick sound check before class:
+d1 $ sound "bd ~ sn ~" # gain 0.8
+d2 $ sound "hh*8" # gain 0.45
+d3 $ n "0 2 4 7" # sound "arpy" # gain 0.55
+
+-- Ask students:
+-- What is the anchor?
+-- What changes?
+-- What would you remove first if the texture becomes too dense?
+
+hush

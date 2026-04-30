@@ -1,0 +1,160 @@
+-- ndr-brt study 05 — Live set architecture
+-- Themes from studies/ndr-brt/study-module-plans.md:
+-- Study 2: One Sample, Many Bodies
+-- Study 8: Live Set Architecture
+-- Study 9: External Control and MIDI, kept as optional discussion only
+--
+-- Teaching aim:
+-- Treat a performance as a sequence of code states. Rehearse the states, not just the loops.
+
+hush
+
+-- Safety setup: known silent state.
+d1 $ silence
+d2 $ silence
+d3 $ silence
+d4 $ silence
+
+-- Set a comfortable tempo if your environment supports bpm from the course setup.
+-- If this errors in your setup, skip it and use your editor's default tempo.
+-- bpm 120
+
+-- SECTION 1 — Intro: one clear idea.
+-- Teach: begin with something you can recover from.
+d1
+  $ sound "bd ~ ~ ~"
+  # gain 0.75
+
+d2
+  $ slow 2
+  $ sound "arpy"
+  # n "0"
+  # gain 0.45
+  # room 0.4
+
+-- SECTION 2 — Build: same material, more bodies.
+d1 $ sound "bd ~ sn ~" # gain 0.85
+
+d2
+  $ slow 2
+  $ sound "arpy"
+  # n "0"
+  # gain 0.45
+  # room 0.4
+
+d3
+  $ chop 8
+  $ sound "arpy"
+  # n "1"
+  # gain 0.35
+  # pan "0.25 0.75"
+
+-- SECTION 3 — Dense: four roles, but still limited material.
+d1 $ sound "bd [sn cp] bd sn" # gain 0.85
+
+d2
+  $ every 4 rev
+  $ sound "hh*8"
+  # gain 0.42
+
+d3
+  $ chop 16
+  $ sound "arpy"
+  # n "1"
+  # gain 0.35
+  # pan rand
+
+d4
+  $ degradeBy 0.4
+  $ fast 2
+  $ n (scale "minor" "0 2 4 7")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.45
+  # room 0.3
+
+-- SECTION 4 — Destabilize one layer only.
+-- Teach: do not transform everything at once unless you planned it.
+d1 $ sound "bd [sn cp] bd sn" # gain 0.85
+
+d2
+  $ every 4 rev
+  $ sometimes (fast 2)
+  $ jux rev
+  $ sound "hh*8"
+  # gain 0.35
+
+d3
+  $ every 3 (iter 4)
+  $ chop 16
+  $ sound "arpy"
+  # n "1"
+  # gain 0.35
+  # pan rand
+
+d4
+  $ degradeBy 0.4
+  $ fast 2
+  $ n (scale "minor" "0 2 4 7")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.45
+  # room 0.3
+
+-- SECTION 5 — Breakdown: remove rhythm, keep a ghost.
+d1 $ silence
+d2 $ silence
+
+d3
+  $ slow 4
+  $ sound "arpy"
+  # n "0"
+  # speed 0.5
+  # gain 0.45
+  # room 0.7
+  # size 0.9
+
+d4
+  $ slow 2
+  $ n (scale "minor" "0 ~ 3 ~")
+  # sound "bass"
+  # octave 3
+  # gain 0.6
+
+-- SECTION 6 — Return: rebuild with one change.
+d1 $ sound "bd [sn cp] bd sn" # gain 0.85
+
+d2 $ sound "hh(7,16)" # gain 0.4
+
+d3
+  $ every 4 rev
+  $ slice 8 "0 3 5 7 2 1 6 4"
+  $ sound "arpy"
+  # n "1"
+  # gain 0.4
+
+d4
+  $ n (scale "minor" "0 2 4 7")
+  # sound "superpiano"
+  # octave 5
+  # gain 0.45
+
+-- SECTION 7 — Planned ending options.
+-- Option A: subtract layers manually.
+d4 $ silence
+d3 $ silence
+d2 $ silence
+d1 $ sound "bd ~ ~ ~" # gain 0.65
+
+-- Option B: global color change, then hush.
+all $ (# room 0.5) . (# size 0.9)
+all $ (# cutoff 700)
+
+hush
+
+-- Rehearsal checklist in Tidal comments:
+-- [ ] Can you start from silence?
+-- [ ] Can you reach Section 3 without looking lost?
+-- [ ] Can you recover if one pattern becomes too dense?
+-- [ ] Can you perform the ending without panic?
+-- [ ] Can you explain which layer is anchor, texture, melody, or accent?

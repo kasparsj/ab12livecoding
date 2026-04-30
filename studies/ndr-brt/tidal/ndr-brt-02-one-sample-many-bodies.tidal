@@ -1,0 +1,99 @@
+-- ndr-brt study 02 — One sample, many bodies
+-- Themes from studies/ndr-brt/study-module-plans.md:
+-- Study 2: One Sample, Many Bodies
+-- Study 3: Transformation Chains as Composition
+-- Study 7: Modular Timbre and Effects, translated to stock effects
+--
+-- Teaching aim:
+-- Build a complete miniature from one source sound. Change role through speed,
+-- chop/slice, filtering, space, density, and direction.
+
+hush
+
+-- Choose one source. If "arpy" is missing, try "feel", "bass", "gtr", or "bd".
+-- Keep the same source for the whole lab.
+d1 $ sound "arpy" # gain 0.8
+
+-- 1. Anchor body: steady and recognizable.
+d1
+  $ sound "arpy*4"
+  # n "0 1 2 3"
+  # gain 0.65
+
+-- 2. Slow body: lower, longer, more textural.
+d2
+  $ slow 2
+  $ sound "arpy"
+  # n "0"
+  # speed 0.5
+  # gain 0.5
+  # room 0.35
+  # size 0.7
+
+-- 3. Grain body: chopped into smaller pieces.
+d3
+  $ chop 16
+  $ sound "arpy"
+  # n "1"
+  # gain 0.45
+  # pan "0.25 0.75"
+
+-- 4. Accent body: fast, quiet, occasional.
+d4
+  $ sometimes (fast 2)
+  $ degradeBy 0.35
+  $ sound "arpy*8"
+  # n "2 3 1 0"
+  # speed 2
+  # gain 0.35
+  # delay 0.25
+  # delayfeedback 0.25
+
+-- 5. All four bodies together.
+d1 $ sound "arpy*4" # n "0 1 2 3" # gain 0.6
+
+d2
+  $ slow 2
+  $ sound "arpy"
+  # n "0"
+  # speed 0.5
+  # gain 0.45
+  # room 0.35
+  # size 0.7
+
+d3
+  $ every 4 rev
+  $ chop 16
+  $ sound "arpy"
+  # n "1"
+  # gain 0.35
+  # pan "0.25 0.75"
+
+d4
+  $ degradeBy 0.35
+  $ sound "arpy*8"
+  # n "2 3 1 0"
+  # speed 2
+  # gain 0.3
+  # delay 0.25
+  # delayfeedback 0.25
+
+-- 6. Slice version: turn one sound into a rhythm by changing playback positions.
+-- If slice does not suit your sample, return to chop above.
+d3
+  $ every 4 rev
+  $ slice 8 "0 3 5 7 2 1 6 4"
+  $ sound "arpy"
+  # n "1"
+  # gain 0.45
+
+-- 7. Global ending gesture.
+-- This works well in performance: gradually make the whole set thinner/darker.
+all $ (# cutoff 900)
+all $ (# room 0.5) . (# size 0.8)
+
+-- 8. Capstone prompt in code:
+-- Make a 90-second piece with only one sample.
+-- Required roles: anchor, slow body, grain body, accent body, planned ending.
+
+hush

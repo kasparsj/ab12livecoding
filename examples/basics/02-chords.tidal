@@ -1,0 +1,28 @@
+-- Chords, Arpeggios, and Musical Layers
+-- Covers playing chords and building arpeggios.
+
+hush
+
+-- Drum anchor from Week 1.
+d1 $ sound "bd ~ sn ~"
+d2 $ sound "hh*8" # gain 0.45
+
+-- Basic chord pattern using chord names.
+d3 $ n "c'maj e'min f'maj" # sound "supermandolin" # sustain 1.2 # gain 0.75
+
+-- Chord octave choices and inversions/open voicing.
+d3 $ n "c4'maj e4'min f4'maj'o" # sound "superpiano" # sustain 1.5 # room 0.25 # gain 0.7
+
+-- Bass layer.
+d4 $ n "c2 ~ e2 ~ f2 ~ e2 ~" # sound "bass" # gain 0.8
+
+-- Arpeggio from a chord.
+d3 $ arp "up" $ n "c'maj'4 e'min'4" # sound "supermandolin" # sustain 0.5 # gain 0.75
+
+-- Pattern the arpeggiator.
+d3 $ arp "<up down pinkyup>" $ n "<c'maj'4 e'min'4 f'maj'4>" # sound "supermandolin" # sustain 0.6 # gain 0.75
+
+-- Add offset and stereo reversal for motion.
+d3 $ jux rev $ off 0.125 (|+ 7) $ arp "<up down pinkyup>" $ n "<c'maj'4 e'min'4 f'maj'4>" # sound "supermandolin" # sustain 0.6 # room 0.3 # gain 0.75
+
+hush

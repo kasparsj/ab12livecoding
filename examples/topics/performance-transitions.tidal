@@ -1,0 +1,67 @@
+-- Composition, arrangement, and transitions
+-- Use this as a menu for building performable live-set states.
+
+hush
+
+-- Pattern combination.
+d1 $ stack [sound "bd ~ sn ~", sound "hh*8" # gain 0.45]
+d1 $ overlay (sound "hh*8" # gain 0.4) (sound "bd ~ sn ~")
+d1 $ superimpose (fast 2) $ sound "bd ~ sn ~"
+d1 $ layer [id, fast 2, rev] $ sound "bd [sn cp] hh*4"
+d1 $ steps [sound "bd", sound "sn", sound "hh", sound "cp"] "0 2 1 3"
+d1 $ iter' 4 1 $ sound "bd [sn cp] hh*4"
+
+-- Concatenation and form.
+d1 $ cat [sound "bd sn", sound "bd*4", sound "bd [sn cp] hh*4"]
+d1 $ fastcat [sound "bd sn", sound "hh*8", sound "cp*4"]
+d1 $ timeCat [(2, sound "bd ~ sn ~"), (1, sound "hh*8"), (1, sound "cp*4")]
+d1 $ randcat [sound "bd sn", sound "bd*4", sound "bd [sn cp] hh*4"]
+d1 $ wrandcat [(sound "bd sn", 0.6), (sound "bd*4", 0.3), (sound "bd [sn cp] hh*4", 0.1)]
+d1 $ append (sound "bd sn") (sound "hh*8")
+d1 $ fastAppend (sound "bd sn") (sound "hh*8")
+
+-- Time and transformation menu.
+d1 $ hurry 2 $ sound "arpy arpy arpy:1 arpy:2"
+d1 $ palindrome $ sound "arpy arpy:1 arpy:2 arpy:3"
+d1 $ trunc 0.75 $ sound "bd sn hh cp"
+d1 $ linger 0.25 $ sound "bd sn hh cp"
+d1 $ loopFirst $ sound "bd sn hh cp"
+d1 $ bite 4 "2 0 1 3" $ n "0 .. 7" # sound "arpy"
+d1 $ shuffle 4 $ sound "bd sn hh cp"
+d1 $ scramble 4 $ sound "bd sn hh cp"
+d1 $ ply 2 $ sound "bd sn"
+d1 $ stutter 3 0.125 $ sound "cp"
+d1 $ stut 3 0.8 0.125 $ sound "cp"
+d1 $ echo 3 0.125 0.7 $ sound "cp"
+d1 $ ghost $ sound "bd sn"
+d1 $ spin 4 $ sound "arpy*4"
+d1 $ weave 4 (pan "0 1") $ sound "arpy*4"
+d1 $ inside 2 (rev) $ sound "bd sn hh cp"
+d1 $ outside 2 (fast 2) $ sound "bd sn hh cp"
+d1 $ within (0.25, 0.75) (fast 2) $ sound "bd sn hh cp"
+d1 $ compress (0.25, 0.75) $ sound "bd sn hh cp"
+d1 $ zoom (0.25, 0.75) $ sound "bd sn hh cp"
+d1 $ swingBy 0.1 4 $ sound "hh*8"
+d1 $ swing 4 $ sound "hh*8"
+
+-- Transitions: evaluate in a live session, one at a time.
+d1 $ sound "bd ~ sn ~"
+xfade 1 $ sound "bd*4"
+xfadeIn 1 4 $ sound "bd [sn cp] hh*4"
+jump 1 $ sound "bd sn bd sn"
+jumpIn 1 4 $ sound "bd*4"
+jumpMod 1 4 $ sound "bd [sn cp] hh*4"
+wait 1 4 $ sound "bd ~ sn ~"
+waitT 1 (Sound.Tidal.Transition.jump) 4 $ sound "bd*4"
+anticipate 1 $ sound "bd [sn cp] hh*4"
+anticipateIn 1 4 $ sound "bd [sn cp] hh*4"
+clutch 1 $ sound "bd*4"
+clutchIn 1 4 $ sound "bd*4"
+interpolate 1 $ sound "bd*4"
+interpolateIn 1 4 $ sound "bd*4"
+wash 1 4 $ sound "bd [sn cp] hh*4"
+washIn 1 4 $ sound "bd [sn cp] hh*4"
+fadeIn 1 4 $ sound "bd*4"
+fadeOut 1 4
+
+hush

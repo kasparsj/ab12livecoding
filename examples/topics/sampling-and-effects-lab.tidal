@@ -1,0 +1,63 @@
+-- Sampling and effects extension lab
+-- Insert this during Week 2 or Week 3 when students need sound-design tools.
+
+hush
+
+-- Sample start/end and envelope length.
+d1 $ sound "arpy" # begin 0.1 # end 0.7 # gain 0.7
+d1 $ sound "arpy*4" # sustain 0.25 # gain 0.7
+d1 $ sound "arpy*4" # legato 0.7 # gain 0.7
+d1 $ sound "arpy*4" # cut 1 # gain 0.7
+
+-- Granular/sample manipulation.
+d1 $ chop 16 $ sound "arpy" # gain 0.6
+d1 $ striate 8 $ sound "arpy" # gain 0.6
+d1 $ striateBy 8 0.5 $ sound "arpy" # gain 0.6
+d1 $ slice 8 "0 3 5 7 2 1 6 4" $ sound "arpy" # gain 0.6
+d1 $ splice 8 "0 3 5 7 2 1 6 4" $ sound "arpy" # gain 0.6
+d1 $ randslice 8 $ sound "arpy" # gain 0.6
+d1 $ chew 8 "0 3 5 7 2 1 6 4" $ sound "arpy" # gain 0.6
+d1 $ loopAt 4 $ sound "arpy" # gain 0.6
+d1 $ smash 3 [2, 3, 4] $ sound "arpy" # gain 0.6
+d1 $ smash' 3 [2, 3, 4] $ sound "arpy" # gain 0.6
+d1 $ grain 0.1 0.2 $ sound "arpy" # gain 0.6
+d1 $ grain' 0.1 0.2 0.5 $ sound "arpy" # gain 0.6
+
+-- Sampling continuous patterns.
+d1 $ sound "hh*8" # pan (segment 8 sine) # gain 0.45
+d1 $ sound "hh*8" # pan (discretise 8 sine) # gain 0.45
+d1 $ sound "hh*8" # pan (sig 0.25) # gain 0.45
+
+-- Core effects.
+d1 $ sound "drum*8" # vowel "a o e i"
+d1 $ sound "cp*4" # delay 0.4 # delaytime 0.125 # delayfeedback 0.5 # lock 1
+d1 $ sound "sn*4" # dry 0.5 # room 0.6 # size 0.8
+d1 $ sound "bd*4" # shape 0.3 # gain 0.6
+
+-- Filters.
+d1 $ sound "tabla*4" # cutoff 400 # resonance 0.2
+d1 $ sound "tabla*4" # hcutoff 600 # hresonance 0.2
+d1 $ sound "tabla*4" # djf "0.2 0.8"
+d1 $ sound "tabla*4" # bandf 1200 # bandq 0.5
+
+-- Distortion, bit, spectral, and modulation effects. Keep gain low.
+d1 $ sound "arpy*4" # distort 0.2 # gain 0.45
+d1 $ sound "arpy*4" # triode 0.2 # gain 0.45
+d1 $ sound "arpy*4" # squiz "1 2 4" # gain 0.45
+d1 $ sound "arpy*4" # crush 8 # gain 0.45
+d1 $ sound "arpy*4" # coarse 4 # gain 0.45
+d1 $ sound "arpy*4" # krush 0.4 # kcutoff 3000 # gain 0.45
+d1 $ sound "arpy*4" # octer 0.3 # octersub 0.2 # octersubsub 0.1 # gain 0.45
+d1 $ sound "arpy*4" # ring 0.3 # ringf 440 # gain 0.45
+d1 $ sound "arpy*4" # tremolodepth 0.7 # tremolorate 8 # gain 0.45
+d1 $ sound "arpy*4" # leslie 0.5 # lrate 6.7 # lsize 1 # gain 0.45
+d1 $ sound "arpy*4" # phaserrate 0.4 # phaserdepth 0.6 # gain 0.45
+d1 $ sound "arpy*4" # comb 0.4 # gain 0.45
+d1 $ sound "arpy*4" # freeze 0.2 # gain 0.45
+d1 $ sound "arpy*4" # binshift 0.2 # gain 0.45
+d1 $ sound "arpy*4" # scram 0.2 # gain 0.45
+d1 $ sound "arpy*4" # waveloss 20 # gain 0.45
+d1 $ sound "arpy*4" # smear 0.3 # gain 0.45
+d1 $ sound "arpy*4" # enhance 0.3 # gain 0.45
+
+hush

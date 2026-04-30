@@ -1,0 +1,78 @@
+-- ndr-brt study 03 — Probability and rhythm logic
+-- Themes from studies/ndr-brt/study-module-plans.md:
+-- Study 4: Probability With Boundaries
+-- Study 5: Boolean Rhythm Lab
+--
+-- Teaching aim:
+-- Use randomness with limits. Then compare Euclidean and boolean-style rhythm thinking.
+
+hush
+
+-- 1. Stable reference groove.
+d1 $ sound "bd ~ sn ~"
+d2 $ sound "hh*8" # gain 0.45
+
+-- 2. Probability boundary: remove some hats, but leave the kick/snare stable.
+d1 $ sound "bd ~ sn ~"
+d2 $ degradeBy 0.25 $ sound "hh*8" # gain 0.45
+
+-- 3. Randomness dimension A: event presence only.
+d2 $ degradeBy 0.45 $ sound "hh*8" # gain 0.45
+
+-- 4. Randomness dimension B: pan only.
+d2 $ sound "hh*8" # gain 0.45 # pan rand
+
+-- 5. Randomness dimension C: sample number only.
+d3 $ sound "arpy*4" # n (irand 8) # gain 0.55
+
+-- 6. Randomness dimension D: speed only.
+d3 $ sound "arpy*4" # n "0 1 2 3" # speed (range 0.75 1.25 sine) # gain 0.55
+
+-- 7. Compare periodic change and probability.
+d1 $ every 4 rev $ sound "bd [sn cp] hh*4" # gain 0.8
+
+d1 $ sometimes rev $ sound "bd [sn cp] hh*4" # gain 0.8
+
+-- 8. Euclidean rhythm lab.
+-- Hear how k events over n steps changes density and feel.
+d1 $ sound "bd(3,8)"
+d2 $ sound "sn(2,8)" # gain 0.7
+d3 $ sound "hh(5,8)" # gain 0.45
+
+-- 9. Rotate density over time by changing Euclidean values.
+d1 $ sound "bd(<3 5>,8)"
+d2 $ sound "sn(2,8)" # gain 0.7
+d3 $ sound "hh(<5 7 6>,8)" # gain 0.45
+
+-- 10. Boolean-style rhythm without custom functions.
+-- Treat each layer as a logical condition. The composite groove is the result.
+-- Kick: sparse ground. Snare: backbeat. Hat: high-density grid. Clap: occasional mask.
+d1 $ sound "bd(3,8)"
+d2 $ sound "~ sn ~ sn"
+d3 $ sound "hh(7,16)" # gain 0.4
+d4 $ every 4 (degradeBy 0.6) $ sound "cp(5,16)" # gain 0.5
+
+-- 11. Masking: use one rhythm to reveal another.
+d4
+  $ mask "t f t t f t f t"
+  $ sound "cp*8"
+  # gain 0.55
+
+-- 12. Challenge: unstable but recognizable.
+-- Rules: one stable anchor, one random dimension, one Euclidean layer, one silence command.
+d1 $ sound "bd ~ sn ~" # gain 0.9
+
+d2
+  $ degradeBy 0.25
+  $ sound "hh(7,16)"
+  # gain 0.4
+  # pan rand
+
+d3
+  $ every 4 rev
+  $ sound "arpy(5,8)"
+  # n (irand 4)
+  # gain 0.5
+  # room 0.25
+
+hush

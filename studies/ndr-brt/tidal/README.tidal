@@ -1,0 +1,23 @@
+-- ndr-brt / sc-adente Tidal teaching pack
+--
+-- This folder is the canonical ndr-brt Tidal teaching pack.
+-- Teach directly from these files rather than duplicated copies in examples/.
+--
+-- Suggested order:
+-- 00-open-this-first.tidal
+-- ndr-brt-00-teaching-map.tidal
+-- ndr-brt-01-dialect-and-transformations.tidal
+-- ndr-brt-02-one-sample-many-bodies.tidal
+-- ndr-brt-03-probability-and-rhythm-logic.tidal
+-- ndr-brt-04-melodic-machines.tidal
+-- ndr-brt-05-live-set-architecture.tidal
+--
+-- Open one file at a time and evaluate one block at a time.
+
+hush
+
+-- Minimal sound check for this folder:
+d1 $ sound "bd ~ sn ~" # gain 0.8
+d2 $ sound "hh*8" # gain 0.45
+
+hush
