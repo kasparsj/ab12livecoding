@@ -1,0 +1,30 @@
+-- Kindohm / 365 Tidal Patterns study track - teaching map
+-- Source study plans: studies/kindohm/*.md
+-- Use these files as optional artist-sketchbook studies after or alongside the 3-week course.
+-- Evaluate one block at a time. If a sample is missing, replace it with bd, sn, hh, cp, arpy, bass, drum, or feel.
+
+hush
+
+-- File order for teaching:
+-- 1. kindohm-01-daily-sketch-and-reuse.tidal
+--    Daily practice, one sketch idea, and reusable template thinking.
+--
+-- 2. kindohm-02-transformer-chains.tidal
+--    every, whenmod, foldEvery, offsets, rev, iter, and transformation menus.
+--
+-- 3. kindohm-03-sample-index-machines.tidal
+--    Stock translation of samples/run/pick sample-index techniques.
+--
+-- 4. kindohm-04-time-effects-and-sections.tidal
+--    striate, stut, trunc, within, modulation, fills, and dropouts.
+--
+-- 5. kindohm-05-melody-and-hardware-translation.tidal
+--    Scale mapping and translating hardware streams into stock note patterns.
+
+-- 5-minute warm-up before any study:
+d1 $ sound "bd ~ sn ~"
+d2 $ sound "hh*8" # gain 0.45
+d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55
+
+-- Shared safe ending:
+hush

@@ -1,0 +1,91 @@
+-- Kindohm study 04 - Time effects and section logic
+-- Themes from studies/kindohm/study-module-plans.md:
+-- Study 5: Break Slicing and Glitch Gestures
+-- Study 6: Modulation as Motion
+-- Study 7: Periodic Section Logic
+--
+-- Teaching aim:
+-- Use bounded time effects, slow modulation, and cycle-count logic to create
+-- fills, dropouts, and returns while preserving a recoverable groove.
+
+hush
+
+-- 1. Stable groove.
+d1 $ sound "bd ~ sn ~" # gain 0.85
+d2 $ sound "hh*8" # gain 0.45
+
+-- 2. Add a sliced texture quietly.
+d3
+  $ striate 8
+  $ sound "arpy"
+  # gain 0.35
+
+-- 3. Bound the glitch to a region of the cycle.
+d3
+  $ within (0.25, 0.75) (striate 16 . rev)
+  $ sound "arpy"
+  # gain 0.35
+
+-- 4. Schedule the glitch only near the end of an 8-cycle phrase.
+d3
+  $ whenmod 8 6 (within (0.25, 0.75) (striate 16 . rev))
+  $ sound "arpy"
+  # gain 0.35
+
+-- 5. Use stutter as a fill, not as the whole groove.
+d1
+  $ whenmod 8 7 (stut 4 0.25 0.6)
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.75
+
+-- 6. Use trunc as a dropout/freeze gesture.
+d1
+  $ whenmod 16 12 (trunc 0.25)
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.8
+
+-- 7. Slow modulation: same rhythm, moving timbre.
+d2
+  $ sound "hh*8"
+  # cutoff (range 800 4500 $ slow 4 sine)
+  # resonance 0.15
+  # gain 0.4
+
+-- 8. Delay modulation. Keep gain conservative.
+d3
+  $ sound "arpy*4"
+  # n "0 2 4 7"
+  # delay 0.25
+  # delaytime (range 0.08 0.35 $ slow 3 sine)
+  # delayfeedback (range 0.2 0.65 $ slow 5 sine)
+  # gain 0.35
+
+-- 9. Full conditional arrangement sketch.
+do
+  resetCycles
+  d1
+    $ whenmod 16 12 (trunc 0.25)
+    $ whenmod 8 7 (stut 4 0.25 0.6)
+    $ sound "bd [sn cp] hh*4"
+    # gain 0.75
+  d2
+    $ sound "hh*8"
+    # cutoff (range 800 4500 $ slow 4 sine)
+    # gain 0.35
+  d3
+    $ whenmod 8 6 (within (0.25, 0.75) (striate 16 . rev))
+    $ sound "arpy"
+    # gain 0.3
+  d4
+    $ whenmod 16 8 (const $ sound "~")
+    $ n "0 2 4 7"
+    # sound "superpiano"
+    # gain 0.45
+
+-- 10. Rehearsed ending.
+d4 $ silence
+d3 $ silence
+d2 $ silence
+d1 $ sound "bd ~ ~ ~" # gain 0.65
+
+hush

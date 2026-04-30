@@ -1,0 +1,72 @@
+-- Kindohm study 02 - Transformation chains and menus
+-- Themes from studies/kindohm/study-module-plans.md:
+-- Study 2: Transformation Chains
+-- Study 3: Transformation Menus
+--
+-- Teaching aim:
+-- Build a dense line one transformation at a time, then learn to rotate through
+-- transformation choices without changing the base pattern.
+
+hush
+
+-- 1. Base pattern.
+d1 $ sound "bd [sn cp] hh*4" # gain 0.8
+
+-- 2. Add one transformation.
+d1
+  $ every 4 rev
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.8
+
+-- 3. Add a second transformation.
+d1
+  $ every 3 (0.25 <~)
+  $ every 4 rev
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.8
+
+-- 4. Add a conditional section gesture.
+d1
+  $ whenmod 8 6 (trunc 0.5)
+  $ every 3 (0.25 <~)
+  $ every 4 rev
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.8
+
+-- 5. Add a stereo/iteration transformation.
+d1
+  $ whenmod 8 6 (trunc 0.5)
+  $ every 3 (0.25 <~)
+  $ every 4 (jux rev)
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.75
+
+-- 6. foldEvery: apply one move on several cycle counts.
+d1
+  $ foldEvery [3, 4] (0.25 <~)
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.8
+
+-- 7. slowspread transformation menu.
+-- If slowspread is not available in your Tidal version, skip to section 8.
+d1
+  $ slowspread ($) [id, rev, slow 2, jux rev, density 2, trunc 0.5]
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.75
+
+-- 8. Manual menu alternative.
+-- Evaluate each line as a named state if slowspread is unavailable.
+d1 $ sound "bd [sn cp] hh*4" # gain 0.8
+d1 $ rev $ sound "bd [sn cp] hh*4" # gain 0.8
+d1 $ slow 2 $ sound "bd [sn cp] hh*4" # gain 0.8
+d1 $ jux rev $ sound "bd [sn cp] hh*4" # gain 0.75
+d1 $ density 2 $ sound "bd [sn cp] hh*4" # gain 0.65
+d1 $ trunc 0.5 $ sound "bd [sn cp] hh*4" # gain 0.8
+
+-- 9. Teaching prompt:
+-- Which transformation changed rhythm?
+-- Which changed order?
+-- Which changed density?
+-- Which is safe enough to perform without losing the groove?
+
+hush

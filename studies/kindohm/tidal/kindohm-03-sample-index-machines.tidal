@@ -1,0 +1,56 @@
+-- Kindohm study 03 - Sample-index machines
+-- Themes from studies/kindohm/study-module-plans.md:
+-- Study 4: Sample-Index Machines
+--
+-- Teaching aim:
+-- Separate the idea of sample family, sample index, and rhythmic structure.
+-- The source archive uses many custom sample families; these examples translate
+-- the technique to stock or common SuperDirt names.
+
+hush
+
+-- 1. A normal sample pattern.
+d1 $ sound "bd sn hh cp" # gain 0.8
+
+-- 2. Scan sample numbers with n.
+d1 $ n "0 1 2 3" # sound "drum" # gain 0.75
+
+-- 3. Use run as an index machine.
+d1 $ n (run 8) # sound "drum" # gain 0.7
+
+-- 4. Slow the index stream while keeping rhythm quick.
+d1 $ n (slow 2 $ run 8) # sound "drum*8" # gain 0.65
+
+-- 5. Curate the useful indices.
+d1 $ n "0 2 5 3 1 7" # sound "drum*8" # gain 0.7
+
+-- 6. Stock translation of a samples/run idea.
+-- Some Tidal versions support samples directly; if yours does not, use the n/sound form above.
+d1 $ sound (samples "drum*8" (run 8)) # gain 0.65
+
+-- 7. Same index idea, different sample family.
+d1 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.65
+
+-- 8. Layer a stable anchor under the scanner.
+d1 $ sound "bd ~ sn ~" # gain 0.85
+d2 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.45
+
+-- 9. Pattern the sample family role.
+d1 $ sound "bd ~ sn ~" # gain 0.85
+d2 $ n "0 2 5 3" # sound "<feel drum arpy>" # gain 0.45
+
+-- 10. Add transformation without changing the index logic.
+d2
+  $ every 4 rev
+  $ jux (|+| speed "1.5")
+  $ n "0 2 5 3"
+  # sound "<feel drum arpy>"
+  # gain 0.4
+
+-- 11. Assignment seed:
+-- Pick one sample family.
+-- Scan 8 or 16 sample numbers.
+-- Reduce the scan to your favorite 4 numbers.
+-- Add a stable kick/snare under it.
+
+hush

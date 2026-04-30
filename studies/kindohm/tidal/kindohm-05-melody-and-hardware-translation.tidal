@@ -1,0 +1,93 @@
+-- Kindohm study 05 - Melody and hardware translation
+-- Themes from studies/kindohm/study-module-plans.md:
+-- Study 8: Melody and Hardware Translation
+--
+-- Teaching aim:
+-- Translate hardware/MIDI stream thinking into stock Tidal note examples, then
+-- map generated numbers into scale-aware melody.
+
+hush
+
+-- 1. Hardware-style mental model:
+-- A named stream like keys/bass/brute can be translated to a normal d-slot.
+d1 $ n "0 2 4 7" # sound "superpiano" # gain 0.65
+
+-- 2. Use stock scale mapping.
+d1
+  $ n (scale "minor" "0 2 4 7")
+  # sound "superpiano"
+  # gain 0.65
+
+-- 3. Generate a scale-degree stream.
+d1
+  $ n (scale "minor" $ run 8)
+  # sound "superpiano"
+  # gain 0.6
+
+-- 4. Slow the generated stream into a phrase.
+d1
+  $ slow 2
+  $ n (scale "minor" $ run 8)
+  # sound "superpiano"
+  # sustain 0.6
+  # gain 0.6
+
+-- 5. Add register movement.
+d1
+  $ n (scale "minor" "0 2 4 7 6 4 2 0")
+  # sound "superpiano"
+  # octave "<4 5>"
+  # gain 0.6
+
+-- 6. Add controlled probability.
+d1
+  $ degradeBy 0.15
+  $ n (scale "minor" "0 2 4 7 6 4 2 0")
+  # sound "superpiano"
+  # octave "<4 5>"
+  # gain 0.6
+
+-- 7. Add a bass translation.
+d2
+  $ slow 2
+  $ n (scale "minor" "0 0 3 2")
+  # sound "bass"
+  # octave 3
+  # gain 0.75
+
+-- 8. Add drum section logic from the Kindohm transformation studies.
+d3
+  $ whenmod 8 6 (trunc 0.5)
+  $ sound "bd [sn cp] hh*4"
+  # gain 0.75
+
+-- 9. Translate hardware parameter motion to stock controls.
+d1
+  $ n (scale "minor" "0 2 4 7 6 4 2 0")
+  # sound "superpiano"
+  # octave "<4 5>"
+  # cutoff (range 700 3500 $ slow 5 sine)
+  # room (range 0.1 0.4 $ slow 7 sine)
+  # gain 0.55
+
+-- 10. Capstone seed: melody plus conditional drums.
+do
+  resetCycles
+  d1
+    $ n (scale "minor" "0 2 4 7 6 4 2 0")
+    # sound "superpiano"
+    # octave "<4 5>"
+    # cutoff (range 700 3500 $ slow 5 sine)
+    # gain 0.55
+  d2
+    $ slow 2
+    $ n (scale "minor" "0 0 3 2")
+    # sound "bass"
+    # octave 3
+    # gain 0.75
+  d3
+    $ whenmod 8 6 (trunc 0.5)
+    $ sound "bd [sn cp] hh*4"
+    # gain 0.75
+
+hush

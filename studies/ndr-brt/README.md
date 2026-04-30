@@ -1,4 +1,4 @@
-# ndr-brt / sc-adente Curriculum Study Plans
+# ndr-brt / sc-adente
 
 This folder contains planning documents for adding material inspired by [`ndr-brt/sc-adente`](https://github.com/ndr-brt/sc-adente) to the TidalCycles curriculum.
 
