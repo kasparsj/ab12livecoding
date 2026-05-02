@@ -1,0 +1,516 @@
+# Instincts generated from https://github.com/kasparsj/ab12livecoding
+# Generated: 2026-05-02T20:49:51.035Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: ab12livecoding-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Commit Length
+
+## Action
+
+Keep commit messages concise (~21 characters)
+
+## Evidence
+
+- Average commit message length: 21 chars
+- Based on 17 commits
+
+---
+id: ab12livecoding-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Naming Files
+
+## Action
+
+Use PascalCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: PascalCase
+
+---
+id: ab12livecoding-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: ab12livecoding-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: ab12livecoding-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: ab12livecoding-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~18x per month
+- Files: **/*.test.*
+
+---
+id: ab12livecoding-workflow-add-new-study-track
+trigger: "when doing add new study track"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Workflow Add New Study Track
+
+## Action
+
+Follow the add-new-study-track workflow:
+1. Create or update studies/<track>/README.md
+2. Add studies/<track>/research-summary.md
+3. Add studies/<track>/source-map.md
+4. Add studies/<track>/tidal/*.tidal (example or skeleton files)
+5. Optionally add other supporting markdown files (e.g., performance-cues.md, production-notes.md)
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: studies/*/README.md, studies/*/research-summary.md, studies/*/source-map.md
+
+---
+id: ab12livecoding-workflow-update-existing-study-track
+trigger: "when doing update existing study track"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Workflow Update Existing Study Track
+
+## Action
+
+Follow the update-existing-study-track workflow:
+1. Edit studies/<track>/*.md (roadmap, status, vocabulary, etc.)
+2. Edit or add studies/<track>/tidal/*.tidal
+3. Update studies/<track>/source-map.md as needed
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: studies/*/roadmap.md, studies/*/status.md, studies/*/vocabulary-atlas.md
+
+---
+id: ab12livecoding-workflow-add-lesson-or-resource
+trigger: "when doing add lesson or resource"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Workflow Add Lesson Or Resource
+
+## Action
+
+Follow the add-lesson-or-resource workflow:
+1. Create lessons/<topic>.md or resources/<resource>.md
+2. Optionally update README.md or navigation to link the new lesson/resource
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: lessons/*.md, resources/*.md, README.md
+
+---
+id: ab12livecoding-workflow-bulk-study-track-expansion
+trigger: "when doing bulk study track expansion"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Workflow Bulk Study Track Expansion
+
+## Action
+
+Follow the bulk-study-track-expansion workflow:
+1. Edit studies/<track>/*.md (README, implementation-plan, curriculum-integration-plan, study-module-plans, etc.)
+2. Edit studies/<track>/tidal/*.tidal
+3. Edit or add shared study resources (studies/shared/*.md)
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: studies/*/*.md, studies/*/tidal/*.tidal, studies/shared/*.md
+
+---
+id: ab12livecoding-instinct-file-naming
+trigger: "When creating a new file"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct File Naming
+
+## Action
+
+Name files using PascalCase (e.g., MyFile.ts)
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.files
+
+---
+id: ab12livecoding-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Function Naming
+
+## Action
+
+Use camelCase for function names (e.g., doSomething)
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.functions
+
+---
+id: ab12livecoding-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names (e.g., MyClass)
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.classes
+
+---
+id: ab12livecoding-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names (e.g., MAX_SIZE)
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.constants
+
+---
+id: ab12livecoding-instinct-relative-imports
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Relative Imports
+
+## Action
+
+Use relative import paths (e.g., import { X } from './X')
+
+## Evidence
+
+- Pattern in codeStyle.importStyle
+
+---
+id: ab12livecoding-instinct-named-exports
+trigger: "When exporting functions or classes"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Named Exports
+
+## Action
+
+Use named exports (e.g., export { MyFunction })
+
+## Evidence
+
+- Pattern in codeStyle.exportStyle
+
+---
+id: ab12livecoding-instinct-test-location
+trigger: "When adding tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Test Location
+
+## Action
+
+Place test files in a separate location from source files
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation
+
+---
+id: ab12livecoding-instinct-test-naming
+trigger: "When naming test files"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Test Naming
+
+## Action
+
+Use the pattern *.test.* for test files
+
+## Evidence
+
+- Pattern in workflows[0].filesInvolved
+
+---
+id: ab12livecoding-instinct-feature-test-sequence
+trigger: "When implementing a new feature"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Feature Test Sequence
+
+## Action
+
+Add feature implementation, then add tests for the feature, then update documentation
+
+## Evidence
+
+- Pattern in workflows[0].commitSequence
+
+---
+id: ab12livecoding-instinct-git-commit-style
+trigger: "When making a commit"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Git Commit Style
+
+## Action
+
+Use short, imperative, freeform commit messages (e.g., 'add midi study', 'improve studies')
+
+## Evidence
+
+- Pattern in commits.examples
+
+---
+id: ab12livecoding-instinct-git-commit-length
+trigger: "When writing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Git Commit Length
+
+## Action
+
+Keep commit messages concise (average ~21 characters)
+
+## Evidence
+
+- Pattern in commits.averageLength
+
+---
+id: ab12livecoding-instinct-add-new-study-track
+trigger: "When someone wants to introduce a new study/artist track or research area"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Add New Study Track
+
+## Action
+
+Create or update studies/<track>/README.md, add research-summary.md, source-map.md, and tidal/*.tidal files
+
+## Evidence
+
+- Workflow: add-new-study-track
+- Pattern in workflows[1].commitSequence
+
+---
+id: ab12livecoding-instinct-update-existing-study-track
+trigger: "When someone wants to expand or refine an existing study/artist track"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Update Existing Study Track
+
+## Action
+
+Edit studies/<track>/*.md (roadmap, status, vocabulary, etc.), edit/add tidal/*.tidal, update source-map.md
+
+## Evidence
+
+- Workflow: update-existing-study-track
+- Pattern in workflows[2].commitSequence
+
+---
+id: ab12livecoding-instinct-add-lesson-or-resource
+trigger: "When someone wants to document a new concept, lesson, or quick reference"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Add Lesson Or Resource
+
+## Action
+
+Create lessons/<topic>.md or resources/<resource>.md, optionally update README.md or navigation
+
+## Evidence
+
+- Workflow: add-lesson-or-resource
+- Pattern in workflows[3].commitSequence
+
+---
+id: ab12livecoding-instinct-bulk-study-track-expansion
+trigger: "When someone wants to do a curriculum-wide update or synchronize improvements across studies"
+confidence: 0.88
+domain: workflow
+source: repo-analysis
+source_repo: kasparsj/ab12livecoding
+---
+
+# Ab12livecoding Instinct Bulk Study Track Expansion
+
+## Action
+
+Edit studies/<track>/*.md, studies/<track>/tidal/*.tidal, and shared study resources (studies/shared/*.md)
+
+## Evidence
+
+- Workflow: bulk-study-track-expansion
+- Pattern in workflows[4].commitSequence
+
