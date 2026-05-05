@@ -1,67 +1,171 @@
 -- Composition, arrangement, and transitions
 -- Menu for building performable live-set states.
 
+-- Stop all currently running patterns before starting this topic.
 hush
 
 -- Pattern combination.
+-- Layer kick/snare and quieter hats together in one stream.
 d1 $ stack [sound "bd ~ sn ~", sound "hh*8" # gain 0.45]
+
+-- Overlay the quieter hat pattern on top of the kick/snare pattern.
 d1 $ overlay (sound "hh*8" # gain 0.4) (sound "bd ~ sn ~")
+
+-- Add a double-speed copy of the kick/snare pattern on top of itself.
 d1 $ superimpose (fast 2) $ sound "bd ~ sn ~"
+
+-- Combine the original, a double-speed version, and a reversed version of the same drum pattern.
 d1 $ layer [id, fast 2, rev] $ sound "bd [sn cp] hh*4"
+
+-- Use the numeric pattern to choose kick, snare, hat, and clap patterns by index.
 d1 $ steps [sound "bd", sound "sn", sound "hh", sound "cp"] "0 2 1 3"
+
+-- Rotate the pattern through four iterations, offset by one iteration.
 d1 $ iter' 4 1 $ sound "bd [sn cp] hh*4"
 
 -- Concatenation and form.
+-- Play the three drum sections one after another, one section per cycle.
 d1 $ cat [sound "bd sn", sound "bd*4", sound "bd [sn cp] hh*4"]
+
+-- Play the three patterns in sequence within a single cycle.
 d1 $ fastcat [sound "bd sn", sound "hh*8", sound "cp*4"]
+
+-- Play kick/snare for two time units, then hats for one, then claps for one.
 d1 $ timeCat [(2, sound "bd ~ sn ~"), (1, sound "hh*8"), (1, sound "cp*4")]
+
+-- Pick one of the three drum sections randomly each cycle.
 d1 $ randcat [sound "bd sn", sound "bd*4", sound "bd [sn cp] hh*4"]
+
+-- Pick one drum section randomly each cycle using the listed weights.
 d1 $ wrandcat [(sound "bd sn", 0.6), (sound "bd*4", 0.3), (sound "bd [sn cp] hh*4", 0.1)]
+
+-- Append the hat pattern after the kick/snare pattern over two cycles.
 d1 $ append (sound "bd sn") (sound "hh*8")
+
+-- Append the hat pattern after the kick/snare pattern inside one cycle.
 d1 $ fastAppend (sound "bd sn") (sound "hh*8")
 
 -- Time and transformation menu.
+-- Speed up the arpy pattern and raise sample playback speed by the same factor.
 d1 $ hurry 2 $ sound "arpy arpy arpy:1 arpy:2"
+
+-- Play the arpy sequence forward and then backward.
 d1 $ palindrome $ sound "arpy arpy:1 arpy:2 arpy:3"
+
+-- Keep only the first three quarters of each cycle.
 d1 $ trunc 0.75 $ sound "bd sn hh cp"
+
+-- Repeat the first quarter-cycle slice to fill the cycle.
 d1 $ linger 0.25 $ sound "bd sn hh cp"
+
+-- Loop the first cycle of the pattern continuously.
 d1 $ loopFirst $ sound "bd sn hh cp"
+
+-- Slice the note pattern into four parts and reorder them as 2, 0, 1, 3.
 d1 $ bite 4 "2 0 1 3" $ n "0 .. 7" # sound "arpy"
+
+-- Divide the cycle into four parts and play a random permutation of those parts each cycle.
 d1 $ shuffle 4 $ sound "bd sn hh cp"
+
+-- Divide the cycle into four parts and randomly choose parts with replacement.
 d1 $ scramble 4 $ sound "bd sn hh cp"
+
+-- Repeat each event twice inside its original timespan.
 d1 $ ply 2 $ sound "bd sn"
+
+-- Repeat the clap three times with 0.125-cycle spacing.
 d1 $ stutter 3 0.125 $ sound "cp"
+
+-- Add three clap repeats with decay and 0.125-cycle spacing.
 d1 $ stut 3 0.8 0.125 $ sound "cp"
+
+-- Add three delayed clap echoes with 0.125-cycle spacing and 0.7 feedback/level.
 d1 $ echo 3 0.125 0.7 $ sound "cp"
+
+-- Add quieter pitch-shifted ghost-note copies after the kick and snare.
 d1 $ ghost $ sound "bd sn"
+
+-- Layer four rotated/panned copies of the arpy pattern.
 d1 $ spin 4 $ sound "arpy*4"
+
+-- Weave four copies of the arpy pattern while applying the pan pattern across them.
 d1 $ weave 4 (pan "0 1") $ sound "arpy*4"
+
+-- Reverse inside each half-cycle instead of reversing the whole cycle.
 d1 $ inside 2 (rev) $ sound "bd sn hh cp"
+
+-- Apply fast 2 outside the two-cycle view, changing the larger-scale timing.
 d1 $ outside 2 (fast 2) $ sound "bd sn hh cp"
+
+-- Double the speed only within the middle half of the cycle.
 d1 $ within (0.25, 0.75) (fast 2) $ sound "bd sn hh cp"
+
+-- Compress the whole pattern into the middle half of the cycle.
 d1 $ compress (0.25, 0.75) $ sound "bd sn hh cp"
+
+-- Zoom into the middle half of the pattern and stretch that slice to fill the cycle.
 d1 $ zoom (0.25, 0.75) $ sound "bd sn hh cp"
+
+-- Delay every other hat subdivision by 0.1 relative to a four-slice swing grid.
 d1 $ swingBy 0.1 4 $ sound "hh*8"
+
+-- Apply the default swing amount on a four-slice swing grid.
 d1 $ swing 4 $ sound "hh*8"
 
 -- Transitions: evaluate in a live session, one at a time.
+-- Start a baseline kick/snare pattern on d1 before trying transitions.
 d1 $ sound "bd ~ sn ~"
+
+-- Crossfade stream 1 into a four-kick pattern.
 xfade 1 $ sound "bd*4"
+
+-- Crossfade stream 1 into a fuller drum pattern over four cycles.
 xfadeIn 1 4 $ sound "bd [sn cp] hh*4"
+
+-- Replace stream 1 immediately with the new kick/snare pattern.
 jump 1 $ sound "bd sn bd sn"
+
+-- Replace stream 1 with the four-kick pattern after four cycles.
 jumpIn 1 4 $ sound "bd*4"
+
+-- Replace stream 1 at the next cycle where the cycle number is divisible by four.
 jumpMod 1 4 $ sound "bd [sn cp] hh*4"
+
+-- Pause stream 1 for four cycles, then start the kick/snare pattern.
 wait 1 4 $ sound "bd ~ sn ~"
+
+-- Wait four cycles, then use the jump transition for stream 1.
 waitT 1 (Sound.Tidal.Transition.jump) 4 $ sound "bd*4"
+
+-- Queue a pattern so it enters with Tidal's anticipate transition behavior.
 anticipate 1 $ sound "bd [sn cp] hh*4"
+
+-- Start the anticipated pattern on stream 1 after four cycles.
 anticipateIn 1 4 $ sound "bd [sn cp] hh*4"
+
+-- Transition by degrading the old stream 1 pattern while revealing the new one.
 clutch 1 $ sound "bd*4"
+
+-- Use the clutch transition over four cycles.
 clutchIn 1 4 $ sound "bd*4"
+
+-- Morph matching control values from the current stream 1 pattern into the new pattern.
 interpolate 1 $ sound "bd*4"
+
+-- Morph matching control values into the new stream 1 pattern over four cycles.
 interpolateIn 1 4 $ sound "bd*4"
+
+-- Use the wash transition helper to move stream 1 toward the fuller drum pattern over four cycles.
 wash 1 4 $ sound "bd [sn cp] hh*4"
+
+-- Use the timed wash-in transition helper over four cycles.
 washIn 1 4 $ sound "bd [sn cp] hh*4"
+
+-- Fade stream 1 into the four-kick pattern over four cycles.
 fadeIn 1 4 $ sound "bd*4"
+
+-- Fade stream 1 out over four cycles.
 fadeOut 1 4
 
+-- Stop every running pattern.
 hush

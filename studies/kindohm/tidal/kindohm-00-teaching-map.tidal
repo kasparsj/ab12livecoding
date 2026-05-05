@@ -27,9 +27,10 @@ hush
 --    Scale mapping and translating hardware streams into stock note patterns.
 
 -- Warm-up before any study:
-d1 $ sound "bd ~ sn ~"
-d2 $ sound "hh*8" # gain 0.45
-d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55
+do
+  d1 $ sound "bd ~ sn ~"
+  d2 $ sound "hh*8" # gain 0.45
+  d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55
 
 -- Shared safe ending:
 hush

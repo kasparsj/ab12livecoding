@@ -1,52 +1,97 @@
 -- Harmony, modulation, selection, and generative patterns
 -- Extension after examples/basics/02-chords.tidal for control and modulation.
 
+-- Stop all currently running patterns before starting this topic.
 hush
 
 -- Scales and chord vocabulary.
+-- Map scale degrees 0, 2, 4, and 7 through Tidal's named minor scale and play them on superpiano.
 d1 $ n (scale "minor" "0 2 4 7") # sound "superpiano" # gain 0.7
 
+-- Map scale-degree numbers through an explicit minor scale list, then play the resulting notes.
 d1 $ n (toScale [0,2,3,5,7,8,10] "0 2 4 7") # sound "superpiano" # gain 0.7
 
 -- Inspect scaleList / scaleTable and chordList / chordTable in the REPL when appropriate.
 
 -- Rolled chords and voicings.
+-- Roll each chord so its notes are spread quickly instead of sounding exactly together.
 d1 $ rolled 0.08 $ n "c'maj e'min f'maj" # sound "superpiano" # sustain 1.5 # gain 0.7
+
+-- Roll octave-specific/open-voiced chords with a shorter roll window.
 d1 $ rolledBy 0.04 "0 1 2" $ n "c4'maj e4'min f4'maj'o" # sound "superpiano" # sustain 1.5 # gain 0.7
 
 -- Oscillators for movement.
+-- Pan the hats with a sine-wave control pattern.
 d2 $ sound "hh*8" # pan sine # gain 0.45
+
+-- Pan the hats with a cosine-wave control pattern.
 d2 $ sound "hh*8" # pan cosine # gain 0.45
+
+-- Pan the hats with a triangle-wave control slowed to two cycles.
 d2 $ sound "hh*8" # pan (slow 2 tri) # gain 0.45
+
+-- Sweep hat playback speed between 0.75 and 1.5 using a rising saw wave.
 d2 $ sound "hh*8" # speed (range 0.75 1.5 saw) # gain 0.45
+
+-- Sweep hat playback speed exponentially between 0.75 and 2 using an inverse saw wave.
 d2 $ sound "hh*8" # speed (rangex 0.75 2 isaw) # gain 0.45
+
+-- Smooth the stepped pan values into a continuous pan movement.
 d2 $ sound "hh*8" # pan (smooth "0 1 0.5 1") # gain 0.45
 
 -- Random and weighted choice.
+-- Choose a random note number from 0, 2, 4, or 7 for each arpy event.
 d3 $ sound "arpy*8" # n (choose [0, 2, 4, 7]) # gain 0.6
+
+-- Use the 0-to-1 pattern to select note numbers from the list instead of choosing randomly.
 d3 $ sound "arpy*8" # n (chooseBy "0 0.25 0.5 0.75" [0, 2, 4, 7]) # gain 0.6
+
+-- Choose random note numbers with explicit weights, making 0 the most likely.
 d3 $ sound "arpy*8" # n (wchoose [(0,0.5), (2,0.2), (4,0.2), (7,0.1)]) # gain 0.6
+
+-- Use the sine pattern to move through the weighted choice list over time.
 d3 $ sound "arpy*8" # n (wchooseBy sine [(0,0.5), (2,0.2), (4,0.2), (7,0.1)]) # gain 0.6
 
 -- Pattern and function selection.
+-- Select between three full drum patterns using 0-to-1 selector values.
 d1 $ select "0 0.5 0.9" [sound "bd sn", sound "bd*4", sound "bd [sn cp] hh*4"]
+
+-- Select between reverse, double-speed, and half-speed transforms using 0-to-1 selector values.
 d1 $ selectF "0 0.5 0.9" [rev, fast 2, slow 2] $ sound "bd [sn cp] hh*4"
+
+-- Pick reverse, double-speed, or half-speed transforms by integer index.
 d1 $ pickF "0 1 2 1" [rev, fast 2, slow 2] $ sound "bd [sn cp] hh*4"
+
+-- Pick whole patterns by integer index and squeeze each chosen pattern into the selector's event.
 d1 $ squeeze "0 1 2" [sound "bd sn", sound "hh*8", sound "cp*4"]
 
 -- Named pattern kit with inhabit.
+-- Define a local drum function that maps readable names to full patterns.
 do
+  -- Map bd, hh, and sd names to kick, quiet hat, and fourth snare sample patterns.
   let drum = inhabit [("bd", s "bd"), ("hh", s "hh" # gain 0.45), ("sd", s "sn:3")]
+  -- Use the named drum kit inside mini-notation, including probabilistic kicks and Euclidean snare.
   d1 $ drum "[bd*4?, [~hh]*4, sd(6,16)]"
 
 -- Continuous/random processes.
+-- Pan the hats with a random continuous control pattern.
 d2 $ sound "hh*8" # pan rand # gain 0.45
+
+-- Generate a random run of note numbers from 0 up to 7 for arpy events.
 d3 $ sound "arpy*8" # n (randrun 8) # gain 0.55
+
+-- Map one-dimensional Perlin noise into the 0-to-8 note range.
 d3 $ sound "arpy*8" # n (range 0 8 perlin) # gain 0.55
+
+-- Map two-dimensional Perlin noise into the 0-to-8 note range.
 d3 $ sound "arpy*8" # n (range 0 8 perlin2) # gain 0.55
+
+-- Choose one note number per cycle from the list, then use it for all arpy events in that cycle.
 d3 $ sound "arpy*8" # n (cycleChoose [0, 2, 4, 7]) # gain 0.55
 
 -- Markov-style pitch as an advanced optional demo.
+-- Generate piano note numbers from a Markov transition table and play them quietly.
 d4 $ n (markovPat 0 [(0, [(2, 0.7), (4, 0.3)]), (2, [(4, 0.7), (0, 0.3)]), (4, [(7, 0.7), (2, 0.3)]), (7, [(0, 1.0)])]) # sound "superpiano" # gain 0.6
 
+-- Stop every running pattern.
 hush

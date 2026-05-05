@@ -62,10 +62,15 @@ d1
 -- 8. Manual menu alternative.
 -- Evaluate each line as a named state if slowspread is unavailable.
 d1 $ sound "bd [sn cp] hh*4" # gain 0.8
+
 d1 $ rev $ sound "bd [sn cp] hh*4" # gain 0.8
+
 d1 $ slow 2 $ sound "bd [sn cp] hh*4" # gain 0.8
+
 d1 $ jux rev $ sound "bd [sn cp] hh*4" # gain 0.75
+
 d1 $ density 2 $ sound "bd [sn cp] hh*4" # gain 0.65
+
 d1 $ trunc 0.5 $ sound "bd [sn cp] hh*4" # gain 0.8
 
 -- 9. Teaching prompt:

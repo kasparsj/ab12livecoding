@@ -37,12 +37,14 @@ d1 $ sound (samples "drum*8" (run 8)) # gain 0.65
 d1 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.65
 
 -- 8. Layer a stable anchor under the scanner.
-d1 $ sound "bd ~ sn ~" # gain 0.85
-d2 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.45
+do
+  d1 $ sound "bd ~ sn ~" # gain 0.85
+  d2 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.45
 
 -- 9. Pattern the sample family role.
-d1 $ sound "bd ~ sn ~" # gain 0.85
-d2 $ n "0 2 5 3" # sound "<feel drum arpy>" # gain 0.45
+do
+  d1 $ sound "bd ~ sn ~" # gain 0.85
+  d2 $ n "0 2 5 3" # sound "<feel drum arpy>" # gain 0.45
 
 -- 10. Add transformation without changing the index logic.
 d2

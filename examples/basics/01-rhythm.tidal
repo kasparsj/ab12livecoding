@@ -1,41 +1,57 @@
 -- Basics
 -- Covers rhythm construction and starting/restarting patterns.
 
+-- Stop all currently running patterns before starting this example.
 hush
 
 -- Simple kick/snare.
+-- Play a kick followed by a snare on stream d1.
 d1 $ sound "bd sn"
 
 -- Choose a different snare sample and add density.
+-- Play kick then the fourth snare sample, because sample indices are zero-based.
 d1 $ sound "bd sn:3"
 
+-- Repeat the kick twice, then use a rest before the fourth snare sample.
 d1 $ sound "bd*2 [~ sn:3]"
 
 -- Add toms and nested grouping.
+-- Build a denser drum phrase with nested rests, low tom, snare, high tom, and mid tom.
 d1 $ sound "bd*2 [[~ lt] sn:3] lt:1 [ht mt*2]"
 
 -- Shift the rhythm every other cycle.
+-- Every second cycle, shift the drum pattern earlier by a quarter cycle.
 d1 $ every 2 (0.25 <~) $ sound "bd*2 [[~ lt] sn:3] lt:1 [ht mt*2]"
 
 -- Pattern the shift amount.
+-- Every second cycle, choose a different left-shift amount from the angle-bracket cycle pattern.
 d1 $ every 2 ("<0.25 0.125 0.5>" <~) $ sound "bd*2 [[~ lt] sn:3] lt:1 [ht mt*2]"
 
 -- Another rhythmic construction using sample numbers.
+-- Play indexed samples from the feel folder with patterned sample numbers, faster playback, and lower gain.
 d2 $ n "0 <0 4> [2 0] [2 3]" # sound "feel" # speed 1.5 # gain 0.7
 
 -- Stereo/reversal variation.
+-- On d2, rotate sample indices, vary speed, and reverse one stereo side for 40 percent of the width.
 d2 $ juxBy 0.4 rev $ every 2 (rot "<1 3 2>") $ n "0 <0 4> [2 0] [2 3]" # sound "feel" # speed "1.75 2" # gain 0.7
 
 -- Trigger from the start on the next cycle.
+-- Queue a kick-and-hat pattern so it starts from its beginning at the next cycle boundary.
 d3 $ qtrigger $ sound "bd hh hh hh" # gain 0.65
 
 -- Reset the cycle count and start two aligned patterns.
+-- Group the reset and pattern starts so they are evaluated together.
 do
+  -- Reset Tidal's global cycle counter to zero.
   resetCycles
+  -- Start a four-kick pattern on d1.
   d1 $ sound "bd*4"
+  -- Start an offbeat hat pattern on d2 at reduced gain.
   d2 $ sound "~ hh ~ hh*2" # gain 0.6
 
 -- Stop only one slot or everything.
+-- Silence only stream d3.
 d3 $ silence
 
+-- Stop every running pattern.
 hush

@@ -16,14 +16,15 @@
 hush
 
 -- 1. Stable groove.
-d1 $ sound "bd ~ sn ~" # gain 0.85
-d2 $ sound "hh*8" # gain 0.45
+do
+  d1 $ sound "bd - sn -" # gain 0.85
+  d2 $ sound "hh*8" # gain 0.45
 
 -- 2. Add a sliced texture quietly.
 d3
   $ striate 8
   $ sound "arpy"
-  # gain 0.35
+  # gain 0.5
 
 -- 3. Bound the glitch to a region of the cycle.
 d3
@@ -88,9 +89,10 @@ do
     # gain 0.45
 
 -- 10. Rehearsed ending.
-d4 $ silence
-d3 $ silence
-d2 $ silence
-d1 $ sound "bd ~ ~ ~" # gain 0.65
+do
+  d4 $ silence
+  d3 $ silence
+  d2 $ silence
+  d1 $ sound "bd ~ ~ ~" # gain 0.65
 
 hush

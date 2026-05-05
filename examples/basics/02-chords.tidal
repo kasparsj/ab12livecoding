@@ -1,28 +1,39 @@
 -- Chords, Arpeggios, and Musical Layers
 -- Covers playing chords and building arpeggios.
 
+-- Stop all currently running patterns before starting this example.
 hush
 
 -- Drum anchor from the rhythm examples.
+-- Play a sparse kick/snare anchor on d1.
 d1 $ sound "bd ~ sn ~"
+
+-- Add eight hi-hats per cycle on d2 at reduced gain.
 d2 $ sound "hh*8" # gain 0.45
 
 -- Basic chord pattern using chord names.
+-- Play C major, E minor, and F major chord events with the supermandolin sound.
 d3 $ n "c'maj e'min f'maj" # sound "supermandolin" # sustain 1.2 # gain 0.75
 
 -- Chord octave choices and inversions/open voicing.
+-- Play the same chord movement in octave 4 with open voicing on F major, reverb room, and longer sustain.
 d3 $ n "c4'maj e4'min f4'maj'o" # sound "superpiano" # sustain 1.5 # room 0.25 # gain 0.7
 
 -- Bass layer.
+-- Add a low bass note pattern with rests between notes.
 d4 $ n "c2 ~ e2 ~ f2 ~ e2 ~" # sound "bass" # gain 0.8
 
 -- Arpeggio from a chord.
+-- Turn four-note C major and E minor chords into upward arpeggios.
 d3 $ arp "up" $ n "c'maj'4 e'min'4" # sound "supermandolin" # sustain 0.5 # gain 0.75
 
 -- Pattern the arpeggiator.
+-- Alternate arpeggio directions while also alternating the chord source.
 d3 $ arp "<up down pinkyup>" $ n "<c'maj'4 e'min'4 f'maj'4>" # sound "supermandolin" # sustain 0.6 # gain 0.75
 
 -- Add offset and stereo reversal for motion.
+-- Add a delayed transposed copy seven notes higher, then reverse one stereo side with jux.
 d3 $ jux rev $ off 0.125 (|+ 7) $ arp "<up down pinkyup>" $ n "<c'maj'4 e'min'4 f'maj'4>" # sound "supermandolin" # sustain 0.6 # room 0.3 # gain 0.75
 
+-- Stop every running pattern.
 hush

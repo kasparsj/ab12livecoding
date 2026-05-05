@@ -1,77 +1,116 @@
 -- Pattern mechanics, rhythm logic, and safety
 -- Extension after examples/basics/01-rhythm.tidal for deeper rhythm tools.
 
+-- Stop all currently running patterns before starting this topic.
 hush
 
 -- Tempo and performance safety.
+-- Set the tempo to 0.6 cycles per second.
 setcps 0.6
 
+-- Start a basic kick-hat-snare-hat pattern on d1.
 d1 $ sound "bd hh sn hh"
 
+-- Start a quieter arpy/clap pattern on d2.
 d2 $ sound "arpy cp arpy:2" # gain 0.55
 
+-- Solo stream 1 so only d1 is heard.
 solo 1
+
+-- Remove soloing from stream 1.
 unsolo 1
+
+-- Mute stream 2 without deleting its pattern.
 mute 2
+
+-- Unmute stream 2.
 unmute 2
+
+-- Remove all active mutes.
 unmuteAll
 
 -- Pause/restart trick from the workshop.
+-- Use a negative cps value as a temporary pause/reverse-clock trick.
 setcps (-4)
 
+-- Return the tempo to 0.6 cycles per second.
 setcps 0.6
 
 -- Mini-notation expansion: divide, replicate, alternate, superpose, cycle choices.
+-- Play snare at half speed, so it lands every other cycle.
 d1 $ sound "bd sn/2"
 
+-- Replicate the kick into three separate steps before the snare.
 d1 $ sound "bd!3 sn"
 
+-- Randomly choose a kick sample and a snare/clap choice inside bracketed alternatives.
 d1 $ sound "[bd:0|bd:1] [sn|cp]"
 
+-- Superpose snare and clap together, then play kick and a grouped pair of hats.
 d1 $ sound "[sn,cp] bd [hh hh]"
 
+-- Alternate between sd, cp, and arpy on successive cycles after the kick.
 d1 $ sound "bd <sd cp arpy>"
 
 -- Step sequencer helpers.
+-- Convert an x/number step string into snare sample triggers and rests.
 d1 $ s (step "sn" "x x 12 ")
 
+-- Use numbers in the step string as indices into the two-sound list.
 d2 $ s (step' ["superpiano", "supermandolin"] "0 1 000 1") # sustain 4 # n 0
 
 -- Structure and masks.
+-- Gate an eight-kick pattern with a true/false structure.
 d1 $ struct "t f t t f t t t" $ sound "bd*8"
 
+-- Replace each true event in the boolean pattern with the compressed hat pattern.
 d2 $ substruct "t f t f" $ sound "hh*8" # gain 0.45
 
+-- Let only the clap events that fall under true mask positions pass through.
 d3 $ mask "t f f f f t f t" $ sound "cp*8" # gain 0.5
 
 -- Euclidean variants.
+-- Distribute seven kick hits evenly across eight steps.
 d1 $ sound "bd(7,8)"
 
+-- Distribute two snare hits evenly across eight steps.
 d2 $ sound "sn(2,8)" # gain 0.7
 
+-- Distribute five hat hits evenly across eight steps.
 d3 $ sound "hh(5,8)" # gain 0.45
 
+-- Distribute five clap hits across sixteen steps and rotate the pattern by two steps.
 d4 $ sound "cp(5,16,2)" # gain 0.5
 
 -- Reference functions for deeper Euclidean work.
+-- Use the function form to distribute three kick hits across eight steps.
 d1 $ euclid 3 8 $ sound "bd"
 
+-- Play the inverse/offbeat version of a three-in-eight Euclidean hat rhythm.
 d2 $ euclidInv 3 8 $ sound "hh" # gain 0.4
 
+-- Use one pattern for Euclidean hits and rests for the gaps.
 d3 $ euclidFull 5 8 "cp" "~" # gain 0.5
 
 -- Necklace and conditional structure.
+-- Generate a boolean necklace rhythm and turn true values into kick sounds.
 d1 $ sound (necklace 3 8 "bd" "~")
 
+-- Reverse the hat pattern on cycle 1 of each four-cycle span.
 d2 $ every' 4 1 rev $ sound "hh*8" # gain 0.45
 
+-- Double the clap speed when the cycle position is in the selected part of each eight-cycle span.
 d3 $ whenmod 8 6 (fast 2) $ sound "cp*4" # gain 1.0
 
 -- Conditional/function selection menu.
+-- Apply reverse on every third and fifth cycle, folding both periodic transforms together.
 d1 $ foldEvery [3, 5] rev $ sound "bd [sn cp] hh*4"
 
+-- Double arpy playback speed when the control-pattern comparison is true.
 d2 $ when (>= 0.5) (# speed 2) $ sound "arpy*4" # gain 0.5
 
+-- Apply fast 2 where the test pattern is true and slow 2 where it is false.
 d3 $ contrast "t f t f" (fast 2) (slow 2) $ sound "hh*8" # gain 0.4
 
+-- Stop every running pattern.
 hush

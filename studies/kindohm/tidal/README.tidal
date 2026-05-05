@@ -9,7 +9,6 @@
 -- Work directly from these files rather than duplicated copies in examples/.
 --
 -- Suggested order:
--- 00-open-this-first.tidal
 -- kindohm-00-teaching-map.tidal
 -- kindohm-01-daily-sketch-and-reuse.tidal
 -- kindohm-02-transformer-chains.tidal

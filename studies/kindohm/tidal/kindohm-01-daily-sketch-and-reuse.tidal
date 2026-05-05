@@ -14,13 +14,15 @@
 hush
 
 -- 1. Seed sketch: one anchor, one support layer.
-d1 $ sound "bd ~ sn ~" # gain 0.85
-d2 $ sound "hh*8" # gain 0.45
+do
+  d1 $ sound "bd ~ sn ~" # gain 0.85
+  d2 $ sound "hh*8" # gain 0.45
 
 -- 2. Version A: same anchor, add one melodic idea.
-d1 $ sound "bd ~ sn ~" # gain 0.85
-d2 $ sound "hh*8" # gain 0.45
-d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55
+do
+  d1 $ sound "bd ~ sn ~" # gain 0.85
+  d2 $ sound "hh*8" # gain 0.45
+  d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55
 
 -- 3. Version B: change one dimension only - speed/sample motion.
 d3

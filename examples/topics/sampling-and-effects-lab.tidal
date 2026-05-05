@@ -1,63 +1,149 @@
 -- Sampling and effects extension lab
 -- Use when students need sound-design tools.
 
+-- Stop all currently running patterns before starting this topic.
 hush
 
 -- Sample start/end and envelope length.
+-- Play only the portion of arpy from 10 percent to 70 percent of the sample.
 d1 $ sound "arpy" # begin 0.1 # end 0.7 # gain 0.7
+
+-- Trigger arpy four times per cycle with a short sustain.
 d1 $ sound "arpy*4" # sustain 0.25 # gain 0.7
+
+-- Trigger arpy four times per cycle with 0.7 legato overlap/length.
 d1 $ sound "arpy*4" # legato 0.7 # gain 0.7
+
+-- Put all four arpy events in cut group 1 so new events cut off older ones in that group.
 d1 $ sound "arpy*4" # cut 1 # gain 0.7
 
 -- Granular/sample manipulation.
+-- Cut each arpy sample into sixteen parts and pattern the pieces.
 d1 $ chop 16 $ sound "arpy" # gain 0.6
+
+-- Striate arpy into eight progressive sample slices.
 d1 $ striate 8 $ sound "arpy" # gain 0.6
+
+-- Striate arpy into eight slices with each slice lasting half the sample.
 d1 $ striateBy 8 0.5 $ sound "arpy" # gain 0.6
+
+-- Slice arpy into eight parts and play them back in the listed order.
 d1 $ slice 8 "0 3 5 7 2 1 6 4" $ sound "arpy" # gain 0.6
+
+-- Splice arpy into eight parts and repitch slices so they fit their slots.
 d1 $ splice 8 "0 3 5 7 2 1 6 4" $ sound "arpy" # gain 0.6
+
+-- Slice arpy into eight parts and choose a random slice for playback.
 d1 $ randslice 8 $ sound "arpy" # gain 0.6
+
+-- Reorder eight pattern slices and adjust playback speed to fit the selected slots.
 d1 $ chew 8 "0 3 5 7 2 1 6 4" $ sound "arpy" # gain 0.6
+
+-- Fit the arpy sample so it lasts exactly four cycles.
 d1 $ loopAt 4 $ sound "arpy" # gain 0.6
+
+-- Striate arpy into three pieces while cutting between speeds 2, 3, and 4.
 d1 $ smash 3 [2, 3, 4] $ sound "arpy" # gain 0.6
+
+-- Chop-based smash variant using three pieces and speeds 2, 3, and 4.
 d1 $ smash' 3 [2, 3, 4] $ sound "arpy" # gain 0.6
+
+-- Play a grain-style arpy segment starting at 0.1 with length 0.2.
 d1 $ grain 0.1 0.2 $ sound "arpy" # gain 0.6
+
+-- Use the grain-prime helper on arpy with the shown numeric grain controls.
 d1 $ grain' 0.1 0.2 0.5 $ sound "arpy" # gain 0.6
 
 -- Sampling continuous patterns.
+-- Sample the sine pan wave eight times per cycle for stepped pan movement.
 d1 $ sound "hh*8" # pan (segment 8 sine) # gain 0.45
+
+-- Use the older discretise alias to sample the sine pan wave eight times per cycle.
 d1 $ sound "hh*8" # pan (discretise 8 sine) # gain 0.45
+
+-- Convert a constant time function into a constant pan pattern at 0.25.
 d1 $ sound "hh*8" # pan (sig 0.25) # gain 0.45
 
 -- Core effects.
+-- Sweep the drum pattern through vowel formant filter values.
 d1 $ sound "drum*8" # vowel "a o e i"
+
+-- Add delay to claps, with eighth-cycle delay time, feedback, and tempo-locked delay timing.
 d1 $ sound "cp*4" # delay 0.4 # delaytime 0.125 # delayfeedback 0.5 # lock 1
+
+-- Add reverb to snares while keeping half of the dry signal.
 d1 $ sound "sn*4" # dry 0.5 # room 0.6 # size 0.8
+
+-- Add waveshaping distortion to kicks at reduced gain.
 d1 $ sound "bd*4" # shape 0.3 # gain 0.6
 
 -- Filters.
+-- Low-pass filter tabla hits with 400 Hz cutoff and light resonance.
 d1 $ sound "tabla*4" # cutoff 400 # resonance 0.2
+
+-- High-pass filter tabla hits with 600 Hz cutoff and light resonance.
 d1 $ sound "tabla*4" # hcutoff 600 # hresonance 0.2
+
+-- Move tabla hits through the DJ filter between low-pass and high-pass positions.
 d1 $ sound "tabla*4" # djf "0.2 0.8"
+
+-- Band-pass filter tabla hits around 1200 Hz with moderate band resonance.
 d1 $ sound "tabla*4" # bandf 1200 # bandq 0.5
 
 -- Distortion, bit, spectral, and modulation effects. Keep gain low.
+-- Add a small amount of distortion to arpy.
 d1 $ sound "arpy*4" # distort 0.2 # gain 0.45
+
+-- Add a small amount of triode-style distortion to arpy.
 d1 $ sound "arpy*4" # triode 0.2 # gain 0.45
+
+-- Pattern the squiz effect amount across 1, 2, and 4.
 d1 $ sound "arpy*4" # squiz "1 2 4" # gain 0.45
+
+-- Bitcrush arpy to an 8-bit style setting.
 d1 $ sound "arpy*4" # crush 8 # gain 0.45
+
+-- Apply fake downsampling with a coarse value of 4.
 d1 $ sound "arpy*4" # coarse 4 # gain 0.45
+
+-- Apply krush with its filter cutoff at 3000 Hz.
 d1 $ sound "arpy*4" # krush 0.4 # kcutoff 3000 # gain 0.45
+
+-- Add octave, sub-octave, and sub-sub-octave harmonics to arpy.
 d1 $ sound "arpy*4" # octer 0.3 # octersub 0.2 # octersubsub 0.1 # gain 0.45
+
+-- Add ring modulation at 440 Hz.
 d1 $ sound "arpy*4" # ring 0.3 # ringf 440 # gain 0.45
+
+-- Add tremolo with 0.7 depth and rate 8.
 d1 $ sound "arpy*4" # tremolodepth 0.7 # tremolorate 8 # gain 0.45
+
+-- Add a Leslie speaker effect with fast rate and size 1.
 d1 $ sound "arpy*4" # leslie 0.5 # lrate 6.7 # lsize 1 # gain 0.45
+
+-- Add phaser modulation with rate 0.4 and depth 0.6.
 d1 $ sound "arpy*4" # phaserrate 0.4 # phaserdepth 0.6 # gain 0.45
+
+-- Add a spectral comb filter amount of 0.4.
 d1 $ sound "arpy*4" # comb 0.4 # gain 0.45
+
+-- Freeze part of the spectral magnitude content.
 d1 $ sound "arpy*4" # freeze 0.2 # gain 0.45
+
+-- Apply bin shifting at amount 0.2.
 d1 $ sound "arpy*4" # binshift 0.2 # gain 0.45
+
+-- Apply bin scrambling at amount 0.2.
 d1 $ sound "arpy*4" # scram 0.2 # gain 0.45
+
+-- Drop 20 percent of tiny zero-crossing-based audio segments with waveloss.
 d1 $ sound "arpy*4" # waveloss 20 # gain 0.45
+
+-- Apply spectral smearing at amount 0.3.
 d1 $ sound "arpy*4" # smear 0.3 # gain 0.45
+
+-- Apply spectral enhancement at amount 0.3.
 d1 $ sound "arpy*4" # enhance 0.3 # gain 0.45
 
+-- Stop every running pattern.
 hush
