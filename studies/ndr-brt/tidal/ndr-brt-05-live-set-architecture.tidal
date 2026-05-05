@@ -15,10 +15,11 @@
 hush
 
 -- Safety setup: known silent state.
-d1 $ silence
-d2 $ silence
-d3 $ silence
-d4 $ silence
+do
+  d1 $ silence
+  d2 $ silence
+  d3 $ silence
+  d4 $ silence
 
 -- Set a comfortable tempo if your environment supports bpm from the course setup.
 -- If this errors in your setup, skip it and use your editor's default tempo.
@@ -107,8 +108,9 @@ d4
   # room 0.3
 
 -- SECTION 5 — Breakdown: remove rhythm, keep a ghost.
-d1 $ silence
-d2 $ silence
+do
+  d1 $ silence
+  d2 $ silence
 
 d3
   $ slow 4
@@ -146,14 +148,18 @@ d4
 
 -- SECTION 7 — Planned ending options.
 -- Option A: subtract layers manually.
-d4 $ silence
-d3 $ silence
-d2 $ silence
-d1 $ sound "bd ~ ~ ~" # gain 0.65
+do
+  d4 $ silence
+  d3 $ silence
+  d2 $ silence
+  d1 $ sound "bd ~ ~ ~" # gain 0.65
 
 -- Option B: global color change, then hush.
 all $ (# room 0.5) . (# size 0.9)
+
 all $ (# cutoff 700)
+
+all $ id
 
 hush
 

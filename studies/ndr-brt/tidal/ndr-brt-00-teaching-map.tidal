@@ -27,9 +27,10 @@ hush
 --    Intro/build/dense/breakdown/ending states for a performable set.
 
 -- Warm-up before any study:
-d1 $ sound "bd ~ sn ~"
-d2 $ sound "hh*8" # gain 0.45
-d3 $ n "0 2 4 7" # sound "arpy" # gain 0.55
+do
+  d1 $ sound "bd ~ sn ~"
+  d2 $ sound "hh*8" # gain 0.45
+  d3 $ n "0 2 4 7" # sound "arpy" # gain 0.55
 
 -- Shared safe ending:
 hush

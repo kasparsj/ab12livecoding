@@ -14,12 +14,14 @@
 hush
 
 -- 1. Stable reference groove.
-d1 $ sound "bd ~ sn ~"
-d2 $ sound "hh*8" # gain 0.45
+do
+  d1 $ sound "bd ~ sn ~"
+  d2 $ sound "hh*8" # gain 0.45
 
 -- 2. Probability boundary: remove some hats, but leave the kick/snare stable.
-d1 $ sound "bd ~ sn ~"
-d2 $ degradeBy 0.25 $ sound "hh*8" # gain 0.45
+do
+  d1 $ sound "bd ~ sn ~"
+  d2 $ degradeBy 0.25 $ sound "hh*8" # gain 0.45
 
 -- 3. Randomness dimension A: event presence only.
 d2 $ degradeBy 0.45 $ sound "hh*8" # gain 0.45
@@ -40,22 +42,25 @@ d1 $ sometimes rev $ sound "bd [sn cp] hh*4" # gain 0.8
 
 -- 8. Euclidean rhythm lab.
 -- Hear how k events over n steps changes density and feel.
-d1 $ sound "bd(3,8)"
-d2 $ sound "sn(2,8)" # gain 0.7
-d3 $ sound "hh(5,8)" # gain 0.45
+do
+  d1 $ sound "bd(3,8)"
+  d2 $ sound "sn(2,8)" # gain 0.7
+  d3 $ sound "hh(5,8)" # gain 0.45
 
 -- 9. Rotate density over time by changing Euclidean values.
-d1 $ sound "bd(<3 5>,8)"
-d2 $ sound "sn(2,8)" # gain 0.7
-d3 $ sound "hh(<5 7 6>,8)" # gain 0.45
+do
+  d1 $ sound "bd(<3 5>,8)"
+  d2 $ sound "sn(2,8)" # gain 0.7
+  d3 $ sound "hh(<5 7 6>,8)" # gain 0.45
 
 -- 10. Boolean-style rhythm without custom functions.
 -- Treat each layer as a logical condition. The composite groove is the result.
 -- Kick: sparse ground. Snare: backbeat. Hat: high-density grid. Clap: occasional mask.
-d1 $ sound "bd(3,8)"
-d2 $ sound "~ sn ~ sn"
-d3 $ sound "hh(7,16)" # gain 0.4
-d4 $ every 4 (degradeBy 0.6) $ sound "cp(5,16)" # gain 0.5
+do
+  d1 $ sound "bd(3,8)"
+  d2 $ sound "~ sn ~ sn"
+  d3 $ sound "hh(7,16)" # gain 0.4
+  d4 $ every 4 (degradeBy 0.6) $ sound "cp(5,16)" # gain 0.5
 
 -- 11. Masking: use one rhythm to reveal another.
 d4

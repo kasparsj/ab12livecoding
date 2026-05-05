@@ -36,6 +36,7 @@ d2 $ every 4 rev $ sound "hh*8" # g 0.45
 -- To test the variation without the anchor, silence d1 temporarily.
 -- Bring the anchor back before continuing.
 d1 $ silence
+
 d1 $ sound "bd ~ sn ~" # g 0.9
 
 -- 4. Transformation order: one idea at a time.

@@ -95,7 +95,10 @@ d3
 -- 7. Global ending gesture.
 -- This works well in performance: gradually make the whole set thinner/darker.
 all $ (# cutoff 900)
+
 all $ (# room 0.5) . (# size 0.8)
+
+all $ id
 
 -- 8. Capstone prompt in code:
 -- Make a piece with only one sample.
