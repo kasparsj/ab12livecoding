@@ -14,7 +14,7 @@ artist-code study.
 
 | Course area | Current focus | ndr-brt addition | Source study modules | Tidal teaching files |
 | --- | --- | --- | --- | --- |
-| Starting patterns and rhythm | Pattern start/stop, rhythm syntax, transformations, alignment | Artist-dialect sidebar; stable anchor plus transformation-chain lab. | Studies 1, 3, 4 | `00-open-this-first.tidal`, `ndr-brt-01-dialect-and-transformations.tidal` |
+| Starting patterns and rhythm | Pattern start/stop, rhythm syntax, transformations, alignment | Artist-dialect sidebar; stable anchor plus transformation-chain lab. | Studies 1, 3, 4 | `ndr-brt-01-dialect-and-transformations.tidal` |
 | Musical layers and control | Bass, chords, arpeggios, layers, parameters | One-sample layering lab; melodic-machine extension for generated pitch and scale mapping. | Studies 2, 6, 7 | `ndr-brt-02-one-sample-many-bodies.tidal`, `ndr-brt-04-melodic-machines.tidal` |
 | Arrangement and performance | Sections, performance safety, final recording/performance | Boolean/probability rhythm lab; live-set architecture checklist; single-sample capstone option. | Studies 5, 8, 9 | `ndr-brt-03-probability-and-rhythm-logic.tidal`, `ndr-brt-05-live-set-architecture.tidal` |
 

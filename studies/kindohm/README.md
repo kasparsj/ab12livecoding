@@ -18,7 +18,7 @@ stock-sample studies, examples, assignments, and optional advanced labs.
 | [`implementation-plan.md`](implementation-plan.md) | Concrete task plan for producing lesson patches, examples, assignments, and references. |
 | [`status.md`](status.md) | Current completion, verification, and open-risk status. |
 | [`roadmap.md`](roadmap.md) | Future additions separated from implementation status. |
-| [`tidal/`](tidal/) | Ready-to-teach `.tidal` files derived from the study plans; start with `00-open-this-first.tidal`. |
+| [`tidal/`](tidal/) | Ready-to-teach `.tidal` files derived from the study plans. |
 
 ## Proposed curriculum role
 

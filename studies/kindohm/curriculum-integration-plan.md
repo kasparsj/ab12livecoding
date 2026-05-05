@@ -14,7 +14,7 @@ daily sketches into performance vocabulary.
 
 | Course area | Current focus | Kindohm addition | Source study modules | Tidal teaching files |
 | --- | --- | --- | --- | --- |
-| Starting patterns and rhythm | Pattern start/stop, rhythm syntax, transformations, alignment | Daily sketch method; transformation-chain listening lab. | Studies 1, 2 | `00-open-this-first.tidal`, `kindohm-01-daily-sketch-and-reuse.tidal`, `kindohm-02-transformer-chains.tidal` |
+| Starting patterns and rhythm | Pattern start/stop, rhythm syntax, transformations, alignment | Daily sketch method; transformation-chain listening lab. | Studies 1, 2 | `kindohm-01-daily-sketch-and-reuse.tidal`, `kindohm-02-transformer-chains.tidal` |
 | Musical layers and control | Bass, chords, arpeggios, layers, parameters | Sample-index machines; LFO/effect modulation; stock translation of custom sample folders. | Studies 3, 4, 6 | `kindohm-03-sample-index-machines.tidal`, `kindohm-04-time-effects-and-sections.tidal` |
 | Arrangement and performance | Sections, performance safety, final recording/performance | `whenmod` section logic; daily-pattern capstone; MIDI/hardware translation discussion. | Studies 5, 7, 8 | `kindohm-04-time-effects-and-sections.tidal`, `kindohm-05-melody-and-hardware-translation.tidal` |
 

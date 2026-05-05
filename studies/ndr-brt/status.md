@@ -11,8 +11,6 @@
 
 ## Not Yet Verified Live
 
-- `tidal/00-open-this-first.tidal`
-- `tidal/README.tidal`
 - `tidal/ndr-brt-00-teaching-map.tidal`
 - `tidal/ndr-brt-01-dialect-and-transformations.tidal`
 - `tidal/ndr-brt-02-one-sample-many-bodies.tidal`

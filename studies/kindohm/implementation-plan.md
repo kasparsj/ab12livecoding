@@ -22,7 +22,6 @@ Future additions now live in [`roadmap.md`](roadmap.md).
 
 Created canonical Tidal-first files in `studies/kindohm/tidal/`:
 
-- [x] `studies/kindohm/tidal/00-open-this-first.tidal`
 - [x] `studies/kindohm/tidal/kindohm-00-teaching-map.tidal`
 - [x] `studies/kindohm/tidal/kindohm-01-daily-sketch-and-reuse.tidal`
 - [x] `studies/kindohm/tidal/kindohm-02-transformer-chains.tidal`
@@ -83,11 +82,10 @@ Keep optional:
 
 ## Suggested implementation order
 
-1. Teach from `studies/kindohm/tidal/00-open-this-first.tidal`.
-2. Use the daily sketch file before any dense transformation material.
-3. Add transformation chains and sample-index machines as rhythm and sampling extensions.
-4. Use time/effects/section logic as performance preparation.
-5. Use melody/hardware translation only after students understand note patterns.
+1. Use the daily sketch file before any dense transformation material.
+2. Add transformation chains and sample-index machines as rhythm and sampling extensions.
+3. Use time/effects/section logic as performance preparation.
+4. Use melody/hardware translation only after students understand note patterns.
 
 ## Risk checklist
 

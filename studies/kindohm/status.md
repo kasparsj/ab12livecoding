@@ -18,8 +18,6 @@
 
 ## Not Yet Verified Live
 
-- `tidal/00-open-this-first.tidal`
-- `tidal/README.tidal`
 - `tidal/kindohm-00-teaching-map.tidal`
 - `tidal/kindohm-01-daily-sketch-and-reuse.tidal`
 - `tidal/kindohm-02-transformer-chains.tidal`
