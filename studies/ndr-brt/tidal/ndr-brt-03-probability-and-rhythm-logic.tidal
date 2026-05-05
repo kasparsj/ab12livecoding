@@ -1,88 +1,105 @@
--- ndr-brt study 03 — Probability and rhythm logic
+-- ndr-brt study 03 - Probability and rhythm logic
 -- Level: intermediate
--- Time: 35-55 minutes
--- Prerequisites: Euclidean notation, gain, simple layers
--- Key functions: degradeBy, rand, irand, sometimes, euclid, mask, every
+-- Time: 45-65 minutes
+-- Prerequisites: Euclidean notation, masks, gain, layers
+-- Key functions: sometimesBy, rarely, almostNever, degradeBy, euclid, mask, struct
 -- Sample fallbacks: arpy -> superpiano -> gtr
--- Themes from studies/ndr-brt/study-module-plans.md:
--- Study 4: Probability With Boundaries
--- Study 5: Boolean Rhythm Lab
---
--- Goal:
--- Use randomness with limits. Then compare Euclidean and boolean-style rhythm thinking.
+-- Themes: bounded randomness, boolean rhythm thinking, stock sieve translation.
 
 hush
 
--- 1. Stable reference groove.
+let g = gain
+    db = degradeBy
+    sb = sometimesBy
+    h = hurry
+    sp = speed
+    oc = octave
+    rvb r s = room r # size s
+    scc sh co cr = shape sh # coarse co # crush cr
+
+-- 1. Stable reference. The kick/snare are the recovery path.
 do
-  d1 $ sound "bd ~ sn ~"
-  d2 $ sound "hh*8" # gain 0.45
+  d1 $ sound "bd ~ sn ~" # g 0.82
+  d2 $ sound "hh*8" # g 0.35
 
--- 2. Probability boundary: remove some hats, but leave the kick/snare stable.
+-- 2. Probability stack: one small risk per line.
 do
-  d1 $ sound "bd ~ sn ~"
-  d2 $ degradeBy 0.25 $ sound "hh*8" # gain 0.45
+  let p = 0.12
+  d2
+    $ sb p (|* g 0.5)
+    $ sb p (jux rev)
+    $ sb p (h 2)
+    $ sb p (# pan rand)
+    $ db 0.20
+    $ sound "hh*8"
+    # g 0.36
 
--- 3. Randomness dimension A: event presence only.
-d2 $ degradeBy 0.45 $ sound "hh*8" # gain 0.45
-
--- 4. Randomness dimension B: pan only.
-d2 $ sound "hh*8" # gain 0.45 # pan rand
-
--- 5. Randomness dimension C: sample number only.
-d3 $ sound "arpy*4" # n (irand 8) # gain 0.55
-
--- 6. Randomness dimension D: speed only.
-d3 $ sound "arpy*4" # n "0 1 2 3" # speed (range 0.75 1.25 sine) # gain 0.55
-
--- 7. Compare periodic change and probability.
-d1 $ every 4 rev $ sound "bd [sn cp] hh*4" # gain 0.8
-
-d1 $ sometimes rev $ sound "bd [sn cp] hh*4" # gain 0.8
-
--- 8. Euclidean rhythm lab.
--- Hear how k events over n steps changes density and feel.
+-- 3. Rare events should be audible because the form underneath is stable.
 do
-  d1 $ sound "bd(3,8)"
-  d2 $ sound "sn(2,8)" # gain 0.7
-  d3 $ sound "hh(5,8)" # gain 0.45
+  d1 $ sound "bd ~ sn ~" # g 0.82
+  d2 $ sound "hh(7,16)" # g 0.32
+  d3
+    $ rarely ((h 2).(# s "cp").(# g 0.45))
+    $ almostNever ((# crush 4).(# shape 0.15))
+    $ sound "~ cp ~ cp"
+    # g 0.28
 
--- 9. Rotate density over time by changing Euclidean values.
+-- 4. Euclidean gates as roles.
 do
-  d1 $ sound "bd(<3 5>,8)"
-  d2 $ sound "sn(2,8)" # gain 0.7
-  d3 $ sound "hh(<5 7 6>,8)" # gain 0.45
+  d1 $ sound "bd(3,8)" # g 0.82
+  d2 $ sound "sn(2,8)" # g 0.62
+  d3 $ sound "hh(7,16)" # g 0.30
+  d4 $ db 0.35 $ sound "cp(5,16)" # g 0.32
 
--- 10. Boolean-style rhythm without custom functions.
--- Treat each layer as a logical condition. The composite groove is the result.
--- Kick: sparse ground. Snare: backbeat. Hat: high-density grid. Clap: occasional mask.
+-- 5. Rotating density with bounded randomness.
 do
-  d1 $ sound "bd(3,8)"
-  d2 $ sound "~ sn ~ sn"
-  d3 $ sound "hh(7,16)" # gain 0.4
-  d4 $ every 4 (degradeBy 0.6) $ sound "cp(5,16)" # gain 0.5
+  d1 $ sound "bd(<3 5>,8)" # g 0.82
+  d2 $ sound "sn(2,8)" # g 0.62
+  d3
+    $ sb 0.20 (iter 4)
+    $ sb 0.12 (h 2)
+    $ sound "hh(<5 7 6>,16)"
+    # g 0.30
+    # pan rand
 
--- 11. Masking: use one rhythm to reveal another.
+-- 6. Masking: boolean thinking without custom sieve helpers.
 d4
   $ mask "t f t t f t f t"
   $ sound "cp*8"
-  # gain 0.55
+  # g 0.42
 
--- 12. Challenge: unstable but recognizable.
--- Rules: one stable anchor, one random dimension, one Euclidean layer, one silence command.
-d1 $ sound "bd ~ sn ~" # gain 0.9
+-- 7. Stock-safe OR/AND style grid.
+-- OR feel: any active layer can speak.
+do
+  d1 $ sound "bd(3,8)" # g 0.8
+  d2 $ sound "sn(2,8)" # g 0.55
+  d3 $ sound "hh(5,8)" # g 0.28
 
-d2
-  $ degradeBy 0.25
-  $ sound "hh(7,16)"
-  # gain 0.4
-  # pan rand
+-- AND feel: one rhythm reveals another using `struct`.
+d4
+  $ struct "t f t f t t f t"
+  $ sound "cp*8"
+  # g 0.35
 
-d3
-  $ every 4 rev
-  $ sound "arpy(5,8)"
-  # n (irand 4)
-  # gain 0.5
-  # room 0.25
+-- Inversion feel: alternate foreground and ghost grid.
+do
+  d3 $ mask "t f t f f t f t" $ sound "hh*8" # g 0.32
+  d4 $ mask "f t f t t f t f" $ sound "cp*8" # g 0.28
+
+-- 8. Unstable but recognizable challenge.
+do
+  d1 $ sound "bd ~ sn ~" # g 0.85
+  d2
+    $ db 0.25
+    $ sb 0.18 (iter 4)
+    $ sound "hh(7,16)"
+    # g 0.30
+    # pan rand
+  d3
+    $ rarely (|+ n 3)
+    $ sound "arpy(5,8)"
+    # n (irand 4)
+    # g 0.38
+    # rvb 0.25 0.5
 
 hush

@@ -2,7 +2,9 @@
 
 ## Guiding principle
 
-Use the original `sc-adente` code as an artist-code research source, then create simplified curriculum examples that run in a standard TidalCycles/SuperDirt classroom environment.
+Use the original `sc-adente` code as an artist-code research source, then create
+stock-dense curriculum examples that run in a standard TidalCycles/SuperDirt
+classroom environment.
 
 Do **not** assume students have the original sample library, custom synthdefs, Olbos effects, Mutable UGens, or MIDI devices.
 
@@ -32,7 +34,7 @@ Acceptance criteria:
 
 ## Phase 2 - Create course example files
 
-**Goal:** Convert extracted idioms into runnable examples using stock samples/effects.
+**Goal:** Convert extracted idioms into runnable, stock-dense examples using stock samples/effects.
 
 Created canonical Tidal-first files in `studies/ndr-brt/tidal/`:
 
@@ -47,6 +49,8 @@ Example constraints:
 - Use stock sample names where possible: `bd`, `sn`, `hh`, `cp`, `arpy`, `bass`, `feel`, `breaks125`, `gtr`, etc.
 - Avoid custom-only parameters in beginner examples.
 - Prefer comments that name the musical role of each line.
+- Preserve sc-adente code feel through aliases, local constants, `layer`, and
+  dense transformation chains when the result remains stock-compatible.
 - Include `hush` / cleanup blocks where useful.
 
 Acceptance criteria:
@@ -116,7 +120,7 @@ Acceptance criteria:
 
 1. Link `studies/ndr-brt/` from `README.md`.
 2. Create `resources/ndr-brt-study-notes.md`.
-3. Create the simplified `.tidal` files. (Done: canonical files live only in `studies/ndr-brt/tidal/` to avoid duplicate teaching copies.)
+3. Create the stock-dense `.tidal` files. (Done: canonical files live only in `studies/ndr-brt/tidal/` to avoid duplicate teaching copies.)
 4. Add optional extension blocks to lesson markdown files.
 5. Add optional assignment/capstone prompts.
 6. Add advanced appendices only if needed.

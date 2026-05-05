@@ -6,7 +6,7 @@
 - Research summary with source links and quantitative scan.
 - Curriculum integration plan.
 - Eight study module plans.
-- Tidal teaching pack with orientation, map, and five study files.
+- Classroom-hybrid Tidal pack with five study files.
 - Source map from upstream files to local teaching files.
 - Vocabulary atlas for instructor-facing technique lookup.
 
@@ -18,7 +18,6 @@
 
 ## Not Yet Verified Live
 
-- `tidal/kindohm-00-teaching-map.tidal`
 - `tidal/kindohm-01-daily-sketch-and-reuse.tidal`
 - `tidal/kindohm-02-transformer-chains.tidal`
 - `tidal/kindohm-03-sample-index-machines.tidal`
@@ -29,12 +28,12 @@
 
 - `slowspread`, `foldEvery`, and `samples` may vary by local Tidal version.
 - `superpiano`, `feel`, and `drum` may vary by SuperDirt sample installation.
-- Original source uses custom samples and MIDI hardware streams; local files are
-  translations of method, not reproductions.
+- Original source uses custom samples, older helper idioms, and MIDI hardware
+  streams; local files are stock-sample classroom hybrids, not reproductions.
 
 ## Ready For
 
-- Intermediate extension labs.
-- Optional capstone preparation.
+- Intermediate-to-advanced extension labs.
+- Source-style capstone preparation.
 - Instructor-led study of transformation scheduling, sample indexing, bounded
   glitch, and daily sketch practice.

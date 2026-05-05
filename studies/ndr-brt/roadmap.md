@@ -12,14 +12,16 @@ stays easy to trust.
   `tidal/ndr-brt-03-probability-and-rhythm-logic.tidal`.
 - Add a section-state worksheet for
   `tidal/ndr-brt-05-live-set-architecture.tidal`.
+- Add an instructor note that explains the stock-dense revision and identifies
+  which upstream sc-adente habits were translated.
 
 ## Medium-Term Additions
 
 - Add a single-sample capstone assignment and rubric notes.
 - Add an "unstable but recognizable" exercise set that limits randomness to one
   dimension at a time.
-- Add a source-to-translation appendix showing how a dense source set becomes a
-  short stock-sample classroom sketch.
+- Expand the source-to-translation appendix with before/after commentary for
+  one dense source-style block and its stock-compatible classroom version.
 
 ## Optional Advanced Additions
 

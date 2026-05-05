@@ -22,7 +22,6 @@ Future additions now live in [`roadmap.md`](roadmap.md).
 
 Created canonical Tidal-first files in `studies/kindohm/tidal/`:
 
-- [x] `studies/kindohm/tidal/kindohm-00-teaching-map.tidal`
 - [x] `studies/kindohm/tidal/kindohm-01-daily-sketch-and-reuse.tidal`
 - [x] `studies/kindohm/tidal/kindohm-02-transformer-chains.tidal`
 - [x] `studies/kindohm/tidal/kindohm-03-sample-index-machines.tidal`

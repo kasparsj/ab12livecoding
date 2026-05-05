@@ -9,10 +9,11 @@ library.
 | Function or feature | Used in | Risk | Fallback |
 | --- | --- | --- | --- |
 | `slowspread` | Kindohm transformation menus | Older or newer local setup may not expose it. | Use the manual menu states already included in the file. |
-| `foldEvery` | Kindohm and ndr-brt transformation chains | May be unavailable in older setups. | Stack separate `every` calls. |
+| `foldEvery` | Kindohm transformation chains | May be unavailable in older setups. | Stack separate `every` calls. |
 | `mask` | ndr-brt probability/rhythm logic | Syntax may differ by version. | Use explicit silence in mini-notation. |
 | `slice` | ndr-brt one-sample and live-set files | Some samples do not slice clearly. | Use `chop` or `striate`. |
-| `hpf`, `hresonance` | ndr-brt dialect file | Parameter availability can vary. | Use `cutoff` and `resonance`, or remove the filter. |
+| `gap`, `chew`, `bite` | ndr-brt stock-dense transformation chains | Availability can vary across older Tidal setups. | Use `chop`, `slice`, `striate`, or remove the local transform. |
+| `hcutoff` | ndr-brt stock-dense timbre examples | Parameter availability can vary. | Use `cutoff` and `resonance`, or remove the high-pass color. |
 | `superpiano` | Melody studies | May not be installed in all SuperDirt setups. | Use `arpy`, `gtr`, or `bass`. |
 | `samples` | Kindohm sample-index file | Some setups prefer `n` plus `sound`. | Use the `n (run 8) # sound "name*8"` examples. |
 | `p` named patterns | Remix-performance skeleton | Some students only know `d1`-`d4`, and older BootTidal setups may differ. | Use the fallback note in the file and map stems to `d1`-`d4`. |

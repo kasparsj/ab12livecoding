@@ -57,7 +57,9 @@ Teaching themes:
 
 - Build a full set from one sample by changing playback speed, slice index, direction, filtering, and density.
 - Use `loopAt`, `chop`, `slice`, `striateBy`, `begin`, `end`, and `speed`.
-- Use spectral damage as arrangement: `waveloss`, `crush`, `coarse`, `binshift`, `distort`, `tanh`.
+- Treat spectral damage as arrangement. The source uses custom and stock-style
+  damage controls such as `waveloss`, `crush`, `coarse`, `binshift`, `distort`,
+  and `tanh`; classroom translations should default to stock-safe controls.
 
 ### 4. Controlled probability
 

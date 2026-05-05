@@ -1,98 +1,132 @@
 -- Kindohm study 05 - Melody and hardware translation
--- Level: intermediate to advanced
--- Time: 35-55 minutes
--- Prerequisites: n, octave, scale, simple drum layers
--- Key functions: scale, run, slow, degradeBy, whenmod, range, sine
+-- Level: intermediate to advanced classroom-hybrid
+-- Time: 40-65 minutes
+-- Prerequisites: n, octave, scale, run, simple drum layers
+-- Key functions: scale, run, slow, degradeBy, whenmod, foldEvery, range, sine
+-- Source models: scales.tidal, pattern441.tidal, pattern443.tidal
 -- Sample fallbacks: superpiano -> arpy -> gtr; bass -> superpiano -> arpy
--- Themes from studies/kindohm/study-module-plans.md:
--- Study 8: Melody and Hardware Translation
 --
 -- Goal:
--- Translate hardware/MIDI stream thinking into stock Tidal note examples, then
--- map generated numbers into scale-aware melody.
+-- Translate Kindohm's scale helpers and hardware/MIDI stream thinking into
+-- stock Tidal voices. Named hardware streams become normal d-slots here.
 
 hush
 
--- 1. Hardware-style mental model:
--- A named stream like keys/bass/brute can be translated to a normal d-slot.
-d1 $ n "0 2 4 7" # sound "superpiano" # gain 0.65
+-- 1. Hardware-stream mental model:
+-- keys, bass, and brute from source code become d1, d2, and d3 in class.
+do
+  resetCycles
+  d1 $ n "0 2 4 7" # sound "superpiano" # gain 0.5
+  d2 $ n "0 0 3 2" # sound "bass" # octave 3 # gain 0.62
+  d3 $ sound "bd [sn cp] hh*4" # gain 0.58
 
--- 2. Use stock scale mapping.
-d1
-  $ n (scale "minor" "0 2 4 7")
-  # sound "superpiano"
-  # gain 0.65
-
--- 3. Generate a scale-degree stream.
-d1
-  $ n (scale "minor" $ run 8)
-  # sound "superpiano"
-  # gain 0.6
-
--- 4. Slow the generated stream into a phrase.
+-- 2. Scale-aware generated stream.
 d1
   $ slow 2
   $ n (scale "minor" $ run 8)
   # sound "superpiano"
-  # sustain 0.6
-  # gain 0.6
+  # octave "<4 5>"
+  # sustain 0.45
+  # gain 0.48
 
--- 5. Add register movement.
+-- 3. Add controlled probability and phrase offsets.
 d1
+  $ degradeBy 0.12
+  $ foldEvery [2, 3, 4] (0.25 <~)
+  $ slow 2
   $ n (scale "minor" "0 2 4 7 6 4 2 0")
   # sound "superpiano"
   # octave "<4 5>"
-  # gain 0.6
+  # gain 0.46
 
--- 6. Add controlled probability.
+-- 4. Translate hardware parameter motion to stock controls.
 d1
-  $ degradeBy 0.15
+  $ degradeBy 0.12
+  $ foldEvery [2, 3, 4] (0.25 <~)
+  $ slow 2
   $ n (scale "minor" "0 2 4 7 6 4 2 0")
   # sound "superpiano"
   # octave "<4 5>"
-  # gain 0.6
+  # cutoff (range 700 3600 $ slow 5 sine)
+  # room (range 0.1 0.4 $ slow 7 sine)
+  # gain 0.44
 
--- 7. Add a bass translation.
+-- 5. Bass stream with periodic dropout.
 d2
+  $ whenmod 12 9 (const $ n "~")
   $ slow 2
   $ n (scale "minor" "0 0 3 2")
   # sound "bass"
   # octave 3
-  # gain 0.75
+  # cutoff (range 600 2400 $ slow 6 sine)
+  # gain 0.58
 
--- 8. Add drum section logic from the Kindohm transformation studies.
+-- 6. Drum stream from the transformation studies.
 d3
-  $ whenmod 8 6 (trunc 0.5)
+  $ whenmod 16 12 (trunc 0.5)
+  $ whenmod 8 6 (jux rev)
   $ sound "bd [sn cp] hh*4"
-  # gain 0.75
+  # gain 0.58
 
--- 9. Translate hardware parameter motion to stock controls.
-d1
-  $ n (scale "minor" "0 2 4 7 6 4 2 0")
-  # sound "superpiano"
-  # octave "<4 5>"
-  # cutoff (range 700 3500 $ slow 5 sine)
-  # room (range 0.1 0.4 $ slow 7 sine)
-  # gain 0.55
-
--- 10. Capstone seed: melody plus conditional drums.
+-- 7. Dense stock hardware translation.
+-- The melodic and bass voices behave like named external instruments, but
+-- they remain stock-sample patterns for classroom portability.
 do
   resetCycles
   d1
+    $ whenmod 30 20 (density 1.2)
+    $ whenmod 18 14 (const $ n "~")
+    $ degradeBy 0.12
+    $ foldEvery [2, 3, 4] (0.25 <~)
+    $ slow 2
     $ n (scale "minor" "0 2 4 7 6 4 2 0")
     # sound "superpiano"
     # octave "<4 5>"
-    # cutoff (range 700 3500 $ slow 5 sine)
-    # gain 0.55
+    # cutoff (range 700 3600 $ slow 5 sine)
+    # room (range 0.1 0.4 $ slow 7 sine)
+    # gain 0.42
   d2
+    $ whenmod 12 9 (const $ n "~")
     $ slow 2
     $ n (scale "minor" "0 0 3 2")
     # sound "bass"
     # octave 3
-    # gain 0.75
+    # cutoff (range 600 2400 $ slow 6 sine)
+    # gain 0.56
   d3
-    $ whenmod 8 6 (trunc 0.5)
+    $ whenmod 16 12 (trunc 0.5)
+    $ whenmod 8 6 (jux rev)
     $ sound "bd [sn cp] hh*4"
-    # gain 0.75
+    # gain 0.56
+
+-- 8. Capstone performance stack.
+-- Use this after students can explain the three stream roles.
+d1
+  $ whenmod 30 20 (density 1.2)
+  $ stack
+      [ degradeBy 0.12
+          $ foldEvery [2, 3, 4] (0.25 <~)
+          $ slow 2
+          $ n (scale "minor" "0 2 4 7 6 4 2 0")
+          # sound "superpiano"
+          # octave "<4 5>"
+          # cutoff (range 700 3600 $ slow 5 sine)
+          # gain 0.38
+      , whenmod 12 9 (const $ n "~")
+          $ slow 2
+          $ n (scale "minor" "0 0 3 2")
+          # sound "bass"
+          # octave 3
+          # gain 0.5
+      , whenmod 16 12 (trunc 0.5)
+          $ sound "bd [sn cp] hh*4"
+          # gain 0.48
+      ]
+
+-- 9. Recovery.
+do
+  d3 $ silence
+  d2 $ silence
+  d1 $ sound "superpiano*2" # n "0 7" # gain 0.32
 
 hush

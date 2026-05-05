@@ -1,82 +1,91 @@
 -- Kindohm study 02 - Transformation chains and menus
--- Level: intermediate
--- Time: 35-50 minutes
--- Prerequisites: every, slow, rev, basic mini-notation
--- Key functions: every, whenmod, foldEvery, slowspread, jux, density, trunc
--- Sample fallbacks: none required for bd/sn/cp/hh examples
--- Themes from studies/kindohm/study-module-plans.md:
--- Study 2: Transformation Chains
--- Study 3: Transformation Menus
+-- Level: intermediate to advanced classroom-hybrid
+-- Time: 40-60 minutes
+-- Prerequisites: every, rev, density, slow, basic mini-notation
+-- Key functions: every, whenmod, foldEvery, slowspread, jux, iter, density, trunc
+-- Source models: pattern093.tidal, pattern150.tidal, pattern402.tidal
+-- Sample fallbacks: none required for bd/sn/cp/hh; arpy -> superpiano -> gtr
 --
 -- Goal:
--- Build a dense line one transformation at a time, then learn to rotate through
--- transformation choices without changing the base pattern.
+-- Build a source-shaped transformation engine around a recoverable base
+-- pattern. The menu should sound rehearsed because the choices are bounded.
 
 hush
 
--- 1. Base pattern.
-d1 $ sound "bd [sn cp] hh*4" # gain 0.8
+-- 1. Compact base pattern.
+d1 $ sound "bd [sn cp] hh*4" # gain 0.72
 
--- 2. Add one transformation.
-d1
-  $ every 4 rev
-  $ sound "bd [sn cp] hh*4"
-  # gain 0.8
-
--- 3. Add a second transformation.
-d1
-  $ every 3 (0.25 <~)
-  $ every 4 rev
-  $ sound "bd [sn cp] hh*4"
-  # gain 0.8
-
--- 4. Add a conditional section gesture.
-d1
-  $ whenmod 8 6 (trunc 0.5)
-  $ every 3 (0.25 <~)
-  $ every 4 rev
-  $ sound "bd [sn cp] hh*4"
-  # gain 0.8
-
--- 5. Add a stereo/iteration transformation.
-d1
-  $ whenmod 8 6 (trunc 0.5)
-  $ every 3 (0.25 <~)
-  $ every 4 (jux rev)
-  $ sound "bd [sn cp] hh*4"
-  # gain 0.75
-
--- 6. foldEvery: apply one move on several cycle counts.
+-- 2. Chain periodic moves before adding more layers.
 d1
   $ foldEvery [3, 4] (0.25 <~)
+  $ every 5 rev
   $ sound "bd [sn cp] hh*4"
-  # gain 0.8
+  # gain 0.7
 
--- 7. slowspread transformation menu.
--- If slowspread is not available in your Tidal version, skip to section 8.
+-- 3. Add a slowspread menu.
+-- If slowspread is missing in your Tidal version, use section 4 as a manual menu.
 d1
-  $ slowspread ($) [id, rev, slow 2, jux rev, density 2, trunc 0.5]
+  $ slowspread ($)
+      [ id
+      , rev
+      , slow 2
+      , jux rev
+      , density 2
+      , trunc 0.5
+      , iter 4
+      ]
+  $ foldEvery [3, 4] (0.25 <~)
   $ sound "bd [sn cp] hh*4"
-  # gain 0.75
+  # gain 0.66
 
--- 8. Manual menu alternative.
--- Evaluate each line as a named state if slowspread is unavailable.
-d1 $ sound "bd [sn cp] hh*4" # gain 0.8
+-- 4. Manual menu states for slowspread compatibility problems.
+d1 $ sound "bd [sn cp] hh*4" # gain 0.72
 
-d1 $ rev $ sound "bd [sn cp] hh*4" # gain 0.8
+d1 $ rev $ sound "bd [sn cp] hh*4" # gain 0.72
 
-d1 $ slow 2 $ sound "bd [sn cp] hh*4" # gain 0.8
+d1 $ slow 2 $ sound "bd [sn cp] hh*4" # gain 0.72
 
-d1 $ jux rev $ sound "bd [sn cp] hh*4" # gain 0.75
+d1 $ jux rev $ sound "bd [sn cp] hh*4" # gain 0.64
 
-d1 $ density 2 $ sound "bd [sn cp] hh*4" # gain 0.65
+d1 $ density 2 $ sound "bd [sn cp] hh*4" # gain 0.55
 
-d1 $ trunc 0.5 $ sound "bd [sn cp] hh*4" # gain 0.8
+d1 $ trunc 0.5 $ sound "bd [sn cp] hh*4" # gain 0.72
 
--- 9. Teaching prompt:
--- Which transformation changed rhythm?
--- Which changed order?
--- Which changed density?
--- Which is safe enough to perform without losing the groove?
+-- 5. Dense source-style rhythm stack.
+-- Listen for three jobs: anchor, high pulse, and short melodic disruption.
+do
+  resetCycles
+  d1
+    $ whenmod 16 8
+        ( every 3 (0.25 <~)
+        . slowspread ($) [trunc 0.25, rev, iter 4, density 2, id]
+        )
+    $ stack
+        [ sound "bd [sn cp] hh*4" # gain 0.58
+        , every 3 (density 2) $ sound "hh*8" # gain 0.22
+        , whenmod 8 6 (const $ sound "arpy*8" # n "0 2 7 4" # gain 0.25)
+            $ sound "~ arpy ~ ~" # n "0 2 4 7" # gain 0.2
+        ]
+
+-- 6. Source-style performance line.
+-- This compresses the menu, offsets, and section gesture into one expression.
+d1
+  $ whenmod 32 24 (slow 0.75)
+  $ whenmod 24 16 (iter 4)
+  $ whenmod 16 8
+      ( every 3 (0.25 <~)
+      . every 4 (0.25 <~)
+      . slowspread ($) [trunc 0.25, rev, jux rev, density 2, slow 2, id]
+      )
+  $ stack
+      [ sound "bd [sn cp] hh*4" # gain 0.58
+      , sound "hh*8" # pan (range 0.2 0.8 $ slow 5 sine) # gain 0.22
+      , sound "arpy*4" # n "0 2 7 4" # gain 0.24
+      ]
+
+-- 7. Recovery and discussion.
+-- Remove one transform at a time and name what musical role disappears.
+do
+  d1 $ sound "bd ~ sn ~" # gain 0.65
 
 hush

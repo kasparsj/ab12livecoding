@@ -5,7 +5,7 @@ Use this before teaching or performing any artist-code study.
 ## Before Starting
 
 - Confirm audio output and SuperDirt are running.
-- Run the folder sound check from `tidal/00-open-this-first.tidal`.
+- Run the first study file's sound check before opening denser examples.
 - Keep a stable `d1` anchor ready.
 - Keep `hush` visible and easy to evaluate.
 - Start with conservative gain values.

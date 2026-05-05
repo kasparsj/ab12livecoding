@@ -1,120 +1,112 @@
--- ndr-brt study 04 — Melodic machines
+-- ndr-brt study 04 - Melodic machines
 -- Level: intermediate to advanced
--- Time: 40-60 minutes
--- Prerequisites: n, scale, octave, slow, fast
--- Key functions: scale, run, choose syntax, degradeBy, segment, round, jux
+-- Time: 45-70 minutes
+-- Prerequisites: n, scale, octave, slow, fast, run
+-- Key functions: scale, run, iter, segment, choose, degradeBy, layer, juxBy
 -- Sample fallbacks: superpiano -> arpy -> gtr; bass -> superpiano -> arpy
--- Themes from studies/ndr-brt/study-module-plans.md:
--- Study 6: Melodic Machines
--- Study 4: Probability With Boundaries
---
--- Goal:
--- Generate pitch material, map it into scales, and layer one melodic source across roles.
+-- Themes: generated pitch streams, register roles, bounded choice.
 
 hush
 
--- 1. Fixed scale-degree melody.
+let g = gain
+    sp = speed
+    oc = octave
+    db = degradeBy
+    sb = sometimesBy
+    h = hurry
+    fa = fast
+    sl = slow
+    rvb r s = room r # size s
+    degs lo hi src = round <$> segment 8 (range lo hi src)
+
+-- 1. Fixed source, then generated source.
 d1
   $ n (scale "minor" "0 2 4 7")
   # sound "superpiano"
-  # gain 0.7
+  # oc 5
+  # g 0.58
 
--- 2. Same degrees, different speed and octave.
-d1
-  $ n (scale "minor" "0 2 4 7")
-  # sound "superpiano"
-  # octave 5
-  # gain 0.65
-
-d2
-  $ slow 2
-  $ n (scale "minor" "0 2 4 7")
-  # sound "bass"
-  # octave 3
-  # gain 0.75
-
--- 3. Generated pitch stream with run.
 d1
   $ n (scale "minor" $ run 8)
   # sound "superpiano"
-  # octave 5
-  # gain 0.65
+  # oc 5
+  # g 0.52
 
--- 4. Limit the generated stream with structure and repetition.
+-- 2. Continuous modulation sampled into scale degrees.
 d1
-  $ every 4 rev
-  $ n (scale "minor" "0 2 4 7 6 4 2 0")
+  $ n (scale "minor" $ degs 0 7 sine)
   # sound "superpiano"
-  # octave 5
-  # gain 0.65
+  # oc 5
+  # g 0.55
 
--- 5. Pseudo-Markov idea for beginners.
--- Instead of a full Markov function, use nearby choices that feel related.
--- Each state tends to move to a few familiar neighbors.
+-- 3. Iterated number phrases, source-style.
+do
+  let cr = 4
+  d1
+    $ every 4 rev
+    $ sb 0.18 (h 2)
+    $ n (scale "minor" $ iter cr "0 2 4 7 6 4 2 0")
+    # sound "superpiano"
+    # oc 5
+    # g 0.55
+
+-- 4. Weighted choice without adding a helper dependency.
+-- More zeroes and twos than high notes keeps the machine grounded.
 d1
-  $ n (scale "minor" "[0|2] [2|4] [4|7] [7|6] [6|4] [4|2] [2|0] [0|3]")
+  $ n (scale "minor" $ choose [0,0,2,2,3,4,7])
   # sound "superpiano"
-  # octave 5
-  # gain 0.65
+  # oc 5
+  # g 0.50
 
--- 6. Layer the same source in three roles: melody, bass, ghost octave.
-d1
-  $ every 4 rev
-  $ n (scale "minor" "[0|2] [2|4] [4|7] [7|6]")
-  # sound "superpiano"
-  # octave 5
-  # gain 0.65
+-- 5. One melodic machine, three register roles.
+do
+  let line = scale "minor" $ iter 4 "0 2 [4|5] 7 6 [4|2] 3 0"
+  d1
+    $ every 4 rev
+    $ n line
+    # sound "superpiano"
+    # oc 5
+    # g 0.54
+  d2
+    $ sl 2
+    $ n (scale "minor" "0 0 3 2")
+    # sound "bass"
+    # oc 3
+    # g 0.62
+  d3
+    $ db 0.55
+    $ fa 2
+    $ juxBy 0.35 rev
+    $ n line
+    # sound "arpy"
+    # oc 6
+    # g 0.25
+    # rvb 0.35 0.7
 
-d2
-  $ slow 2
-  $ n (scale "minor" "0 0 3 2")
-  # sound "bass"
-  # octave 3
-  # gain 0.75
+-- 6. Rhythm stays simple so the generated pitch remains legible.
+d4 $ sound "bd ~ sn ~" # g 0.72
 
-d3
-  $ degradeBy 0.55
-  $ fast 2
-  $ n (scale "minor" "7 6 4 2")
-  # sound "arpy"
-  # octave 6
-  # gain 0.35
-  # room 0.4
+-- 7. Denser phrase: pitch, register, and timing all move, but quietly.
+do
+  let cr = 3
+  d3
+    $ db 0.45
+    $ chunk 6 (ply 2)
+    $ sb 0.20 (iter cr)
+    $ sb 0.15 (|+ oc 1)
+    $ n (scale "minor" $ choose [0,2,2,3,4,4,6,7])
+    # sound "arpy"
+    # oc 5
+    # sp "[1 2 1.5 0.5]"
+    # g 0.30
+    # pan rand
+    # rvb 0.25 0.55
 
--- 7. Add rhythm without overcrowding the melody.
-d4 $ sound "bd ~ sn ~" # gain 0.8
-
--- 8. Continuous modulation translated into melody.
--- range creates smooth values; segment samples them into discrete moments.
--- round turns the values into scale degrees.
-d1
-  $ n (scale "minor" $ round <$> segment 8 (range 0 7 sine))
-  # sound "superpiano"
-  # octave 5
-  # gain 0.65
-
--- 9. Challenge: one generated melody, three interpretations.
--- A: lead, B: slow bass, C: sparse shimmer.
-d1
-  $ n (scale "minor" "0 2 [4|5] 7 6 [4|2] 3 0")
-  # sound "superpiano"
-  # octave 5
-  # gain 0.65
-
-d2
-  $ slow 2
-  $ n (scale "minor" "0 0 3 2")
-  # sound "bass"
-  # octave 3
-  # gain 0.75
-
-d3
-  $ degradeBy 0.5
-  $ jux rev
-  $ n (scale "minor" "7 6 4 2")
-  # sound "arpy"
-  # octave 6
-  # gain 0.35
-  # room 0.5
+-- 8. Recovery.
+do
+  d1 $ n (scale "minor" "0 2 4 7") # sound "superpiano" # oc 5 # g 0.5
+  d2 $ silence
+  d3 $ silence
+  d4 $ silence
 
 hush

@@ -1,63 +1,98 @@
 -- Kindohm study 03 - Sample-index machines
--- Level: intermediate
--- Time: 30-45 minutes
--- Prerequisites: sound, n, gain, run, basic sample families
--- Key functions: samples, run, slow, every, jux, speed
--- Sample fallbacks: drum -> feel -> arpy; feel -> drum -> breaks125
--- Themes from studies/kindohm/study-module-plans.md:
--- Study 4: Sample-Index Machines
+-- Level: intermediate classroom-hybrid
+-- Time: 35-55 minutes
+-- Prerequisites: sound, n, gain, run, stack, basic sample families
+-- Key functions: samples, run, slow, every, jux, speed, whenmod, stack
+-- Source models: pattern050.tidal, pattern084.tidal, pattern250.tidal
+-- Sample fallbacks: drum -> feel -> arpy; feel -> drum -> arpy
 --
 -- Goal:
--- Separate the idea of sample family, sample index, and rhythmic structure.
--- The source archive uses many custom sample families; these examples translate
--- the technique to stock or common SuperDirt names.
+-- Separate sample family, sample index, rhythm, and transformation. Kindohm's
+-- source code often turns a custom folder into an instrument; these examples
+-- do the same with stock or common SuperDirt names.
 
 hush
 
--- 1. A normal sample pattern.
-d1 $ sound "bd sn hh cp" # gain 0.8
-
--- 2. Scan sample numbers with n.
-d1 $ n "0 1 2 3" # sound "drum" # gain 0.75
-
--- 3. Use run as an index machine.
-d1 $ n (run 8) # sound "drum" # gain 0.7
-
--- 4. Slow the index stream while keeping rhythm quick.
-d1 $ n (slow 2 $ run 8) # sound "drum*8" # gain 0.65
-
--- 5. Curate the useful indices.
-d1 $ n "0 2 5 3 1 7" # sound "drum*8" # gain 0.7
-
--- 6. Stock translation of a samples/run idea.
--- Some Tidal versions support samples directly; if yours does not, use the n/sound form above.
-d1 $ sound (samples "drum*8" (run 8)) # gain 0.65
-
--- 7. Same index idea, different sample family.
-d1 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.65
-
--- 8. Layer a stable anchor under the scanner.
+-- 1. Anchor first. Keep this running while scanning sample bodies.
 do
-  d1 $ sound "bd ~ sn ~" # gain 0.85
-  d2 $ n (slow 2 $ run 8) # sound "feel*8" # speed 1.5 # gain 0.45
+  resetCycles
+  d1 $ sound "bd ~ sn ~" # gain 0.76
+  d2 $ sound "hh*8" # gain 0.28
 
--- 9. Pattern the sample family role.
-do
-  d1 $ sound "bd ~ sn ~" # gain 0.85
-  d2 $ n "0 2 5 3" # sound "<feel drum arpy>" # gain 0.45
+-- 2. Scan a folder with n/run.
+d3
+  $ n (run 8)
+  # sound "drum*8"
+  # gain 0.48
 
--- 10. Add transformation without changing the index logic.
-d2
-  $ every 4 rev
-  $ jux (|+| speed "1.5")
+-- 3. Slow the index stream without slowing the rhythm.
+d3
+  $ n (slow 2 $ run 8)
+  # sound "drum*8"
+  # gain 0.48
+
+-- 4. Use samples/run when your Tidal version supports it.
+-- If this does not evaluate, keep using the n/sound form above.
+d3
+  $ sound (samples "drum*8" (slow 2 $ run 8))
+  # gain 0.46
+
+-- 5. Curate the scanner into a playable index pattern.
+d3
+  $ n "0 2 5 3 1 7"
+  # sound "drum*8"
+  # speed "1 1 0.75 1.25"
+  # gain 0.48
+
+-- 6. Treat the sample family as a patterned role.
+d3
   $ n "0 2 5 3"
-  # sound "<feel drum arpy>"
-  # gain 0.4
+  # sound "<drum feel arpy>"
+  # speed "1 1.25 0.75 1"
+  # gain 0.42
 
--- 11. Assignment seed:
--- Pick one sample family.
--- Scan 8 or 16 sample numbers.
--- Reduce the scan to your favorite 4 numbers.
--- Add a stable kick/snare under it.
+-- 7. Dense scanner with anchor, pulse, and section replacement.
+do
+  resetCycles
+  d1 $ sound "bd ~ sn ~" # gain 0.76
+  d2
+    $ every 3 (density 2)
+    $ sound "hh*8"
+    # gain 0.24
+  d3
+    $ whenmod 16 12 (const $ sound "arpy*8" # n "0 2 7 4" # gain 0.32)
+    $ every 5 rev
+    $ n (slow 2 $ run 8)
+    # sound "feel*8"
+    # speed "1.5 1 0.75 1.25"
+    # gain 0.36
+
+-- 8. Source-style scanner stack.
+-- The scanner is no longer the whole piece; it is one body inside a stack.
+d1
+  $ whenmod 10 8 (jux rev)
+  $ every 6 (density 2)
+  $ stack
+      [ sound "bd ~ sn ~" # gain 0.58
+      , sound "hh*8" # gain 0.2
+      , n (slow 2 $ run 8)
+          # sound "feel*8"
+          # speed "1.5 1 0.75 1.25"
+          # gain 0.34
+      , whenmod 7 6 (const $ sound "arpy*8" # n "0 2 4 7" # gain 0.25)
+          $ sound "~ arpy ~ arpy"
+          # n "0 2"
+          # gain 0.18
+      ]
+
+-- 9. Assignment seed.
+-- Scan 8 or 16 sample numbers. Reduce to four numbers. Then add one periodic
+-- replacement and one stable kick/snare layer.
+
+-- 10. Recovery.
+do
+  d3 $ silence
+  d2 $ silence
+  d1 $ sound "bd ~ sn ~" # gain 0.65
 
 hush

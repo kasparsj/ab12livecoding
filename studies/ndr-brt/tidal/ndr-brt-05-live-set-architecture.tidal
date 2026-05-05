@@ -1,171 +1,142 @@
--- ndr-brt study 05 — Live set architecture
+-- ndr-brt study 05 - Live set architecture
 -- Level: intermediate to advanced
--- Time: 50-75 minutes
+-- Time: 60-80 minutes
 -- Prerequisites: layers, silence, effects, sections, performance rehearsal
--- Key functions: silence, slow, chop, degradeBy, every, slice, all, hush
+-- Key functions: silence, layer, chunk, iter, chop, slice, all, hush
 -- Sample fallbacks: arpy -> feel -> bass -> gtr; superpiano -> arpy -> gtr
--- Themes from studies/ndr-brt/study-module-plans.md:
--- Study 2: One Sample, Many Bodies
--- Study 8: Live Set Architecture
--- Study 9: External Control and MIDI, kept as optional discussion only
---
--- Goal:
--- Treat a performance as a sequence of code states. Rehearse the states, not just the loops.
+-- Themes: live states, recovery, global color, planned endings.
 
 hush
 
--- Safety setup: known silent state.
+let g = gain
+    sp = speed
+    db = degradeBy
+    h = hurry
+    sb = sometimesBy
+    str = striate
+    rvb r s = room r # size s
+    lp c q = cutoff c # resonance q
+    hp c = hcutoff c
+    scc sh co cr = shape sh # coarse co # crush cr
+    shut = const silence
+
+-- STATE 0 - known silent state.
 do
   d1 $ silence
   d2 $ silence
   d3 $ silence
   d4 $ silence
 
--- Set a comfortable tempo if your environment supports bpm from the course setup.
--- If this errors in your setup, skip it and use your editor's default tempo.
+-- Optional tempo convention from the study source. Skip if your setup lacks bpm.
 -- bpm 120
 
--- SECTION 1 — Intro: one clear idea.
--- Teach: begin with something you can recover from.
-d1
-  $ sound "bd ~ ~ ~"
-  # gain 0.75
+-- STATE 1 - intro: one recoverable pulse and one source sample.
+do
+  d1 $ sound "bd ~ ~ ~" # g 0.70
+  d2
+    $ slow 2
+    $ sound "arpy"
+    # n 0
+    # sp 0.5
+    # end 0.45
+    # g 0.36
+    # rvb 0.35 0.75
 
-d2
-  $ slow 2
-  $ sound "arpy"
-  # n "0"
-  # gain 0.45
-  # room 0.4
+-- STATE 2 - build: same source, more bodies.
+do
+  d1 $ sound "bd ~ sn ~" # g 0.82
+  d2 $ slow 2 $ sound "arpy" # n 0 # sp 0.5 # g 0.34 # rvb 0.35 0.75
+  d3 $ chop 12 $ sound "arpy" # n 1 # g 0.28 # pan "0.25 0.75"
 
--- SECTION 2 — Build: same material, more bodies.
-d1 $ sound "bd ~ sn ~" # gain 0.85
+-- STATE 3 - dense one-source stack plus simple drums.
+do
+  let ar = 3
+  d1 $ sound "bd [sn cp] bd sn" # g 0.78
+  d2
+    $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
+    $ layer [
+      id,
+      (# n 1).(h ar).("q" ~>).(# g 0.45),
+      (# n 2).(str 7).(juxBy 0.45 rev).(# pan rand).(# g 0.28),
+      (|* sp 0.5).(# end 0.35).(hp 250).(# g 0.34),
+      (|* sp "[2 4 6 3]").(db 0.45).(# end 0.08).(# g 0.18)
+    ]
+    $ sound "arpy"
+    # rvb 0.25 0.55
 
-d2
-  $ slow 2
-  $ sound "arpy"
-  # n "0"
-  # gain 0.45
-  # room 0.4
+-- STATE 4 - destabilize one layer only.
+do
+  let ar = 3
+  d1 $ sound "bd [sn cp] bd sn" # g 0.78
+  d2
+    $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
+    $ sb 0.18 (juxBy 0.6 ((|* sp (-1)).rev))
+    $ layer [
+      id,
+      (# n 1).(h ar).("q" ~>).(# g 0.45),
+      (# n 2).(str 9).(# pan rand).(# g 0.25),
+      (|* sp "[2 4 6 3]").(db 0.55).(# end 0.08).(# g 0.18)
+    ]
+    $ sound "arpy"
+    # scc 0.08 2 2
+    # rvb 0.25 0.55
 
-d3
-  $ chop 8
-  $ sound "arpy"
-  # n "1"
-  # gain 0.35
-  # pan "0.25 0.75"
-
--- SECTION 3 — Dense: four roles, but still limited material.
-d1 $ sound "bd [sn cp] bd sn" # gain 0.85
-
-d2
-  $ every 4 rev
-  $ sound "hh*8"
-  # gain 0.42
-
-d3
-  $ chop 16
-  $ sound "arpy"
-  # n "1"
-  # gain 0.35
-  # pan rand
-
-d4
-  $ degradeBy 0.4
-  $ fast 2
-  $ n (scale "minor" "0 2 4 7")
-  # sound "superpiano"
-  # octave 5
-  # gain 0.45
-  # room 0.3
-
--- SECTION 4 — Destabilize one layer only.
--- Teach: do not transform everything at once unless you planned it.
-d1 $ sound "bd [sn cp] bd sn" # gain 0.85
-
-d2
-  $ every 4 rev
-  $ sometimes (fast 2)
-  $ jux rev
-  $ sound "hh*8"
-  # gain 0.35
-
-d3
-  $ every 3 (iter 4)
-  $ chop 16
-  $ sound "arpy"
-  # n "1"
-  # gain 0.35
-  # pan rand
-
-d4
-  $ degradeBy 0.4
-  $ fast 2
-  $ n (scale "minor" "0 2 4 7")
-  # sound "superpiano"
-  # octave 5
-  # gain 0.45
-  # room 0.3
-
--- SECTION 5 — Breakdown: remove rhythm, keep a ghost.
+-- STATE 5 - breakdown: subtract rhythm, keep a low ghost.
 do
   d1 $ silence
   d2 $ silence
+  d3
+    $ slow 4
+    $ sound "arpy"
+    # n 0
+    # sp 0.5
+    # end 0.5
+    # g 0.35
+    # rvb 0.55 0.9
+  d4
+    $ slow 2
+    $ n (scale "minor" "0 ~ 3 ~")
+    # sound "bass"
+    # octave 3
+    # g 0.48
 
-d3
-  $ slow 4
-  $ sound "arpy"
-  # n "0"
-  # speed 0.5
-  # gain 0.45
-  # room 0.7
-  # size 0.9
+-- STATE 6 - return with a changed surface.
+do
+  d1 $ sound "bd [sn cp] bd sn" # g 0.78
+  d2 $ sound "hh(7,16)" # g 0.30
+  d3
+    $ every 4 rev
+    $ slice 8 "0 3 5 7 2 1 6 4"
+    $ sound "arpy"
+    # n 1
+    # g 0.34
+  d4
+    $ db 0.45
+    $ n (scale "minor" "0 2 4 7")
+    # sound "superpiano"
+    # octave 5
+    # g 0.34
+    # rvb 0.25 0.5
 
-d4
-  $ slow 2
-  $ n (scale "minor" "0 ~ 3 ~")
-  # sound "bass"
-  # octave 3
-  # gain 0.6
-
--- SECTION 6 — Return: rebuild with one change.
-d1 $ sound "bd [sn cp] bd sn" # gain 0.85
-
-d2 $ sound "hh(7,16)" # gain 0.4
-
-d3
-  $ every 4 rev
-  $ slice 8 "0 3 5 7 2 1 6 4"
-  $ sound "arpy"
-  # n "1"
-  # gain 0.4
-
-d4
-  $ n (scale "minor" "0 2 4 7")
-  # sound "superpiano"
-  # octave 5
-  # gain 0.45
-
--- SECTION 7 — Planned ending options.
--- Option A: subtract layers manually.
+-- ENDING A - subtract layers manually.
 do
   d4 $ silence
   d3 $ silence
   d2 $ silence
-  d1 $ sound "bd ~ ~ ~" # gain 0.65
+  d1 $ sound "bd ~ ~ ~" # g 0.62
 
--- Option B: global color change, then hush.
-all $ (# room 0.5) . (# size 0.9)
+-- ENDING B - global stock color, then hush.
+all $ (# cutoff (range 2400 500 $ slow 20 sine))
 
-all $ (# cutoff 700)
+all $ (# crush 2) . (# shape 0.12) . (# room 0.45) . (# size 0.85)
 
 all $ id
 
 hush
 
--- Rehearsal checklist in Tidal comments:
--- [ ] Start from silence.
--- [ ] Reach Section 3 with clear transitions.
--- [ ] Recover if one pattern becomes too dense.
--- [ ] Perform the ending cleanly.
--- [ ] Identify each layer: anchor, texture, melody, or accent.
+-- Rehearsal checklist:
+-- [ ] Start from STATE 0.
+-- [ ] Reach STATE 3 without losing the anchor.
+-- [ ] Destabilize only one layer in STATE 4.
+-- [ ] Recover from density by returning to STATE 1 or STATE 5.
+-- [ ] Perform one ending cleanly.

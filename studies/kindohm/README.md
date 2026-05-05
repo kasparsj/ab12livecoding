@@ -5,7 +5,8 @@ Course notes and teaching files inspired by
 
 The material does not copy the daily pattern files into beginner lessons. It
 extracts reusable techniques from the archive and translates them into
-stock-sample studies, examples, assignments, and optional advanced labs.
+stock-sample classroom hybrids: denser than the beginner examples, but still
+safe to evaluate one block at a time.
 
 ## Documents
 
@@ -18,7 +19,7 @@ stock-sample studies, examples, assignments, and optional advanced labs.
 | [`implementation-plan.md`](implementation-plan.md) | Concrete task plan for producing lesson patches, examples, assignments, and references. |
 | [`status.md`](status.md) | Current completion, verification, and open-risk status. |
 | [`roadmap.md`](roadmap.md) | Future additions separated from implementation status. |
-| [`tidal/`](tidal/) | Ready-to-teach `.tidal` files derived from the study plans. |
+| [`tidal/`](tidal/) | Classroom-hybrid `.tidal` pack; start with [`kindohm-01-daily-sketch-and-reuse.tidal`](tidal/kindohm-01-daily-sketch-and-reuse.tidal). |
 
 ## Proposed curriculum role
 
@@ -26,7 +27,7 @@ Use these studies as an **artist-sketchbook track**:
 
 1. Show how one daily practice archive can become a vocabulary of reusable moves.
 2. Use [`tidal/`](tidal/) as the primary teaching surface for intermediate extensions.
-3. Teach from simplified `.tidal` sketches that preserve the technique, not the original sample dependencies.
+3. Teach from source-shaped `.tidal` sketches that preserve density while avoiding original sample dependencies.
 4. Add one capstone option: "daily-pattern performance inspired by 365 Tidal Patterns."
 
 ## Source repository
@@ -46,5 +47,5 @@ Use these studies as an **artist-sketchbook track**:
 
 The source repository README says the patterns use custom samples that are not
 available with stock Dirt/SuperDirt. These teaching files therefore use stock
-sample names and should be treated as translations of method, not reproductions
-of the original pieces.
+sample names and modern classroom formatting. They are stylistic translations,
+not reproductions of the original pieces.

@@ -4,7 +4,9 @@ Course notes and teaching files inspired by [`ndr-brt/sc-adente`](https://github
 
 The material does not copy the artist's set files into beginner lessons. It
 extracts reusable techniques from the `tidal/` codebase and turns them into
-stock-sample studies, examples, assignments, and optional advanced labs.
+stock-compatible studies that keep more of the sc-adente code feel: compact
+aliases, local constants, dense transformation chains, `layer`-first
+derivation, and rehearsed live-state blocks.
 
 ## Documents
 
@@ -17,7 +19,7 @@ stock-sample studies, examples, assignments, and optional advanced labs.
 | [`implementation-plan.md`](implementation-plan.md) | Concrete task plan for producing lesson patches, examples, assignments, and references. |
 | [`status.md`](status.md) | Current completion, verification, and open-risk status. |
 | [`roadmap.md`](roadmap.md) | Future additions separated from implementation status. |
-| [`tidal/`](tidal/) | Ready-to-teach `.tidal` files derived from the study plans. |
+| [`tidal/`](tidal/) | Stock-dense `.tidal` files derived from the study plans; start with `ndr-brt-01-dialect-and-transformations.tidal`. |
 
 ## Proposed curriculum role
 
@@ -25,7 +27,7 @@ Use these studies as an **artist-code track**:
 
 1. Add short ndr-brt sidebars to the relevant course modules.
 2. Use [`tidal/`](tidal/) as the primary teaching surface for intermediate extensions.
-3. Teach from companion `.tidal` sketches that simplify the original idioms into runnable examples.
+3. Teach from companion `.tidal` sketches that translate the original idioms into runnable stock examples.
 4. Add one capstone option: “single-sample live set inspired by sc-adente.”
 
 ## Source repository

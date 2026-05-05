@@ -1,108 +1,103 @@
--- ndr-brt study 01 — Personal dialect and transformation chains
+-- ndr-brt study 01 - Personal dialect and transformation chains
 -- Level: intermediate
--- Time: 35-50 minutes
+-- Time: 45-60 minutes
 -- Prerequisites: every, slow, fast, rev, basic layering
--- Key functions: let aliases, superimpose, every, chunk, iter, foldEvery, whenmod
+-- Key functions: aliases, layer, superimpose, chunk, iter, hurry, gap, chew, juxBy
 -- Sample fallbacks: none required for bd/sn/cp/hh examples
--- Themes from studies/ndr-brt/study-module-plans.md:
--- Study 1: Build Your Livecoding Dialect
--- Study 3: Transformation Chains as Composition
---
--- Goal:
--- Build a compact vocabulary and use transformations as structure.
+-- Themes: shortcut vocabulary as instrument; transformations as structure.
 
 hush
 
--- 1. Baseline pattern without shortcuts.
-d1 $ sound "bd ~ sn ~"
-
-d2 $ sound "hh*8" # gain 0.45
-
--- 2. Same musical idea with a few local aliases.
--- Evaluate this let block before the shorthand examples.
-let g = gain
-    sp = speed
-    oc = octave
+-- 1. Source-style shortcut vocabulary, kept stock-compatible.
+-- These aliases deliberately make later code denser.
+let ac = accelerate
     db = degradeBy
+    fa = fast
+    g = gain
+    h = hurry
+    oc = octave
+    sb = sometimesBy
+    si = superimpose
+    sl = slow
+    sp = speed
+    str = striate
     rvb r s = room r # size s
+    del l t f = delay l # delaytime t # delayfeedback f
     lp c q = cutoff c # resonance q
+    hp c = hcutoff c
+    scc sh co cr = shape sh # coarse co # crush cr
+    shut = const silence
 
--- 3. A readable anchor-plus-variation setup.
--- d1 is the anchor. d2 changes, but the groove still has a center.
-d1 $ sound "bd ~ sn ~" # g 0.9
+-- 2. Same groove twice: readable first, dialect second.
+d1 $ sound "bd ~ sn ~" # gain 0.85
 
-d2 $ every 4 rev $ sound "hh*8" # g 0.45
+d2 $ every 4 rev $ sound "hh*8" # gain 0.38
 
--- To test the variation without the anchor, silence d1 temporarily.
--- Bring the anchor back before continuing.
-d1 $ silence
+d1 $ sound "bd ~ sn ~" # g 0.85
 
-d1 $ sound "bd ~ sn ~" # g 0.9
+d2 $ every 4 rev $ sound "hh*8" # g 0.38
 
--- 4. Transformation order: one idea at a time.
-d2 $ sound "hh*8" # g 0.45
+-- 3. Anchor plus transforming body.
+-- Keep d1 stable while d2 accumulates source-style function composition.
+do
+  let ar = 3
+  d1 $ sound "bd ~ sn ~" # g 0.85
+  d2
+    $ chunk ar ((iter ar).(h ar).(juxBy 0.35 rev))
+    $ every (ar*2) (linger 0.25)
+    $ sound "hh*8 cp"
+    # g 0.42
+    # pan "0.25 0.75"
 
-d2 $ every 4 rev $ sound "hh*8" # g 0.45
+-- 4. Layer-first derivation from one rhythm.
+do
+  let ar = 4
+  d1
+    $ layer [
+      id,
+      (h 2).("q" ~>).(# g 0.45).(# pan 0.8),
+      (fa 2).(every 3 rev).(# g 0.32).(# s "cp"),
+      (db 0.45).(juxBy 0.5 rev).(# g 0.25)
+    ]
+    $ sound "bd [sn ~] hh*4"
+    # g 0.72
+    # rvb 0.15 0.35
 
-d2 $ every 4 rev $ sometimes (fast 2) $ sound "hh*8" # g 0.45
+-- 5. Dense phrase with stock-safe damage.
+-- `coarse`, `crush`, `shape`, filters, and room stand in for source-only
+-- damage chains while staying inside a standard SuperDirt setup.
+do
+  let ar = 3
+  d2
+    $ db 0.45
+    $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
+    $ every 5 (linger 0.25)
+    $ sb 0.20 (si ((h 2).(# pan rand).(# g 0.75)))
+    $ sb 0.12 (juxBy 0.6 ((|* sp (-1)).rev))
+    $ sound "[hh cp*2]"
+    # g 0.34
+    # scc 0.12 2 3
+    # lp (range 900 3500 $ slow 8 sine) 0.2
+    # rvb 0.3 0.6
 
-d2 $ every 4 rev $ sometimes (fast 2) $ jux rev $ sound "hh*8" # g 0.35
+-- 6. Remove one transform at a time and listen for its job.
+do
+  let ar = 3
+  d2
+    $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
+    $ sound "[hh cp*2]"
+    # g 0.34
 
--- 5. Derived voices from one pattern using superimpose.
--- Stock-sample version of sc-adente-style layering.
-d1
-  $ superimpose ((fast 2) . (# g 0.95) . (# pan 0.8))
-  $ sound "bd ~ sn ~"
-  # g 0.8
-  # pan 0.2
+do
+  let ar = 3
+  d2
+    $ chunk ar ((iter ar).(h ar))
+    $ sound "[hh cp*2]"
+    # g 0.34
 
--- 6. A transformation chain as a phrase.
--- Remove one line at a time and listen for the musical change.
-d1
-  $ every 8 (slow 2)
-  $ every 6 rev
-  $ every 4 (jux rev)
-  $ sometimes (fast 2)
-  $ sound "bd [sn cp] hh*4"
-  # g 0.8
-  # room (range 0.1 0.4 sine)
-
--- 7. chunk and iter: local changes inside a repeating structure.
-d1
-  $ chunk 4 (fast 2)
-  $ every 3 (iter 4)
-  $ sound "bd [sn cp] hh*4"
-  # g 0.8
-
--- 8. Performance challenge.
--- Keep d1 stable. Make d2 stranger every 4 or 8 cycles, but avoid losing the pulse.
-d1 $ sound "bd ~ sn ~" # g 0.9
-
-d2
-  $ every 8 (slow 2)
-  $ every 4 rev
-  $ sometimes (fast 2)
-  $ sound "hh*8 cp"
-  # g 0.85
-  # pan "0.2 0.8"
-  # rvb 0.2 0.4
-
--- 9. Advanced but still stock-compatible phrase.
--- This keeps the sc-adente density idea, but avoids private samples and keeps
--- the course tempo convention out of the middle of the lab.
-d2
-  $ db 0.65
-  $ slow 2
-  $ every 4 (linger 0.25)
-  $ foldEvery [3, 5] (stut 3 0.5 0.02)
-  $ whenmod 8 6 (fast 2)
-  $ whenmod 10 8 (db 0.5)
-  $ sometimesBy 0.23 (iter 4)
-  $ sound "[hh cp*2]"
-  # room 0.6 # size 0.9
-  # hpf 50 # hresonance 0.34
-  # g 0.45
-
-d1 $ sound "bd" # shape (slow 4 $ range 0 0.6 saw) # g 0.75
+-- 7. Recovery.
+do
+  d1 $ sound "bd ~ sn ~" # g 0.8
+  d2 $ silence
 
 hush

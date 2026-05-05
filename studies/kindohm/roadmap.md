@@ -1,12 +1,11 @@
 # Kindohm Study Roadmap
 
-Future work is separated from completion status so the current teaching pack
-stays easy to trust.
+Future work is separated from completion status so the classroom-hybrid teaching
+pack stays easy to trust.
 
 ## Short-Term Additions
 
-- Add difficulty labels inside each `.tidal` section if the metadata headers are
-  not enough for instructors.
+- Live-test the new classroom-hybrid `.tidal` batch in Tidal/SuperDirt.
 - Use [`vocabulary-atlas.md`](vocabulary-atlas.md) as the compact reference for
   transformation menus, sample-index recipes, bounded glitch, modulation, and
   `whenmod` arrangements.
@@ -19,11 +18,11 @@ stays easy to trust.
 - Add a sample-index worksheet where students scan, curate, and perform a
   sample family.
 - Add a source-to-translation appendix showing how a dense source idea becomes a
-  short stock-sample classroom sketch.
+  stock-sample classroom-hybrid sketch.
 
 ## Optional Advanced Additions
 
-- Add a MIDI/hardware translation appendix.
+- Add a deeper MIDI/hardware translation appendix.
 - Add a compatibility note for older Kindohm helper syntax.
 - Add a listening guide that pairs local exercises with public listening links
   from the source README.

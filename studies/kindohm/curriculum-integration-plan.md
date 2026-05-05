@@ -28,7 +28,8 @@ daily sketches into performance vocabulary.
 
 ### Examples
 
-Create simplified, stock-sample-compatible examples based on extracted themes:
+Create classroom-hybrid, stock-sample-compatible examples based on extracted
+themes:
 
 - `studies/kindohm/tidal/kindohm-01-daily-sketch-and-reuse.tidal`
 - `studies/kindohm/tidal/kindohm-02-transformer-chains.tidal`

@@ -51,8 +51,8 @@ teaching guidance and verification notes.
 
 | Study | Focus | Start here |
 | --- | --- | --- |
-| [Kindohm / 365 Tidal Patterns](studies/kindohm/) | Daily sketch practice, transformation menus, sample-index machines, glitch gestures, modulation, section logic, and hardware translation. |
-| [ndr-brt / sc-adente](studies/ndr-brt/) | Personal dialect, transformation chains, one-sample composition, probability, melodic machines, and live-set architecture. | [00-open-this-first.tidal](studies/ndr-brt/tidal/00-open-this-first.tidal) |
+| [Kindohm / 365 Tidal Patterns](studies/kindohm/) | Classroom-hybrid daily sketches, transformation menus, sample-index machines, glitch gestures, modulation, section logic, and hardware translation. | [kindohm-01-daily-sketch-and-reuse.tidal](studies/kindohm/tidal/kindohm-01-daily-sketch-and-reuse.tidal) |
+| [ndr-brt / sc-adente](studies/ndr-brt/) | Stock-dense personal dialect, transformation chains, one-sample composition, probability, melodic machines, and live-state architecture. | [ndr-brt-01-dialect-and-transformations.tidal](studies/ndr-brt/tidal/ndr-brt-01-dialect-and-transformations.tidal) |
 | [MIDI Hardware Performance](studies/midi-hardware-performance/) | Hardware-style performance architecture, `struct` gates, MIDI channels, controller input, part toggles, and scene changes. | [midi-controller-performance.tidal](studies/midi-hardware-performance/tidal/midi-controller-performance.tidal) |
 | [Remix Performance](studies/remix-performance/) | Named parts, stem roles, per-layer routing, and compact remix-performance states. | [remix-performance-skeleton.tidal](studies/remix-performance/tidal/remix-performance-skeleton.tidal) |
 

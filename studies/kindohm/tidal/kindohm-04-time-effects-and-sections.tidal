@@ -1,98 +1,120 @@
 -- Kindohm study 04 - Time effects and section logic
--- Level: intermediate to advanced
--- Time: 45-60 minutes
+-- Level: intermediate to advanced classroom-hybrid
+-- Time: 45-70 minutes
 -- Prerequisites: stack/layers, every, gain, basic effects
--- Key functions: within, striate, whenmod, stut, trunc, range, slow, sine
+-- Key functions: within, striate, stut, trunc, whenmod, foldEvery, range, slow, sine
+-- Source models: pattern025.tidal, pattern040.tidal, pattern325.tidal, pattern432.tidal, functions.tidal
 -- Sample fallbacks: arpy -> feel -> drum; superpiano -> arpy -> gtr
--- Themes from studies/kindohm/study-module-plans.md:
--- Study 5: Break Slicing and Glitch Gestures
--- Study 6: Modulation as Motion
--- Study 7: Periodic Section Logic
 --
 -- Goal:
 -- Use bounded time effects, slow modulation, and cycle-count logic to create
--- fills, dropouts, and returns while preserving a recoverable groove.
+-- fills, interruptions, dropouts, and returns without losing the groove.
 
 hush
 
--- 1. Stable groove.
+-- 1. Define a stock version of the source helper idea from functions.tidal.
+-- Evaluate this before sections 4, 7, and 8.
+let ripStock a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
+
+-- 2. Stable groove plus quiet slice.
 do
-  d1 $ sound "bd - sn -" # gain 0.85
-  d2 $ sound "hh*8" # gain 0.45
+  resetCycles
+  d1 $ sound "bd [sn cp] hh*4" # gain 0.68
+  d2
+    $ striate 8
+    $ sound "arpy"
+    # gain 0.26
 
--- 2. Add a sliced texture quietly.
-d3
-  $ striate 8
-  $ sound "arpy"
-  # gain 0.5
-
--- 3. Bound the glitch to a region of the cycle.
-d3
+-- 3. Bound the slice inside the cycle.
+d2
   $ within (0.25, 0.75) (striate 16 . rev)
   $ sound "arpy"
-  # gain 0.35
+  # speed "0.75 1 1.25 1"
+  # gain 0.26
 
--- 4. Trigger the glitch only near the end of an 8-cycle phrase.
-d3
-  $ whenmod 8 6 (within (0.25, 0.75) (striate 16 . rev))
+-- 4. Put the bounded slice on a phrase clock.
+d2
+  $ whenmod 8 6 (ripStock 0.25 0.25)
   $ sound "arpy"
-  # gain 0.35
+  # speed "0.75 1 1.25 1"
+  # gain 0.24
 
--- 5. Use stutter as a fill, not as the whole groove.
+-- 5. Modulation as motion, rhythm unchanged.
 d1
-  $ whenmod 8 7 (stut 4 0.25 0.6)
   $ sound "bd [sn cp] hh*4"
-  # gain 0.75
+  # cutoff (range 900 4200 $ slow 4 sine)
+  # resonance 0.18
+  # delay (range 0 0.25 $ slow 7 sine)
+  # delaytime (range 0.08 0.35 $ slow 3 sine)
+  # delayfeedback (range 0.15 0.55 $ slow 5 sine)
+  # gain 0.56
 
--- 6. Use trunc as a dropout/freeze gesture.
+-- 6. Section logic: fill, dropout, return.
 d1
   $ whenmod 16 12 (trunc 0.25)
+  $ whenmod 8 7 (stut 4 0.25 0.45)
   $ sound "bd [sn cp] hh*4"
-  # gain 0.8
+  # gain 0.64
 
--- 7. Slow modulation: same rhythm, moving timbre.
-d2
-  $ sound "hh*8"
-  # cutoff (range 800 4500 $ slow 4 sine)
-  # resonance 0.15
-  # gain 0.4
-
--- 8. Delay modulation. Keep gain conservative.
-d3
-  $ sound "arpy*4"
-  # n "0 2 4 7"
-  # delay 0.25
-  # delaytime (range 0.08 0.35 $ slow 3 sine)
-  # delayfeedback (range 0.2 0.65 $ slow 5 sine)
-  # gain 0.35
-
--- 9. Full conditional arrangement sketch.
+-- 7. Dense source-style effects stack.
 do
   resetCycles
   d1
+    $ whenmod 30 20 (density 1.25)
+    $ whenmod 14 12 (trunc 0.25)
+    $ foldEvery [2, 3, 4] (0.25 <~)
+    $ every 9 (stut 8 0.25 0.45)
+    $ stack
+        [ sound "bd [sn cp] hh*4"
+            # cutoff (range 800 3600 $ slow 4 sine)
+            # gain 0.48
+        , sound "hh*8"
+            # pan (range 0.25 0.75 $ slow 5 sine)
+            # gain 0.2
+        , whenmod 8 6 (ripStock 0.25 0.25)
+            $ sound "arpy"
+            # speed "0.5 1 1.5 1"
+            # delay 0.25
+            # delaytime (range 0.08 0.3 $ slow 3 sine)
+            # delayfeedback (range 0.2 0.55 $ slow 5 sine)
+            # gain 0.22
+        ]
+
+-- 8. Full section arrangement.
+-- Evaluate from silence, let it run for at least 32 cycles, then use section 9.
+do
+  resetCycles
+  d1
+    $ whenmod 32 24 (slow 0.75)
     $ whenmod 16 12 (trunc 0.25)
-    $ whenmod 8 7 (stut 4 0.25 0.6)
+    $ whenmod 8 7 (stut 4 0.25 0.45)
     $ sound "bd [sn cp] hh*4"
-    # gain 0.75
+    # cutoff (range 800 3600 $ slow 4 sine)
+    # gain 0.56
   d2
+    $ every 3 (density 2)
     $ sound "hh*8"
-    # cutoff (range 800 4500 $ slow 4 sine)
-    # gain 0.35
+    # pan (range 0.25 0.75 $ slow 5 sine)
+    # gain 0.22
   d3
-    $ whenmod 8 6 (within (0.25, 0.75) (striate 16 . rev))
+    -- $ whenmod 8 6 (ripStock 0.25 0.25)
     $ sound "arpy"
-    # gain 0.3
+    # speed "0.5 1 1.5 1"
+    # delay 0.25
+    # delaytime (range 0.08 0.3 $ slow 3 sine)
+    # delayfeedback (range 0.2 0.55 $ slow 5 sine)
+    # gain 0.22
   d4
     $ whenmod 16 8 (const $ sound "~")
-    $ n "0 2 4 7"
-    # sound "superpiano"
-    # gain 0.45
+    $ sound "superpiano*4"
+    # n "0 2 4 7"
+    # gain 0.32
 
--- 10. Rehearsed ending.
+-- 9. Rehearsed return and ending.
 do
   d4 $ silence
   d3 $ silence
-  d2 $ silence
-  d1 $ sound "bd ~ ~ ~" # gain 0.65
+  d2 $ sound "hh*4" # gain 0.18
+  d1 $ sound "bd ~ sn ~" # gain 0.62
 
 hush

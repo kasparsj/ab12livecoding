@@ -1,64 +1,101 @@
 -- Kindohm study 01 - Daily sketch and reuse
--- Level: intermediate warm-up
--- Time: 20-30 minutes
--- Prerequisites: sound patterns, d1/d2/d3, gain, n
--- Key functions: resetCycles, every, rev, range, slow, sine
--- Sample fallbacks: arpy -> superpiano -> gtr
--- Themes from studies/kindohm/study-module-plans.md:
--- Study 1: Daily Pattern Practice
+-- Level: intermediate classroom-hybrid
+-- Time: 25-40 minutes
+-- Prerequisites: sound patterns, d1/d2/d3, gain, n, every
+-- Key functions: resetCycles, every, rev, jux, slow, range, sine, stack, whenmod
+-- Source models: pattern001.tidal, pattern365.tidal
+-- Sample fallbacks: arpy -> superpiano -> gtr; drum -> feel -> arpy
 --
 -- Goal:
--- Treat a daily pattern as one small runnable idea.
--- Keep the anchor and change one dimension at a time.
+-- Treat one daily sketch as a dense reusable seed. The source archive often
+-- compresses many decisions into one expression; this file keeps that density
+-- but exposes the layers one block at a time.
+--
+-- Source-style note:
+-- Kindohm's older files often accumulate controls with |+|. These classroom
+-- translations use modern # controls unless a compatibility point is being
+-- discussed in comments.
 
 hush
 
--- 1. Seed sketch: one anchor, one support layer.
-do
-  d1 $ sound "bd ~ sn ~" # gain 0.85
-  d2 $ sound "hh*8" # gain 0.45
-
--- 2. Version A: same anchor, add one melodic idea.
-do
-  d1 $ sound "bd ~ sn ~" # gain 0.85
-  d2 $ sound "hh*8" # gain 0.45
-  d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55
-
--- 3. Version B: change one dimension only - speed/sample motion.
-d3
-  $ sound "arpy*4"
-  # n "0 2 4 7"
-  # speed "1 1.25 0.75 1.5"
-  # gain 0.5
-
--- 4. Version C: change one dimension only - periodic reversal.
-d3
-  $ every 4 rev
-  $ sound "arpy*4"
-  # n "0 2 4 7"
-  # gain 0.55
-
--- 5. Version D: change one dimension only - timbre motion.
-d3
-  $ sound "arpy*4"
-  # n "0 2 4 7"
-  # cutoff (range 500 3000 $ slow 4 sine)
-  # resonance 0.2
-  # gain 0.55
-
--- 6. Daily pattern template.
--- Keep the comments and replace the contents for each new sketch.
+-- 1. Sound check and anchor.
 do
   resetCycles
-  d1 $ sound "bd ~ sn ~" # gain 0.85       -- anchor
-  d2 $ sound "hh*8" # gain 0.45            -- pulse
-  d3 $ sound "arpy*4" # n "0 2 4 7" # gain 0.55 -- today's idea
+  d1 $ sound "bd*2 [sn cp] bd hh" # gain 0.78
+  d2 $ sound "hh*8" # gain 0.35
 
--- 7. Sketch challenge.
--- Version 1: change rhythm only.
--- Version 2: change sample index only.
--- Version 3: change speed only.
--- Version 4: change modulation only.
--- Version 5: change section logic only.
+-- 2. Make the anchor feel like a daily sketch, not a drum exercise.
+-- Listen for the base groove staying recognizable while order and color move.
+d1
+  $ every 4 rev
+  $ sound "[bd*2 [sn cp] bd hh]"
+  # speed "1 1 0.9 1.1"
+  # cutoff (range 900 3200 $ slow 4 sine)
+  # resonance 0.15
+  # gain 0.7
+
+-- 3. Add a jux/iteration gesture inspired by pattern001's compact transform stack.
+d1
+  $ jux (iter 4)
+  $ every 4 rev
+  $ sound "[bd*2 [sn cp] bd hh]"
+  # speed "1 1 0.9 1.1"
+  # cutoff (range 900 3200 $ slow 4 sine)
+  # resonance 0.15
+  # gain 0.62
+
+-- 4. Reuse the same seed with one support voice.
+-- The arpy layer is intentionally simple so the transformed drum line leads.
+do
+  resetCycles
+  d1
+    $ jux (iter 4)
+    $ every 4 rev
+    $ sound "[bd*2 [sn cp] bd hh]"
+    # speed "1 1 0.9 1.1"
+    # cutoff (range 900 3200 $ slow 4 sine)
+    # gain 0.62
+  d2
+    $ every 6 (0.25 <~)
+    $ sound "arpy*4"
+    # n "0 2 4 7"
+    # cutoff (range 600 2800 $ slow 5 sine)
+    # gain 0.35
+
+-- 5. Source-style daily performance seed.
+-- This is the version to save, date, mutate, and reuse tomorrow.
+do
+  resetCycles
+  d1
+    $ whenmod 16 12 (trunc 0.5)
+    $ whenmod 8 6 (jux rev)
+    $ every 5 (0.25 <~)
+    $ every 4 rev
+    $ sound "[bd*2 [sn cp] bd hh]"
+    # speed "1 1 0.9 1.1 [1.2 0.8]"
+    # cutoff (range 700 3600 $ slow 4 sine)
+    # resonance 0.16
+    # gain 0.64
+  d2
+    $ whenmod 8 4 (density 2)
+    $ sound "hh*8"
+    # pan (range 0.25 0.75 $ slow 3 sine)
+    # gain 0.32
+  d3
+    $ every 6 (0.25 <~)
+    $ sound "arpy*4"
+    # n "0 2 4 7"
+    # cutoff (range 600 2800 $ slow 5 sine)
+    # gain 0.34
+
+-- 6. Five-sketch reuse prompt.
+-- Copy section 5 into five dated files. Change only one dimension in each:
+-- rhythm, sample family, transform chain, modulation, or section logic.
+
+-- 7. Recovery.
+do
+  d3 $ silence
+  d2 $ silence
+  d1 $ sound "bd ~ sn ~" # gain 0.65
 
 hush

@@ -28,7 +28,7 @@ artist-code study.
 
 ### Examples
 
-Create simplified, stock-sample-compatible examples based on the extracted themes:
+Create stock-dense, stock-sample-compatible examples based on the extracted themes:
 
 - `studies/ndr-brt/tidal/ndr-brt-01-dialect-and-transformations.tidal`
 - `studies/ndr-brt/tidal/ndr-brt-02-one-sample-many-bodies.tidal`

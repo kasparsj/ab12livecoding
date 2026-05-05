@@ -10,7 +10,7 @@ Source repos checked:
 
 ## Cross-Reference Results
 
-- Reviewed all 40 files currently under `studies/`, including this audit file.
+- Reviewed the study files then current under `studies/`, including this audit file.
 - Verified the Kindohm source shape: 461 `.tidal` files, five pattern folders,
   `functions.tidal`, and `scales.tidal`.
 - Verified the ndr-brt source shape: 165 files under `tidal/`, including
@@ -45,14 +45,14 @@ Source repos checked:
 | `studies/kindohm/*.md` | Source summary, source map, plans, status, and roadmap are organized. |
 | `studies/kindohm/tidal/*.tidal` | Metadata headers added; live verification still required. |
 | `studies/ndr-brt/*.md` | Source summary, source map, plans, status, and roadmap are organized. |
-| `studies/ndr-brt/tidal/*.tidal` | Metadata headers added; live verification still required. |
+| `studies/ndr-brt/tidal/*.tidal` | Stock-dense revision added; live verification still required. |
 
 ## Remaining Verification
 
 - Manually evaluate the `.tidal` files in a standard TidalCycles/SuperDirt setup
   before assigning them.
-- Confirm `slowspread`, `foldEvery`, `mask`, `slice`, `hpf`, and `hresonance`
-  against the exact Tidal version used in class.
+- Confirm `slowspread`, `foldEvery`, `mask`, `slice`, `gap`, `chew`, and
+  `hcutoff` against the exact Tidal version used in class.
 - Confirm sample fallbacks for `superpiano`, `feel`, `drum`, `arpy`, and `bass`.
 
 ## Quality Bar
