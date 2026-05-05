@@ -28,7 +28,9 @@ Use these studies as an **artist-sketchbook track**:
 1. Show how one daily practice archive can become a vocabulary of reusable moves.
 2. Use [`tidal/`](tidal/) as the primary teaching surface for intermediate extensions.
 3. Teach from source-shaped `.tidal` sketches that preserve density while avoiding original sample dependencies.
-4. Add one capstone option: "daily-pattern performance inspired by 365 Tidal Patterns."
+4. Use the archival idioms file after the core studies when students are ready
+   to read older helper syntax and dense one-expression stacks.
+5. Add one capstone option: "daily-pattern performance inspired by 365 Tidal Patterns."
 
 ## Source repository
 

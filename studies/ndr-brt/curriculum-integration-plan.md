@@ -15,8 +15,8 @@ artist-code study.
 | Course area | Current focus | ndr-brt addition | Source study modules | Tidal teaching files |
 | --- | --- | --- | --- | --- |
 | Starting patterns and rhythm | Pattern start/stop, rhythm syntax, transformations, alignment | Artist-dialect sidebar; stable anchor plus transformation-chain lab. | Studies 1, 3, 4 | `ndr-brt-01-dialect-and-transformations.tidal` |
-| Musical layers and control | Bass, chords, arpeggios, layers, parameters | One-sample layering lab; melodic-machine extension for generated pitch and scale mapping. | Studies 2, 6, 7 | `ndr-brt-02-one-sample-many-bodies.tidal`, `ndr-brt-04-melodic-machines.tidal` |
-| Arrangement and performance | Sections, performance safety, final recording/performance | Boolean/probability rhythm lab; live-set architecture checklist; single-sample capstone option. | Studies 5, 8, 9 | `ndr-brt-03-probability-and-rhythm-logic.tidal`, `ndr-brt-05-live-set-architecture.tidal` |
+| Musical layers and control | Bass, chords, arpeggios, layers, parameters | One-sample layering lab; melodic-machine extension; custom-parameter and controller translation. | Studies 2, 6, 7, 9 | `ndr-brt-02-one-sample-many-bodies.tidal`, `ndr-brt-04-melodic-machines.tidal`, `ndr-brt-06-control-sieves-and-timbre.tidal` |
+| Arrangement and performance | Sections, performance safety, final recording/performance | Boolean/probability rhythm lab; live-set architecture checklist; single-sample capstone option. | Studies 5, 8, 9 | `ndr-brt-03-probability-and-rhythm-logic.tidal`, `ndr-brt-05-live-set-architecture.tidal`, `ndr-brt-06-control-sieves-and-timbre.tidal` |
 
 ## Proposed Additions By Repository Area
 
@@ -35,6 +35,7 @@ Create stock-dense, stock-sample-compatible examples based on the extracted them
 - `studies/ndr-brt/tidal/ndr-brt-03-probability-and-rhythm-logic.tidal`
 - `studies/ndr-brt/tidal/ndr-brt-04-melodic-machines.tidal`
 - `studies/ndr-brt/tidal/ndr-brt-05-live-set-architecture.tidal`
+- `studies/ndr-brt/tidal/ndr-brt-06-control-sieves-and-timbre.tidal`
 
 Keep examples short, annotated, and runnable without the original sample library
 or custom synthdefs.
@@ -69,13 +70,13 @@ Suggested sections:
 
 - Transformations using stock Tidal functions.
 - Sample slicing/chopping with stock samples.
-- Probability, variation, and performance architecture.
+- Probability, variation, control translation, and performance architecture.
 - Simplified Markov/scale mapping as optional material.
 
 ### Keep optional or advanced
 
 - Custom SuperCollider synthdefs and Olbos/Mutable-style effects.
-- MIDI-to-OSC setup.
+- MIDI-to-OSC setup beyond optional stock-control placeholders.
 - Original sample pack assumptions.
 - Full custom `BootTidal` integration.
 

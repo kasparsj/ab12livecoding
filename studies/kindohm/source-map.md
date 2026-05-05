@@ -3,6 +3,8 @@
 This map links upstream `kindohm/365tidalpatterns` material to the local
 classroom-hybrid teaching pack. The local files preserve source-shaped density
 and technique while avoiding Kindohm's custom sample library and MIDI devices.
+Tempo is translated with the course convention `setcps (bpm/60/4)` rather than
+copying the source archive's older `bps` headers.
 
 | Upstream source | Extracted technique | Local teaching file | Local section |
 | --- | --- | --- | --- |
@@ -12,6 +14,7 @@ and technique while avoiding Kindohm's custom sample library and MIDI devices.
 | [`patterns-001-100/pattern050.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-001-100/pattern050.tidal), [`patterns-001-100/pattern084.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-001-100/pattern084.tidal), [`patterns-201-300/pattern250.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-201-300/pattern250.tidal) | Sample family plus sample-index separation using `samples`, `run`, speed, and stacked scanner roles. | [`tidal/kindohm-03-sample-index-machines.tidal`](tidal/kindohm-03-sample-index-machines.tidal) | Scanner, curated index, and source-style stack. |
 | [`patterns-001-100/pattern025.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-001-100/pattern025.tidal), [`patterns-001-100/pattern040.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-001-100/pattern040.tidal), [`functions.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/functions.tidal), [`patterns-301-400/pattern325.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-301-400/pattern325.tidal), [`patterns-401-500/pattern432.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-401-500/pattern432.tidal) | Bounded glitch, helper-style `within`/`stut`, filter/delay motion, and cycle-count section logic. | [`tidal/kindohm-04-time-effects-and-sections.tidal`](tidal/kindohm-04-time-effects-and-sections.tidal) | Effects helper, dense stack, and arranged return. |
 | [`scales.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/scales.tidal), [`patterns-401-500/pattern441.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-401-500/pattern441.tidal), [`patterns-401-500/pattern443.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-401-500/pattern443.tidal) | Scale helpers and MIDI/hardware-stream translation into stock `d` slots. | [`tidal/kindohm-05-melody-and-hardware-translation.tidal`](tidal/kindohm-05-melody-and-hardware-translation.tidal) | Stream translation and capstone stack. |
+| [`functions.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/functions.tidal), [`patterns-301-400/pattern365.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-301-400/pattern365.tidal), [`patterns-401-500/pattern402.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-401-500/pattern402.tidal), [`patterns-401-500/pattern453.tidal`](https://github.com/kindohm/365tidalpatterns/blob/master/patterns-401-500/pattern453.tidal) | Archival helper idioms, `\|+\|` accumulation, probabilistic repeats, random indices, destructive timbre controls, and compressed source-style stacks. | [`tidal/kindohm-06-archival-idioms-and-helper-compression.tidal`](tidal/kindohm-06-archival-idioms-and-helper-compression.tidal) | Helper setup, archival idioms, and compressed capstone. |
 
 ## Vocabulary Atlas
 
@@ -29,6 +32,7 @@ practice files.
 | Bounded glitch gestures | `patterns-001-100/pattern025.tidal`, `patterns-001-100/pattern040.tidal`, `functions.tidal` | [`tidal/kindohm-04-time-effects-and-sections.tidal`](tidal/kindohm-04-time-effects-and-sections.tidal) |
 | Modulation as motion | `patterns-001-100/pattern034.tidal`, `patterns-301-400/pattern325.tidal`, `patterns-401-500/pattern432.tidal` | [`tidal/kindohm-04-time-effects-and-sections.tidal`](tidal/kindohm-04-time-effects-and-sections.tidal) |
 | `whenmod` section logic | `patterns-201-300/pattern225.tidal`, `patterns-301-400/pattern365.tidal`, `patterns-401-500/pattern453.tidal` | [`tidal/kindohm-04-time-effects-and-sections.tidal`](tidal/kindohm-04-time-effects-and-sections.tidal) |
+| Archival helper compression | `functions.tidal`, `patterns-301-400/pattern365.tidal`, `patterns-401-500/pattern402.tidal`, `patterns-401-500/pattern453.tidal` | [`tidal/kindohm-06-archival-idioms-and-helper-compression.tidal`](tidal/kindohm-06-archival-idioms-and-helper-compression.tidal) |
 
 ## Cross-Reference Notes
 

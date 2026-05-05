@@ -6,7 +6,7 @@
 - Research summary with source links and quantitative scan.
 - Curriculum integration plan.
 - Eight study module plans.
-- Classroom-hybrid Tidal pack with five study files.
+- Classroom-hybrid Tidal pack with six study files.
 - Source map from upstream files to local teaching files.
 - Vocabulary atlas for instructor-facing technique lookup.
 
@@ -23,10 +23,14 @@
 - `tidal/kindohm-03-sample-index-machines.tidal`
 - `tidal/kindohm-04-time-effects-and-sections.tidal`
 - `tidal/kindohm-05-melody-and-hardware-translation.tidal`
+- `tidal/kindohm-06-archival-idioms-and-helper-compression.tidal`
 
 ## Current Risks
 
-- `slowspread`, `foldEvery`, and `samples` may vary by local Tidal version.
+- `slowspread`, `foldEvery`, `samples`, `stut'`, `rarely`, and `sometimesBy`
+  may vary by local Tidal version.
+- The files use modern `setcps (bpm/60/4)` conversions rather than Kindohm's
+  older `bps` headers.
 - `superpiano`, `feel`, and `drum` may vary by SuperDirt sample installation.
 - Original source uses custom samples, older helper idioms, and MIDI hardware
   streams; local files are stock-sample classroom hybrids, not reproductions.

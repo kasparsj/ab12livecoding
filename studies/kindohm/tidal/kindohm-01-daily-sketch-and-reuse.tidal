@@ -4,6 +4,7 @@
 -- Prerequisites: sound patterns, d1/d2/d3, gain, n, every
 -- Key functions: resetCycles, every, rev, jux, slow, range, sine, stack, whenmod
 -- Source models: pattern001.tidal, pattern365.tidal
+-- Tempo: setcps (140/60/4), a modern course conversion of source `bps (140/120)` energy.
 -- Sample fallbacks: arpy -> superpiano -> gtr; drum -> feel -> arpy
 --
 -- Goal:
@@ -17,6 +18,7 @@
 -- discussed in comments.
 
 hush
+setcps (140/60/4)
 
 -- 1. Sound check and anchor.
 do
@@ -26,6 +28,8 @@ do
 
 -- 2. Make the anchor feel like a daily sketch, not a drum exercise.
 -- Listen for the base groove staying recognizable while order and color move.
+-- `every 4 rev` changes the phrase ending; the speed and cutoff patterns make
+-- the same rhythm feel like a saved sketch rather than a static loop.
 d1
   $ every 4 rev
   $ sound "[bd*2 [sn cp] bd hh]"
@@ -35,6 +39,8 @@ d1
   # gain 0.7
 
 -- 3. Add a jux/iteration gesture inspired by pattern001's compact transform stack.
+-- `jux (iter 4)` sends a rotated copy to the other side of the stereo field.
+-- Keep gain lower here because the line becomes wider and busier.
 d1
   $ jux (iter 4)
   $ every 4 rev
@@ -64,6 +70,9 @@ do
 
 -- 5. Source-style daily performance seed.
 -- This is the version to save, date, mutate, and reuse tomorrow.
+-- d1 is the archive-style compressed seed: reversal, offset, stereo movement,
+-- timed truncation, and moving filter color all live on one recoverable groove.
+-- d2 adds pulse density without becoming the lead. d3 is the one "today" idea.
 do
   resetCycles
   d1

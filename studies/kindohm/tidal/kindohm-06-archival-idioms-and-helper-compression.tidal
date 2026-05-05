@@ -1,0 +1,115 @@
+-- Kindohm study 06 - Archival idioms and helper compression
+-- Level: advanced classroom-hybrid
+-- Time: 45-75 minutes
+-- Prerequisites: stack, every, whenmod, gain safety, reading dense Tidal lines
+-- Key functions: |+|, stut', rarely, sometimesBy, irand, coarse, accelerate, cut
+-- Source models: functions.tidal, pattern365.tidal, pattern402.tidal, pattern432.tidal, pattern453.tidal
+-- Tempo: setcps (140/60/4), close to the 130-140 source sketches without overloading the class mix.
+-- Sample fallbacks: drum -> feel -> arpy; arpy -> superpiano -> gtr
+--
+-- Goal:
+-- Cover the archival Kindohm coding dialect that the classroom translations
+-- usually smooth out: local helpers, old-style control accumulation, dense
+-- one-expression stacks, probabilistic repeats, and destructive timbre moves.
+
+hush
+setcps (140/60/4)
+
+-- 1. Local helper vocabulary, stock-safe.
+-- These mirror source helper roles without depending on custom samples.
+let ripStock a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
+    ghostStock p = superimpose ((0.125 ~>) . (|*| gain "0.65") . (# end "0.2")) p
+    gtfoStock p = const (sound "~") p
+    shiftStock x p = x <~ p
+
+-- 2. Older source-style accumulation.
+-- Kindohm's archive often adds controls with |+| after a sound expression.
+d1
+  $ every 4 rev
+  $ sound "bd [sn cp] hh*4"
+  |+| speed "1 1 0.8 1.2"
+  -- |+| cutoff (range 800 3200 $ slow 4 sine)
+  |+| resonance 0.18
+  |+| gain 0.62
+
+-- 3. Probabilistic repeat helpers.
+d1
+  $ rarely (stut' 2 (0.125/2) (|*| gain "0.8"))
+  $ sometimesBy 0.2 (ripStock 0.125 0.125)
+  $ sound "bd [sn cp] hh*4"
+  |+| cut "1"
+  |+| gain "0.62"
+
+-- 4. Random index as source-style material scan.
+d2
+  $ n (irand 8)
+  # sound "drum*8"
+  # speed "1 0.75 1.25 1"
+  # gain 0.38
+
+-- 5. Destructive timbre menu, kept quiet.
+d2
+  $ slowspread ($)
+      [ id
+      , (|+| coarse "8")
+      , (|+| coarse "12")
+      , (|+| accelerate "-1")
+      , ripStock 0.125 0.125
+      , ghostStock
+      ]
+  $ n (slow 2 $ run 8)
+  # sound "drum*8"
+  # gain 0.34
+
+-- 6. Compressed source-style stack.
+-- This is intentionally more archival than the earlier study files.
+d1
+  $ whenmod 32 24 (slow 0.75)
+  $ whenmod 24 16 (iter 4)
+  $ whenmod 16 8
+      ( every 3 (0.25 <~)
+      . every 4 (0.25 <~)
+      . slowspread ($)
+          [ trunc 0.25
+          , rev
+          , (|+| accelerate "1 -1")
+          , (|+| coarse "8 12 16")
+          , ripStock 0.125 0.125
+          , ghostStock
+          , id
+          ]
+      )
+  $ stack
+      [ sound "bd [sn cp] hh*4"
+          |+| cut "1"
+          |+| speed "1 1 0.8 1.1 -1"
+          |+| gain "0.52"
+      , every 3 (density 2)
+          $ sound "hh*8"
+          |+| gain "0.18"
+      , whenmod 8 6 (const $ sound "arpy*8" # n "0 2 7 4" # gain 0.24)
+          $ sound "~ arpy ~ arpy"
+          |+| begin (range 0.02 0.12 $ slow 3 sine)
+          |+| speed "0.5 1 1.5 1"
+          |+| gain "0.2"
+      , sometimesBy 0.15 (stut' 8 (0.0625/2) (|*| gain "0.75"))
+          $ n (irand 8)
+          # sound "drum*8"
+          # gain 0.22
+      ]
+  |+| delaytime "0.5"
+  |+| delayfeedback "0.35"
+
+-- 7. Dropout and return helpers.
+d1
+  $ whenmod 16 12 (gtfoStock)
+  $ whenmod 8 6 (shiftStock 0.25)
+  $ sound "bd [sn cp] hh*4"
+  |+| gain "0.62"
+
+-- 8. Recovery.
+do
+  d2 $ silence
+  d1 $ sound "bd ~ sn ~" # gain 0.62
+
+hush

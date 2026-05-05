@@ -8,6 +8,10 @@
 
 hush
 
+-- Optional source-style tempo:
+-- `ssrun.tidal` starts around `bpm 100`; this keeps melodic machines spacious.
+-- setcps (100/60/4)
+
 let g = gain
     sp = speed
     oc = octave
@@ -20,6 +24,8 @@ let g = gain
     degs lo hi src = round <$> segment 8 (range lo hi src)
 
 -- 1. Fixed source, then generated source.
+-- First hear a memorisable four-note cell. Then replace it with `run 8` so the
+-- same scale becomes a machine that walks through all degrees.
 d1
   $ n (scale "minor" "0 2 4 7")
   # sound "superpiano"
@@ -33,6 +39,8 @@ d1
   # g 0.52
 
 -- 2. Continuous modulation sampled into scale degrees.
+-- `sine` is smooth, but `segment` and `round` turn it into stepped melody.
+-- Listen for a contour rather than independent random notes.
 d1
   $ n (scale "minor" $ degs 0 7 sine)
   # sound "superpiano"
@@ -40,6 +48,8 @@ d1
   # g 0.55
 
 -- 3. Iterated number phrases, source-style.
+-- `iter cr` rotates the phrase internally. The line stays made of the same
+-- degrees, but its starting point and emphasis keep shifting.
 do
   let cr = 4
   d1
@@ -51,7 +61,8 @@ do
     # g 0.55
 
 -- 4. Weighted choice without adding a helper dependency.
--- More zeroes and twos than high notes keeps the machine grounded.
+-- More zeroes and twos than high notes keeps the machine grounded. This is a
+-- stock approximation of weighted choice: bias the list by repeating values.
 d1
   $ n (scale "minor" $ choose [0,0,2,2,3,4,7])
   # sound "superpiano"
@@ -59,6 +70,8 @@ d1
   # g 0.50
 
 -- 5. One melodic machine, three register roles.
+-- d1 is the lead, d2 is the slower root/body, and d3 is a sparse upper ghost.
+-- The point is register arrangement, not three unrelated melodies.
 do
   let line = scale "minor" $ iter 4 "0 2 [4|5] 7 6 [4|2] 3 0"
   d1
@@ -84,9 +97,13 @@ do
     # rvb 0.35 0.7
 
 -- 6. Rhythm stays simple so the generated pitch remains legible.
+-- Add drums only after the pitch machine makes sense. Dense rhythm would hide
+-- whether the generated line is working.
 d4 $ sound "bd ~ sn ~" # g 0.72
 
 -- 7. Denser phrase: pitch, register, and timing all move, but quietly.
+-- This is the advanced texture layer. It moves octave, order, speed, pan, and
+-- pitch choice, so it must sit under the main melody rather than replace it.
 do
   let cr = 3
   d3
@@ -103,6 +120,8 @@ do
     # rvb 0.25 0.55
 
 -- 8. Recovery.
+-- Return to the fixed four-note cell and clear the other registers. This makes
+-- the generated material feel like a performable state, not a trap.
 do
   d1 $ n (scale "minor" "0 2 4 7") # sound "superpiano" # oc 5 # g 0.5
   d2 $ silence

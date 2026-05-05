@@ -4,6 +4,7 @@
 -- Prerequisites: sound, n, gain, run, stack, basic sample families
 -- Key functions: samples, run, slow, every, jux, speed, whenmod, stack
 -- Source models: pattern050.tidal, pattern084.tidal, pattern250.tidal
+-- Tempo: setcps (150/60/4), a midpoint for the faster sample-index source sketches.
 -- Sample fallbacks: drum -> feel -> arpy; feel -> drum -> arpy
 --
 -- Goal:
@@ -12,6 +13,7 @@
 -- do the same with stock or common SuperDirt names.
 
 hush
+setcps (150/60/4)
 
 -- 1. Anchor first. Keep this running while scanning sample bodies.
 do
@@ -20,12 +22,15 @@ do
   d2 $ sound "hh*8" # gain 0.28
 
 -- 2. Scan a folder with n/run.
+-- `run 8` counts 0-7 every cycle; `n` turns those numbers into sample indices.
 d3
   $ n (run 8)
   # sound "drum*8"
   # gain 0.48
 
 -- 3. Slow the index stream without slowing the rhythm.
+-- The events still happen eight times per cycle, but the chosen sample number
+-- changes over two cycles. This separates rhythm from sample selection.
 d3
   $ n (slow 2 $ run 8)
   # sound "drum*8"
@@ -33,6 +38,7 @@ d3
 
 -- 4. Use samples/run when your Tidal version supports it.
 -- If this does not evaluate, keep using the n/sound form above.
+-- This is closer to the source archive's folder-as-instrument style.
 d3
   $ sound (samples "drum*8" (slow 2 $ run 8))
   # gain 0.46
@@ -45,6 +51,8 @@ d3
   # gain 0.48
 
 -- 6. Treat the sample family as a patterned role.
+-- Angle brackets rotate between folders, so the same index pattern changes
+-- body without changing its timing.
 d3
   $ n "0 2 5 3"
   # sound "<drum feel arpy>"
@@ -52,6 +60,8 @@ d3
   # gain 0.42
 
 -- 7. Dense scanner with anchor, pulse, and section replacement.
+-- d1/d2 keep the floor stable. d3 is the scanner, with a planned arpy
+-- replacement near the phrase ending.
 do
   resetCycles
   d1 $ sound "bd ~ sn ~" # gain 0.76
@@ -69,6 +79,8 @@ do
 
 -- 8. Source-style scanner stack.
 -- The scanner is no longer the whole piece; it is one body inside a stack.
+-- The archive often layers several sample families this way: one anchor, one
+-- pulse, one scanning body, and one occasional replacement.
 d1
   $ whenmod 10 8 (jux rev)
   $ every 6 (density 2)

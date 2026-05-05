@@ -8,6 +8,10 @@
 
 hush
 
+-- Optional source-style tempo:
+-- Use a moderate four-beat cycle before testing probability density.
+-- setcps (120/60/4)
+
 let g = gain
     db = degradeBy
     sb = sometimesBy
@@ -18,11 +22,14 @@ let g = gain
     scc sh co cr = shape sh # coarse co # crush cr
 
 -- 1. Stable reference. The kick/snare are the recovery path.
+-- Start here so every later random or boolean layer has a form to push against.
 do
   d1 $ sound "bd ~ sn ~" # g 0.82
   d2 $ sound "hh*8" # g 0.35
 
 -- 2. Probability stack: one small risk per line.
+-- Each `sb p` changes one dimension only: level, stereo reversal, speed, pan.
+-- The result should feel alive but still like the same hi-hat pattern.
 do
   let p = 0.12
   d2
@@ -35,6 +42,8 @@ do
     # g 0.36
 
 -- 3. Rare events should be audible because the form underneath is stable.
+-- The clap line is simple enough that rare hurry and damage events read as
+-- decisions, not errors. Keep the stable d1/d2 underneath while testing it.
 do
   d1 $ sound "bd ~ sn ~" # g 0.82
   d2 $ sound "hh(7,16)" # g 0.32
@@ -45,6 +54,8 @@ do
     # g 0.28
 
 -- 4. Euclidean gates as roles.
+-- Treat each Euclidean pattern as a job in the groove: kick ground, snare
+-- response, hat grid, clap accent. Do not judge the rhythms in isolation.
 do
   d1 $ sound "bd(3,8)" # g 0.82
   d2 $ sound "sn(2,8)" # g 0.62
@@ -52,6 +63,8 @@ do
   d4 $ db 0.35 $ sound "cp(5,16)" # g 0.32
 
 -- 5. Rotating density with bounded randomness.
+-- Density changes on a cycle, but the random touches stay limited to iteration,
+-- hurry, and pan. This is the "unstable but still countable" version.
 do
   d1 $ sound "bd(<3 5>,8)" # g 0.82
   d2 $ sound "sn(2,8)" # g 0.62
@@ -63,30 +76,37 @@ do
     # pan rand
 
 -- 6. Masking: boolean thinking without custom sieve helpers.
+-- The mask is a truth table for the clap. Only `t` positions pass through, so
+-- students can hear boolean rhythm before seeing custom sieve functions.
 d4
   $ mask "t f t t f t f t"
   $ sound "cp*8"
   # g 0.42
 
 -- 7. Stock-safe OR/AND style grid.
--- OR feel: any active layer can speak.
+-- OR feel: any active layer can speak. The composite rhythm is the union of
+-- the separate kick, snare, and hat gates.
 do
   d1 $ sound "bd(3,8)" # g 0.8
   d2 $ sound "sn(2,8)" # g 0.55
   d3 $ sound "hh(5,8)" # g 0.28
 
--- AND feel: one rhythm reveals another using `struct`.
+-- AND feel: one rhythm reveals another using `struct`. The clap pattern exists
+-- on every step, but the boolean structure decides which steps are audible.
 d4
   $ struct "t f t f t t f t"
   $ sound "cp*8"
   # g 0.35
 
--- Inversion feel: alternate foreground and ghost grid.
+-- Inversion feel: alternate foreground and ghost grid. The two masks are
+-- opposites, so the hat and clap trade space instead of piling up.
 do
   d3 $ mask "t f t f f t f t" $ sound "hh*8" # g 0.32
   d4 $ mask "f t f t t f t f" $ sound "cp*8" # g 0.28
 
 -- 8. Unstable but recognizable challenge.
+-- This combines the rules: stable anchor, one probabilistic hat, and one
+-- pitch-random melodic gate. If the pulse disappears, reduce d2 or d3 first.
 do
   d1 $ sound "bd ~ sn ~" # g 0.85
   d2

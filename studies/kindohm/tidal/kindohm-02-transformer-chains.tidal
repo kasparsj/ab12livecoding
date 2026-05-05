@@ -4,6 +4,7 @@
 -- Prerequisites: every, rev, density, slow, basic mini-notation
 -- Key functions: every, whenmod, foldEvery, slowspread, jux, iter, density, trunc
 -- Source models: pattern093.tidal, pattern150.tidal, pattern402.tidal
+-- Tempo: setcps (140/60/4), matching the common 140-ish transformation-menu source feel.
 -- Sample fallbacks: none required for bd/sn/cp/hh; arpy -> superpiano -> gtr
 --
 -- Goal:
@@ -11,11 +12,14 @@
 -- pattern. The menu should sound rehearsed because the choices are bounded.
 
 hush
+setcps (140/60/4)
 
 -- 1. Compact base pattern.
 d1 $ sound "bd [sn cp] hh*4" # gain 0.72
 
 -- 2. Chain periodic moves before adding more layers.
+-- `foldEvery [3, 4]` applies the same offset on two phrase lengths, so the
+-- groove slips against itself without needing a second pattern.
 d1
   $ foldEvery [3, 4] (0.25 <~)
   $ every 5 rev
@@ -24,6 +28,8 @@ d1
 
 -- 3. Add a slowspread menu.
 -- If slowspread is missing in your Tidal version, use section 4 as a manual menu.
+-- `slowspread ($)` rotates one transformation at a time over the same base.
+-- The point is not randomness; it is a bounded menu of rehearsable states.
 d1
   $ slowspread ($)
       [ id
@@ -39,6 +45,8 @@ d1
   # gain 0.66
 
 -- 4. Manual menu states for slowspread compatibility problems.
+-- Evaluate these one by one and name the role of each state before automating
+-- the menu: original, reversed, stretched, stereo-reversed, denser, shortened.
 d1 $ sound "bd [sn cp] hh*4" # gain 0.72
 
 d1 $ rev $ sound "bd [sn cp] hh*4" # gain 0.72
@@ -53,6 +61,8 @@ d1 $ trunc 0.5 $ sound "bd [sn cp] hh*4" # gain 0.72
 
 -- 5. Dense source-style rhythm stack.
 -- Listen for three jobs: anchor, high pulse, and short melodic disruption.
+-- The outer `whenmod` turns the whole stack into a section gesture, while the
+-- inner stack keeps separate musical jobs readable.
 do
   resetCycles
   d1
@@ -69,6 +79,8 @@ do
 
 -- 6. Source-style performance line.
 -- This compresses the menu, offsets, and section gesture into one expression.
+-- Read this from bottom to top: build the stack, apply the 16-cycle menu, then
+-- add longer 24- and 32-cycle form changes.
 d1
   $ whenmod 32 24 (slow 0.75)
   $ whenmod 24 16 (iter 4)

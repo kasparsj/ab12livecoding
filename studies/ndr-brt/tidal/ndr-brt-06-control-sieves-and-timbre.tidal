@@ -1,0 +1,131 @@
+-- ndr-brt study 06 - Control, sieves, and timbre translation
+-- Level: advanced
+-- Time: 45-70 minutes
+-- Prerequisites: aliases, masks, control patterns, effects, live recovery
+-- Key functions: sh, so, rinse, mask, struct, cF, shape, coarse, crush, all
+-- Sample fallbacks: arpy -> feel -> bass -> gtr; superpiano -> arpy -> gtr
+-- Themes: missing advanced coverage from Functions.hs, Parameters.hs, and MIDI practice.
+--
+-- This is still stock-compatible. It translates custom sc-adente ecosystems
+-- into classroom-safe patterns instead of requiring private synthdefs,
+-- Olbos/Mutable effects, or a MIDI controller. Each section names the missing
+-- source-world idea and gives a runnable approximation.
+
+hush
+
+-- Optional source-style tempo:
+-- Slower source sketches such as `ssrun.tidal` sit around `bpm 100`; use that
+-- when control and timbre movement need room.
+-- setcps (100/60/4)
+
+let g = gain
+    sp = speed
+    db = degradeBy
+    h = hurry
+    sb = sometimesBy
+    si = superimpose
+    str = striate
+    rvb r s = room r # size s
+    lp c q = cutoff c # resonance q
+    hp c = hcutoff c
+    scc sh co cr = shape sh # coarse co # crush cr
+    sh t f p = superimpose ((h t).f) p
+    so t f p = off t ((h t).f) p
+    rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
+
+-- 1. Shortcut gestures from the source vocabulary.
+-- `sh` adds a hurried copy; `so` offsets a hurried copy. Hear this as helper
+-- vocabulary for thickness and echo-like motion, not as a new composition.
+d1
+  $ sh 2 ((|* g 0.55).(# pan 0.8))
+  $ so "q" ((|* sp 0.5).(# g 0.45))
+  $ sound "bd [sn cp] hh*4"
+  # g 0.58
+
+-- 2. Rinse-style reverse-cycle gesture, translated to a stock sample.
+-- The anchor stays on d1. d2 occasionally pulls a reversed cycle into the
+-- foreground, like a live transition trick rather than a permanent loop.
+do
+  d1 $ sound "bd ~ sn ~" # g 0.75
+  d2
+    $ sb 0.20 (rinse 2 4)
+    $ sound "arpy"
+    # n 0
+    # g 0.32
+    # rvb 0.35 0.65
+
+-- 3. Sieve translation A: OR-like masks.
+-- Different grids can reveal the same source in different roles. Think of each
+-- mask as one logical condition; together they make a composite rhythm.
+do
+  d1 $ mask "t f f t f t f f t f f t f t f f" $ sound "bd*16" # g 0.7
+  d2 $ mask "f f t f f f t f f f t f f f t f" $ sound "sn*16" # g 0.5
+  d3 $ mask "t f t f t t f t f t f t t f t f" $ sound "hh*16" # g 0.26
+
+-- 4. Sieve translation B: AND-like gating with `struct`.
+-- The melodic layer is dense, but the gate decides what survives. This makes
+-- rhythm the selector and melody the material being selected.
+d4
+  $ struct "t f f t f t f f t f f t f t f f"
+  $ n (scale "minor" $ iter 4 "0 2 4 7 6 4 2 0")
+  # sound "arpy"
+  # octave 5
+  # g 0.34
+
+-- 5. Parameter ecosystem translation.
+-- Source patches may use custom params; this stock version treats timbre as
+-- a performable state using filter, crush, shape, room, and speed. Listen for
+-- color movement as part of the composition, not as post-production polish.
+do
+  let color = range 700 4200 $ slow 12 sine
+  d1
+    $ layer [
+      id,
+      (h 2).(# end 0.08).(# g 0.35),
+      (str 9).(# pan rand).(# g 0.28),
+      (|* sp 0.5).(# end 0.35).(# g 0.34)
+    ]
+    $ sound "arpy"
+    # n "0 1 2 3"
+    # lp color 0.18
+    # scc 0.10 2 3
+    # rvb 0.25 0.6
+    # g 0.44
+
+-- 6. Controller-input placeholder.
+-- If your BootTidal exposes OSC/MIDI control as `cF 0 "name"`, uncomment the
+-- next block. The fallback block below runs without external hardware and
+-- demonstrates the same mapping with slow LFOs.
+--
+-- d2
+--   $ sound "hh*8"
+--   # g (range 0.15 0.55 $ cF 0.35 "knob1")
+--   # cutoff (range 600 5000 $ cF 0.4 "knob2")
+
+-- Hardware-free rehearsal of the same idea.
+-- Gain and cutoff move as if two knobs were being played. Use this before
+-- introducing real controller input.
+d2
+  $ sound "hh*8"
+  # g (range 0.15 0.45 $ slow 8 sine)
+  # cutoff (range 600 5000 $ slow 10 cosine)
+
+-- 7. Live global color states.
+-- These are whole-set states, not per-pattern decorations. Use them after a
+-- section is established so the audience hears the room change.
+all $ (# cutoff (range 3200 600 $ slow 18 sine))
+
+all $ (# crush 2) . (# shape 0.10) . (# room 0.35) . (# size 0.75)
+
+all $ id
+
+-- 8. Recovery.
+-- Clear the advanced layers and return to a plain pulse. That makes the custom
+-- control ideas safe to rehearse in front of a class.
+do
+  d1 $ sound "bd ~ sn ~" # g 0.75
+  d2 $ silence
+  d3 $ silence
+  d4 $ silence
+
+hush

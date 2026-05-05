@@ -43,6 +43,7 @@ Created canonical Tidal-first files in `studies/ndr-brt/tidal/`:
 - [x] `studies/ndr-brt/tidal/ndr-brt-03-probability-and-rhythm-logic.tidal`
 - [x] `studies/ndr-brt/tidal/ndr-brt-04-melodic-machines.tidal`
 - [x] `studies/ndr-brt/tidal/ndr-brt-05-live-set-architecture.tidal`
+- [x] `studies/ndr-brt/tidal/ndr-brt-06-control-sieves-and-timbre.tidal`
 
 Example constraints:
 
@@ -51,6 +52,8 @@ Example constraints:
 - Prefer comments that name the musical role of each line.
 - Preserve sc-adente code feel through aliases, local constants, `layer`, and
   dense transformation chains when the result remains stock-compatible.
+- Cover advanced gaps with stock-safe `sh`/`so`/`rinse`, sieve-style masks,
+  parameter translation, and optional `cF` controller placeholders.
 - Include `hush` / cleanup blocks where useful.
 
 Acceptance criteria:

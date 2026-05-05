@@ -8,6 +8,10 @@
 
 hush
 
+-- Optional source-style tempo:
+-- The Eulerroom single-sample source uses `bpm 129`, equivalent to this CPS.
+-- setcps (129/60/4)
+
 let g = gain
     sp = speed
     fa = fast
@@ -22,9 +26,14 @@ let g = gain
     scc sh co cr = shape sh # coarse co # crush cr
 
 -- 1. Pick one stock source and keep it for the whole lab.
+-- The exercise is about changing role, not changing sample. If "arpy" is
+-- missing, choose one fallback and keep that same sound through every section.
 d1 $ sound "arpy" # n 0 # g 0.65
 
 -- 2. Eulerroom-style one-source layer stack, translated to stock samples.
+-- The same sample becomes five bodies: original anchor, delayed high copy,
+-- stereo grain, slow low body, and quiet fast shard. Listen for one source
+-- becoming a whole texture rather than a drum loop plus accompaniment.
 do
   let ar = 3
   d1
@@ -41,12 +50,16 @@ do
     # rvb 0.25 0.55
 
 -- 3. Anchor only: recovery state inside the same source world.
+-- Use this when the layer stack loses focus. It keeps the chosen sample active
+-- but removes the density so the next transformation has a clear reference.
 d1
   $ sound "arpy*4"
   # n "0 1 2 3"
   # g 0.55
 
 -- 4. Slow body and grain body as separate orbits for mixing practice.
+-- d1 names the source plainly, d2 stretches it into weight, and d3 chops it
+-- into surface motion. Balance the gains before adding brighter layers.
 do
   d1 $ sound "arpy*4" # n "0 1 2 3" # g 0.5
   d2
@@ -66,6 +79,8 @@ do
     # pan "0.2 0.8"
 
 -- 5. Slice body: rhythm comes from playback position, not new material.
+-- The rhythm changes because Tidal jumps to different slice positions. This
+-- should feel like rearranging the sample's inside, not adding a new part.
 d3
   $ slice 8 "0 3 5 7 2 1 6 4"
   $ every 4 rev
@@ -74,6 +89,8 @@ d3
   # g 0.38
 
 -- 6. Bright shards. Keep them quiet.
+-- This layer is meant to flash at the edge: high speed, short ends, delay, and
+-- probability create sparkle. It should decorate the anchor, not dominate it.
 d4
   $ db 0.55
   $ sb 0.18 (si ((h 2).(# pan rand).(# g 0.6)))
@@ -87,8 +104,9 @@ d4
   # delayfeedback 0.18
 
 -- 7. Stock destructive ending.
--- Source sets use custom damage too; here the stock version is filter, crush,
--- shape, and room, with conservative gain.
+-- Apply these global states as a planned fade of clarity: first darken, then
+-- roughen and widen, then reset with `all $ id` before stopping. Source sets
+-- use custom damage too; this stock version is filter, crush, shape, and room.
 all $ (# cutoff (range 2800 500 $ slow 24 sine))
 
 all $ (# crush 3) . (# shape 0.15) . (# room 0.45) . (# size 0.8)

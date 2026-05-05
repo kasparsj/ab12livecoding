@@ -6,7 +6,7 @@ The material does not copy the artist's set files into beginner lessons. It
 extracts reusable techniques from the `tidal/` codebase and turns them into
 stock-compatible studies that keep more of the sc-adente code feel: compact
 aliases, local constants, dense transformation chains, `layer`-first
-derivation, and rehearsed live-state blocks.
+derivation, stock-safe control translation, and rehearsed live-state blocks.
 
 ## Documents
 
@@ -29,6 +29,17 @@ Use these studies as an **artist-code track**:
 2. Use [`tidal/`](tidal/) as the primary teaching surface for intermediate extensions.
 3. Teach from companion `.tidal` sketches that translate the original idioms into runnable stock examples.
 4. Add one capstone option: “single-sample live set inspired by sc-adente.”
+
+## Tidal Pack
+
+| File | Focus |
+| --- | --- |
+| [`ndr-brt-01-dialect-and-transformations.tidal`](tidal/ndr-brt-01-dialect-and-transformations.tidal) | Alias vocabulary, transformation chains, and `sh`/`so` gesture helpers. |
+| [`ndr-brt-02-one-sample-many-bodies.tidal`](tidal/ndr-brt-02-one-sample-many-bodies.tidal) | One stock sample split into anchor, slow, grain, and shard bodies. |
+| [`ndr-brt-03-probability-and-rhythm-logic.tidal`](tidal/ndr-brt-03-probability-and-rhythm-logic.tidal) | Bounded probability, Euclidean gates, masks, and boolean-style rhythm. |
+| [`ndr-brt-04-melodic-machines.tidal`](tidal/ndr-brt-04-melodic-machines.tidal) | Generated pitch streams, register roles, and weighted choice. |
+| [`ndr-brt-05-live-set-architecture.tidal`](tidal/ndr-brt-05-live-set-architecture.tidal) | Live states, recovery, global color, and planned endings. |
+| [`ndr-brt-06-control-sieves-and-timbre.tidal`](tidal/ndr-brt-06-control-sieves-and-timbre.tidal) | `rinse`, sieve-style masks, custom parameter translation, and optional control input. |
 
 ## Source repository
 

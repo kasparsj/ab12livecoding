@@ -4,6 +4,7 @@
 -- Prerequisites: n, octave, scale, run, simple drum layers
 -- Key functions: scale, run, slow, degradeBy, whenmod, foldEvery, range, sine
 -- Source models: scales.tidal, pattern441.tidal, pattern443.tidal
+-- Tempo: setcps (120/60/4), close to the hardware-stream sources while keeping notes readable.
 -- Sample fallbacks: superpiano -> arpy -> gtr; bass -> superpiano -> arpy
 --
 -- Goal:
@@ -11,6 +12,7 @@
 -- stock Tidal voices. Named hardware streams become normal d-slots here.
 
 hush
+setcps (120/60/4)
 
 -- 1. Hardware-stream mental model:
 -- keys, bass, and brute from source code become d1, d2, and d3 in class.
@@ -21,6 +23,8 @@ do
   d3 $ sound "bd [sn cp] hh*4" # gain 0.58
 
 -- 2. Scale-aware generated stream.
+-- `run 8` creates scale degrees, and `scale "minor"` maps them to notes.
+-- This is the stock equivalent of a helper-generated melodic stream.
 d1
   $ slow 2
   $ n (scale "minor" $ run 8)
@@ -30,6 +34,8 @@ d1
   # gain 0.48
 
 -- 3. Add controlled probability and phrase offsets.
+-- `degradeBy` removes some notes; `foldEvery` shifts the phrase at several
+-- cycle lengths. The melody should feel generated but still bounded.
 d1
   $ degradeBy 0.12
   $ foldEvery [2, 3, 4] (0.25 <~)
@@ -40,6 +46,8 @@ d1
   # gain 0.46
 
 -- 4. Translate hardware parameter motion to stock controls.
+-- Source hardware parameters become stock controls here: filter and room motion
+-- stand in for synth cutoff, envelope, delay, or voice controls.
 d1
   $ degradeBy 0.12
   $ foldEvery [2, 3, 4] (0.25 <~)
@@ -71,6 +79,8 @@ d3
 -- 7. Dense stock hardware translation.
 -- The melodic and bass voices behave like named external instruments, but
 -- they remain stock-sample patterns for classroom portability.
+-- Think of d1 as keys, d2 as bass, and d3 as the drum machine. The source
+-- archive names hardware streams directly; this file keeps the roles audible.
 do
   resetCycles
   d1
@@ -101,6 +111,8 @@ do
 
 -- 8. Capstone performance stack.
 -- Use this after students can explain the three stream roles.
+-- This compresses the hardware-style arrangement into one Tidal pattern while
+-- preserving the same roles: melody, bass, and drum logic.
 d1
   $ whenmod 30 20 (density 1.2)
   $ stack

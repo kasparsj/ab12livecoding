@@ -4,6 +4,7 @@
 -- Prerequisites: stack/layers, every, gain, basic effects
 -- Key functions: within, striate, stut, trunc, whenmod, foldEvery, range, slow, sine
 -- Source models: pattern025.tidal, pattern040.tidal, pattern325.tidal, pattern432.tidal, functions.tidal
+-- Tempo: setcps (120/60/4), leaving space for slicing, delay feedback, and section returns.
 -- Sample fallbacks: arpy -> feel -> drum; superpiano -> arpy -> gtr
 --
 -- Goal:
@@ -11,9 +12,12 @@
 -- fills, interruptions, dropouts, and returns without losing the groove.
 
 hush
+setcps (120/60/4)
 
 -- 1. Define a stock version of the source helper idea from functions.tidal.
 -- Evaluate this before sections 4, 7, and 8.
+-- `ripStock` means: only transform the middle of the cycle, reverse it, slow it,
+-- and stutter it. It should read as a fill, not a new main groove.
 let ripStock a b p = within (0.25, 0.75) (slow 2 . rev . stut 8 a b) p
 
 -- 2. Stable groove plus quiet slice.
@@ -26,6 +30,8 @@ do
     # gain 0.26
 
 -- 3. Bound the slice inside the cycle.
+-- `within (0.25, 0.75)` leaves the start and end of the cycle recognizable, so
+-- the listener hears a disturbance that still returns to the anchor.
 d2
   $ within (0.25, 0.75) (striate 16 . rev)
   $ sound "arpy"
@@ -40,6 +46,8 @@ d2
   # gain 0.24
 
 -- 5. Modulation as motion, rhythm unchanged.
+-- No rhythmic transform happens here. The motion comes from filter and delay
+-- control patterns, which is a common Kindohm way to animate a stable part.
 d1
   $ sound "bd [sn cp] hh*4"
   # cutoff (range 900 4200 $ slow 4 sine)
@@ -57,6 +65,8 @@ d1
   # gain 0.64
 
 -- 7. Dense source-style effects stack.
+-- This combines the earlier moves: long-form density/truncation, repeated
+-- offsets, stuttered fills, a stable hat layer, and a bounded arpy rip.
 do
   resetCycles
   d1
@@ -82,6 +92,8 @@ do
 
 -- 8. Full section arrangement.
 -- Evaluate from silence, let it run for at least 32 cycles, then use section 9.
+-- d1 carries the form, d2 supplies motion, d3 is the timed glitch texture, and
+-- d4 demonstrates a predictable dropout. Do not add gain while this is running.
 do
   resetCycles
   d1
@@ -97,7 +109,7 @@ do
     # pan (range 0.25 0.75 $ slow 5 sine)
     # gain 0.22
   d3
-    -- $ whenmod 8 6 (ripStock 0.25 0.25)
+    $ whenmod 8 6 (ripStock 0.25 0.25)
     $ sound "arpy"
     # speed "0.5 1 1.5 1"
     # delay 0.25
@@ -111,6 +123,7 @@ do
     # gain 0.32
 
 -- 9. Rehearsed return and ending.
+-- Remove the most transformed layers first, then leave a simple anchor.
 do
   d4 $ silence
   d3 $ silence

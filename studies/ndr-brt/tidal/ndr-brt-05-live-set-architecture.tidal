@@ -18,19 +18,27 @@ let g = gain
     lp c q = cutoff c # resonance q
     hp c = hcutoff c
     scc sh co cr = shape sh # coarse co # crush cr
+    sh t f p = superimpose ((h t).f) p
+    so t f p = off t ((h t).f) p
     shut = const silence
 
 -- STATE 0 - known silent state.
+-- Rehearse this as a reset point. It clears four slots without changing global
+-- effects, so you can recover before using `hush`.
 do
   d1 $ silence
   d2 $ silence
   d3 $ silence
   d4 $ silence
 
--- Optional tempo convention from the study source. Skip if your setup lacks bpm.
--- bpm 120
+-- Optional source-style tempo:
+-- The Eulerroom source uses `bpm 129`. ndr-brt's helper maps that to the same
+-- four-beat-cycle CPS formula used in the course.
+-- setcps (129/60/4)
 
 -- STATE 1 - intro: one recoverable pulse and one source sample.
+-- The sparse kick gives the audience a clock. The slow sample says what the
+-- set is made from before slicing and damage hide the source.
 do
   d1 $ sound "bd ~ ~ ~" # g 0.70
   d2
@@ -43,16 +51,22 @@ do
     # rvb 0.35 0.75
 
 -- STATE 2 - build: same source, more bodies.
+-- Add roles one at a time: pulse, low/stretched source, then chopped surface.
+-- This is the mix-check before the dense states.
 do
   d1 $ sound "bd ~ sn ~" # g 0.82
   d2 $ slow 2 $ sound "arpy" # n 0 # sp 0.5 # g 0.34 # rvb 0.35 0.75
   d3 $ chop 12 $ sound "arpy" # n 1 # g 0.28 # pan "0.25 0.75"
 
 -- STATE 3 - dense one-source stack plus simple drums.
+-- This is the full texture: drums stay plain while d2 carries the source-style
+-- stack. The offset copy, grains, low body, and fast shard should still point
+-- back to one sample.
 do
   let ar = 3
   d1 $ sound "bd [sn cp] bd sn" # g 0.78
   d2
+    $ so "q" ((|* sp 0.5).(# g 0.45))
     $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
     $ layer [
       id,
@@ -65,6 +79,8 @@ do
     # rvb 0.25 0.55
 
 -- STATE 4 - destabilize one layer only.
+-- Keep the drums unchanged and make only d2 less predictable. This is the
+-- performance safety rule: mutate one dimension while the form remains clear.
 do
   let ar = 3
   d1 $ sound "bd [sn cp] bd sn" # g 0.78
@@ -82,6 +98,8 @@ do
     # rvb 0.25 0.55
 
 -- STATE 5 - breakdown: subtract rhythm, keep a low ghost.
+-- Remove the grid but keep memory of the source through a slow sample and bass.
+-- This gives the return somewhere to come from.
 do
   d1 $ silence
   d2 $ silence
@@ -101,6 +119,8 @@ do
     # g 0.48
 
 -- STATE 6 - return with a changed surface.
+-- Bring the pulse back, but change the texture from chopped grain to sliced
+-- playback positions. It should feel like a return, not a rewind.
 do
   d1 $ sound "bd [sn cp] bd sn" # g 0.78
   d2 $ sound "hh(7,16)" # g 0.30
@@ -119,6 +139,8 @@ do
     # rvb 0.25 0.5
 
 -- ENDING A - subtract layers manually.
+-- This is the safest ending for a class performance: remove high/detail layers
+-- first, then leave a single pulse.
 do
   d4 $ silence
   d3 $ silence
@@ -126,6 +148,8 @@ do
   d1 $ sound "bd ~ ~ ~" # g 0.62
 
 -- ENDING B - global stock color, then hush.
+-- This is a more dramatic ending. Darken everything, roughen the texture, reset
+-- global transforms, then stop.
 all $ (# cutoff (range 2400 500 $ slow 20 sine))
 
 all $ (# crush 2) . (# shape 0.12) . (# room 0.45) . (# size 0.85)
