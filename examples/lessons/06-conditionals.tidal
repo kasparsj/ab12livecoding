@@ -1,0 +1,53 @@
+-- Deterministic Cycle Conditions
+
+d1 $ every 3 rev $ n "0 1 [~ 2] 3" # s "arpy"
+
+d1 $ every 3 (fast 2) $ n "0 1 [~ 2] 3" # s "arpy"
+
+d1 $ when ((elem '4') . show) (striate 4) $ s "hh hc"
+
+d1 $ whenmod 8 6 rev $ s "bd*2 arpy*2 cp hh*4"
+
+-- Random Event Conditions
+
+d1 $ sometimes (# crush 2) $ n "0 1 [~ 2] 3" # s "arpy"
+
+d1 $ sometimesBy 0.35 (# crush 2) $ s "bd sn cp hh"
+
+-- Event vs Cycle Randomness
+
+d1 $ sometimes (# crush 2) $ s "bd sn cp hh"
+
+d1 $ someCycles (# crush 2) $ s "bd sn cp hh"
+
+-- Fills and Replacements
+
+d1 $ every 5 (|+| speed "0.5") $ every 4 (0.25 <~) $ every 3 rev $
+  s "bd sn arpy*2 cp"
+  # speed "[1 1.25 0.75 -1.5]/3"
+
+d1 $ whenmod 8 6 rev $ s "bd*2 arpy*2 cp hh*4"
+
+d1 $ whenmod 8 7 (const $ s "cp*8") $ s "bd sn"
+
+-- Boolean Pattern Conditions
+
+d1 $ struct (every 3 inv "t(3,8)") $ s "cp"
+d1 $ mask "t t f t" $ s "bd*8"
+
+-- Practical Examples
+
+-- Reverse every fourth cycle.
+d1 $ every 4 rev $ s "bd sn hh cp"
+
+-- Speed up during the second half of each 8-cycle phrase.
+d1 $ whenmod 8 4 (fast 2) $ s "bd sn"
+
+-- Choose one transform on even cycles and another on odd cycles.
+d1 $ ifp ((== 0) . (`mod` 2)) rev (fast 2) $ s "bd sn cp hh"
+
+-- Add random event-level distortion.
+d1 $ sometimes (# crush 2) $ s "bd sn hh cp"
+
+-- Add random cycle-level room.
+d1 $ someCycles (# room 0.8) $ s "arpy*8"

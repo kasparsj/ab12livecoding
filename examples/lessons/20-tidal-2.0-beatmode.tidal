@@ -1,0 +1,36 @@
+-- Current Tidal Model
+
+setcps (120/60/4)
+
+d1 $ s "bd sn hh cp"
+
+d1 $ s "bd sn"
+d1 $ s "bd sn hh cp"
+d1 $ s "bd sn hh cp mt arpy"
+
+-- What beatMode Changes
+
+-- Current cycle-oriented expectation:
+d1 $ rev $ s "bd sn hh cp"
+
+-- Cycle Thinking vs Beat Thinking
+
+setcps (120/60/4)
+
+d1 $ s "bd sn hh cp"
+d2 $ fast 2 $ s "hh cp"
+d3 $ every 4 rev $ s "bd sn hh cp"
+
+-- Link, DAWs, and the Beat Grid
+
+setcps (120/60/4)
+
+-- Classroom Exercises
+
+setcps (120/60/4)
+
+d1 $ s "bd sn hh cp"
+d2 $ s "hh*8"
+
+d1 $ every 4 rev $ s "bd sn hh cp"
+d2 $ every 3 (fast 2) $ s "hh cp"

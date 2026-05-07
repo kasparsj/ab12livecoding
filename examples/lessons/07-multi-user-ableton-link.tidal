@@ -1,0 +1,33 @@
+-- Version Check
+
+enableLink
+
+-- Beats Per Cycle
+
+tidal <- startTidal superdirtTarget
+  (defaultConfig {cQuantum = 4, cBeatsPerCycle = 4})
+
+tidal <- startTidal superdirtTarget
+  (defaultConfig {cQuantum = 3, cBeatsPerCycle = 3})
+
+-- Carabiner Bridge Setup
+
+sock <- carabiner tidal 4 (-0.14)
+
+d1 $ s "cp bd bd bd"
+
+sendMsg sock "bpm 155"
+
+-- Aligning Latency
+
+setcps 0.25
+
+d1 $ s "cp"
+
+d1 $ s "cp" # nudge 0.05
+
+d1 $ s "cp" # nudge (-0.05)
+
+-- Cycle Alignment
+
+resetCycles

@@ -1,0 +1,25 @@
+-- Orbits
+
+d1 $ s "bd sn" # orbit 0
+d2 $ s "hh*8"  # orbit 1
+d3 $ s "arpy"  # orbit 2
+
+-- Mini-Notation
+
+s "bd sn"             -- two events across one cycle
+s "bd [sn cp] hh*2"   -- group and repeat inside the cycle
+s "[bd*2, hh*8, cp]"  -- parallel parts inside one pattern
+s "bd <sn cp>"        -- alternate sn/cp by cycle
+
+-- once
+
+once $ s "bd"
+once $ s "bev"
+
+d1 $ qtrigger $ s "bd sn bd sn"
+
+d1 $ trigger $ s "bd sn"
+
+do
+  resetCycles
+  d1 $ s "bd sn"

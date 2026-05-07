@@ -11,7 +11,7 @@ This map keeps the beginner path focused while adding optional labs for broader 
 | Conditions and logic | `every`, `sometimes`, `mask` | `every'`, `foldEvery`, `when`, `whenmod`, `contrast`, `choose`, `chooseBy`, `wchoose`, `wchooseBy`, `select`, `selectF`, `pickF`, `squeeze`, `inhabit`, `sew`, `stitch` | Logic extensions |
 | Randomness | `rand`, `irand`, `degrade`, `degradeBy` | `often`, `sometimesBy`, `someCycles`, `someCyclesBy`, `randrun`, `perlin`, `perlin2`, `cycleChoose`, `markovPat` | Generative lab |
 | Pattern combination | basic layering with multiple slots | `stack`, `overlay`, `superimpose`, `layer`, `steps`, `iter'` | Arrangement lab |
-| Concatenation and form | section comments and manual changes | `cat`, `fastcat`, `timeCat`, `randcat`, `wrandcat`, `append`, `fastAppend` | Arrangement lab |
+| Concatenation and form | section comments and manual changes, `ur`, `seqP`, `seqPLoop` | `cat`, `fastcat`, `timeCat`, `randcat`, `wrandcat`, `append`, `fastAppend` | Arrangement lab |
 | Time and transformation | `fast`, `slow`, `rev`, `every`, `jux`, `off`, `rot`, `chunk` | `hurry`, `palindrome`, `trunc`, `linger`, `loopFirst`, `bite`, `shuffle`, `scramble`, `ply`, `stutter`, `stut`, `echo`, `ghost`, `spin`, `weave`, `inside`, `outside`, `within`, `compress`, `zoom`, `swing`, `swingBy` | Transformation extensions |
 | Harmony and melody | notes, chord symbols, `arp`, bass layers | `scale`, `toScale`, `rolled`, `rolledBy`, voicings, oscillator-driven melody | Harmony lab |
 | Oscillators and modulation | `range`, `sine`, `segment` | `rangex`, `cosine`, `square`, `tri`, `saw`, `isaw`, `smooth`, `perlin`, `perlin2` | Modulation lab |

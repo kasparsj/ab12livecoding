@@ -1,0 +1,38 @@
+-- Cycles, Arcs, And Queries
+
+s "bd hh bd hh"
+
+s "bd hh hh"
+
+-- Structure Comes From Intersections
+
+"2 3" + "4 5 6"
+
+"6 [7 8] 9"
+
+-- Left, Right, Or Both
+
+d1 $ s "bd sn" # gain "1 0.5"
+
+d1 $ gain "1 0.5" # s "bd sn"
+
+-- Patterned Parameters Are Patterns All The Way Down
+
+d1 $ fast 2 $ s "bd sn"
+d1 $ fast "2 4" $ s "bd sn kurt cp"
+
+-- Mini-Notation Is Parsed, Not Interpreted As Strings
+
+s "[bd sd] hh"
+
+-- Worked Teaching Path
+
+"1 2 3"
+
+"2 3" + "4 5 6"
+"2 3" |+ "4 5 6"
+"2 3" +| "4 5 6"
+
+d1 $ s "bd sn" # gain "1 0.5 0.8"
+
+d1 $ s "hh*8" # pan sine

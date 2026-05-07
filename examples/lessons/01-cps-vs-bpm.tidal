@@ -1,0 +1,11 @@
+-- Conversion
+
+setcps (120/60/4)
+
+-- Pattern Time
+
+s "bd sn hh cp"
+
+-- Teaching Line
+
+setcps (120/60/4)

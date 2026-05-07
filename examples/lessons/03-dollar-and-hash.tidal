@@ -1,0 +1,25 @@
+-- $
+
+d1 $ s "bd sn"
+
+d1 $ every 3 rev $ s "bd sn"
+
+-- #
+
+d1 $ s "bd sn" # gain "1 0.5 0.8"
+
+d1 $ gain "1 0.5 0.8" # s "bd sn"
+
+-- Controls Are Patterns
+
+gain 0.8
+gain "1 0.7 0.4"
+pan "0 1 0.25 0.75"
+
+d1 $ s "bd sn" # gain "1 0.7" # pan "0 1"
+
+-- Reading a Full Line
+
+d1 $ every 4 rev $ s "bd sn [hh hh]" # gain "1 0.8 0.6"
+
+d1 (every 4 rev (s "bd sn [hh hh]" # gain "1 0.8 0.6"))

@@ -1,0 +1,53 @@
+-- Named Sections with ur
+
+let sections =
+      [ ("intro", s "bd ~ bd ~" # gain 0.9)
+      , ("lift",  stack [s "bd*4", s "hh*8" # gain 0.45])
+      , ("break", s "cp*4" # room 0.4 # gain 0.75)
+      ]
+in
+d1 $ ur 12 "intro lift break" sections []
+
+let sections =
+      [ ("intro", s "bd ~ bd ~" # gain 0.9)
+      , ("lift",  stack [s "bd*4", s "hh*8" # gain 0.45])
+      , ("break", s "cp*4" # room 0.4 # gain 0.75)
+      ]
+    moves =
+      [ ("wide", (# room 0.8 # size 0.9))
+      , ("double", fast 2)
+      ]
+in
+d1 $ ur 16 "intro lift:wide break:double lift" sections moves
+
+-- Multiple Parts in One Section
+
+let parts =
+      [ ("drums", s "bd [~ sn] bd [cp sn]")
+      , ("hats",  s "hh*8" # gain 0.4)
+      , ("bass",  n "c2 ~ eb2 g2" # s "superpiano" # gain 0.65)
+      ]
+    moves =
+      [ ("open", (# cutoff 5000))
+      , ("up", (|+ n 12))
+      ]
+in
+d1 $ ur 12 "drums [drums,hats] [drums,hats,bass:up] [drums,bass:open]" parts moves
+
+-- Scheduled Ranges with seqP
+
+d1 $ qtrigger $ seqP
+  [ (0, 16, s "bd ~ bd ~")
+  , (4, 16, s "hh*8" # gain 0.4)
+  , (8, 16, n "c2 eb2 g2 bb1" # s "superpiano" # gain 0.65)
+  , (12, 16, s "cp*8" # gain 0.7 # room 0.5)
+  ]
+
+-- Looping a Schedule with seqPLoop
+
+d1 $ qtrigger $ seqPLoop
+  [ (0, 8,  s "bd ~ sn ~")
+  , (2, 8,  s "hh*8" # gain 0.35)
+  , (4, 8,  n "c3 eb3 g3 bb2" # s "superpiano" # gain 0.55)
+  , (6, 8,  every 2 rev $ s "cp*4" # room 0.5)
+  ]

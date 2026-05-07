@@ -2,30 +2,79 @@
 
 d1 $ s "bd(3,8)"
 
-d2 $ s "hh(7,16)"
+d1 $ s "hh(7,16)"
 
-d3 $ s "cp(5,8,2)"
+d1 $ s "cp(5,8,2)"
+
+-- rotated
 
 d1 $ s "bd(3,8,1)"
 
--- viss kopā
+-- several Euclidean parts together
+
 d1 $ s "[bd(3,8), cp(2,8), hh(7,8)]"
 
 -- euclid
 
 d1 $ euclid 3 8 $ s "cp"
 
+-- equivalent mini-notation
+
 d1 $ s "cp(3,8)"
+
+-- patterned euclid arguments
 
 d1 $ euclid "<3 5>" "[8 16]/4" $ s "bd"
 
-d2 $ euclidInv 3 8 $ s "hh"
+-- inverse and hit/gap forms
+
+d1 $ euclidInv 3 8 $ s "hh"
 
 d1 $ euclidFull 5 8 (s "bd") (s "hh")
+
+-- Boolean Patterns
+
+-- Boolean pattern literals from the lesson:
+-- "t f t f"
+-- "1 0 1 0"
+-- "t(3,8)"
+
+-- "t(3,8)" expands to:
+-- t f t f t f f t
+
+-- struct
+
+-- struct :: Pattern Bool -> Pattern a -> Pattern a
+
+d1 $ struct "t(3,8)" $ s "bd"
+
+d1 $ struct "1 0 1 0" $ s "hh"
+
+d1 $ struct (every 3 inv "t(3,8)") $ s "cp"
+
+-- rhythm/gates -> struct -> instrument/control pattern
+
+-- Reusable Rhythm Variables
+
+do
+  let main = "t(5,16)"
+      clap = "t(2,8,1)"
+
+  d1 $ stack [
+      struct main $ s "bd",
+      struct clap $ s "cp",
+      struct main $ s "hh" # speed "2"
+    ]
+
+-- Alignment Caveat
+
+d1 $ struct "t(5,8)" $ n "0 1 2 3 4" # s "superpiano"
 
 -- Binary Rhythm Generators
 
 d1 $ struct (binary 163) $ s "cp"
+
+-- extra random binary variation
 
 d1 $ struct (binary (slow 4 $ binary (irand 200))) $ s "cp"
 
@@ -34,3 +83,12 @@ d1 $ struct (binaryN 12 2946) $ s "hh"
 d1 $ struct (ascii "x y") $ s "bd"
 
 d1 $ struct (necklace 12 [4,2]) $ s "sd"
+
+-- binary 163 as an explicit boolean pattern
+
+d1 $ struct "t f t f f f t t" $ s "cp"
+
+-- Continuous Patterns and struct
+
+d1 $ speed (struct "t(3,8)" $ slow 2 $ range 0.5 2.5 sine)
+  # s "bd"
