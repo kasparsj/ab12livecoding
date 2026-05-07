@@ -1,0 +1,59 @@
+-- 1. paskatīties materiālus githubā
+
+-- 2. izrunāt jautājumus
+
+-- 3. kopīgi pastrādāt pie kompozīcijas
+
+bpm 127
+
+let s101 = every 5 (|+| speed "-1") $ every 4 (hurry 0.2) $ sound "cb"
+      # gain 0.78 # oc "5 6" # ring 0.8 # ringf 300
+    s102 = sound "bd*2 [sn cp] bd hh" # gain 0.78 # djf 0.2 # tanh 2
+    s103 = sound "[bd*2 [sn cp] bd hh]*2" # gain 0.78 # djf 0.8 # tanh 2
+    s104 = s "bd" # gain 0
+    s201 = sound "hh*8" # gain 0.65 # pan (range 0 1 $ sine)
+    s301 = s "cb" # ring 1 # ringf 300
+    d1Score = [
+        (0, 12, s101),
+        (2, 4, s102),
+        (4, 8, s103),
+        (8, 12, s104),
+        (12, 16, s102)
+      ]
+    d2Score = [
+        (4, 6, s201)
+      ]
+    d3Score = [
+        (8, 10, s301)
+      ]
+    offset = 0
+in
+do
+{
+  resetCycles;
+  d1 $ rotL offset $ seqP d1Score;
+  d2 $ rotL offset $ seqP d2Score;
+  d3 $ rotL offset $ seqP d3Score
+}
+
+
+---- ur
+
+
+let pats =
+      [
+        ("a", stack [n "c4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[c3,g4,c4]" # s "superpiano"# gain "0.7"
+                    ]
+        ),
+        ("b", stack [n "d4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[d3,a4,d4]" # s "superpiano"# gain "0.7"
+                    ]
+        ),
+        ("c", stack [n "f4 c5 g4 f4 f5 g4 e5 g4" # s "superpiano" # gain "0.7",
+                     n "[f4,c5,f4]" # s "superpiano"# gain "0.7"
+                    ]
+        )
+      ]
+in
+d1 $ ur 12 "a b c" pats []

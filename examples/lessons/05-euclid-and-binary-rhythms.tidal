@@ -1,0 +1,36 @@
+-- Euclidean Mini-Notation
+
+d1 $ s "bd(3,8)"
+
+d2 $ s "hh(7,16)"
+
+d3 $ s "cp(5,8,2)"
+
+d1 $ s "bd(3,8,1)"
+
+-- viss kopā
+d1 $ s "[bd(3,8), cp(2,8), hh(7,8)]"
+
+-- euclid
+
+d1 $ euclid 3 8 $ s "cp"
+
+d1 $ s "cp(3,8)"
+
+d1 $ euclid "<3 5>" "[8 16]/4" $ s "bd"
+
+d2 $ euclidInv 3 8 $ s "hh"
+
+d1 $ euclidFull 5 8 (s "bd") (s "hh")
+
+-- Binary Rhythm Generators
+
+d1 $ struct (binary 163) $ s "cp"
+
+d1 $ struct (binary (slow 4 $ binary (irand 200))) $ s "cp"
+
+d1 $ struct (binaryN 12 2946) $ s "hh"
+
+d1 $ struct (ascii "x y") $ s "bd"
+
+d1 $ struct (necklace 12 [4,2]) $ s "sd"

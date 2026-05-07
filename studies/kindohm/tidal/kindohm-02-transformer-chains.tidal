@@ -12,6 +12,7 @@
 -- pattern. The menu should sound rehearsed because the choices are bounded.
 
 hush
+
 setcps (140/60/4)
 
 -- 1. Compact base pattern.

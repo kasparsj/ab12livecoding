@@ -12,6 +12,7 @@
 -- fills, interruptions, dropouts, and returns without losing the groove.
 
 hush
+
 setcps (120/60/4)
 
 -- 1. Define a stock version of the source helper idea from functions.tidal.

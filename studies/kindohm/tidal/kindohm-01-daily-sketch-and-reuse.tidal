@@ -18,13 +18,16 @@
 -- discussed in comments.
 
 hush
+
 setcps (140/60/4)
+
+-- 'cycle' 0 -> inf
 
 -- 1. Sound check and anchor.
 do
-  resetCycles
+  resetCycles -- sets 'cycle' number to 0
   d1 $ sound "bd*2 [sn cp] bd hh" # gain 0.78
-  d2 $ sound "hh*8" # gain 0.35
+  d2 $ sound "hh*8" # gain 0.65
 
 -- 2. Make the anchor feel like a daily sketch, not a drum exercise.
 -- Listen for the base groove staying recognizable while order and color move.
@@ -33,7 +36,7 @@ do
 d1
   $ every 4 rev
   $ sound "[bd*2 [sn cp] bd hh]"
-  # speed "1 1 0.9 1.1"
+  # speed "[1 1 0.9 1.1]"
   # cutoff (range 900 3200 $ slow 4 sine)
   # resonance 0.15
   # gain 0.7
@@ -64,9 +67,14 @@ do
   d2
     $ every 6 (0.25 <~)
     $ sound "arpy*4"
-    # n "0 2 4 7"
+    # n "0 2 4 7" -- notes: 1-11 samples translate mostly c to b
+    -- # n (run 7)
+    -- # n (irand 7) -- rand(0, 7)
     # cutoff (range 600 2800 $ slow 5 sine)
-    # gain 0.35
+    # gain 0.95
+    -- # tanh 3
+    -- # room 0.3
+    -- # size 0.7
 
 -- 5. Source-style daily performance seed.
 -- This is the version to save, date, mutate, and reuse tomorrow.
@@ -89,13 +97,15 @@ do
     $ whenmod 8 4 (density 2)
     $ sound "hh*8"
     # pan (range 0.25 0.75 $ slow 3 sine)
-    # gain 0.32
+    # gain 0.62
   d3
     $ every 6 (0.25 <~)
-    $ sound "arpy*4"
+    $ sound "arpy*77"
     # n "0 2 4 7"
     # cutoff (range 600 2800 $ slow 5 sine)
-    # gain 0.34
+    # gain 0.5
+    # octave 7
+
 
 -- 6. Five-sketch reuse prompt.
 -- Copy section 5 into five dated files. Change only one dimension in each:

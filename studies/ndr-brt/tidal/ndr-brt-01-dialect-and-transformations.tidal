@@ -38,25 +38,26 @@ let ac = accelerate
 -- 2. Same groove twice: readable first, dialect second.
 -- Listen for identical sound, then notice how the shorter dialect makes later
 -- transformation chains easier to scan under performance pressure.
+do
 d1 $ sound "bd ~ sn ~" # gain 0.85
+d2 $ every 4 rev $ sound "hh*8" # gain 0.58
 
-d2 $ every 4 rev $ sound "hh*8" # gain 0.38
-
+do
 d1 $ sound "bd ~ sn ~" # g 0.85
+d2 $ every 4 rev $ sound "hh*8" # g 0.58
 
-d2 $ every 4 rev $ sound "hh*8" # g 0.38
 
 -- 3. Anchor plus transforming body.
 -- d1 is the floor. d2 gets folded, hurried, and stereo-reversed, but the kick
 -- and snare keep enough orientation that the gesture feels intentional.
 do
-  let ar = 3
-  d1 $ sound "bd ~ sn ~" # g 0.85
+  let ar = 4
+  d1 $ sound "bd ~ sn ~" # g 0.05
   d2
     $ chunk ar ((iter ar).(h ar).(juxBy 0.35 rev))
     $ every (ar*2) (linger 0.25)
     $ sound "hh*8 cp"
-    # g 0.42
+    # g 0.62
     # pan "0.25 0.75"
 
 -- 4. Layer-first derivation from one rhythm.
@@ -67,12 +68,12 @@ do
   d1
     $ layer [
       id,
-      (h 2).("q" ~>).(# g 0.45).(# pan 0.8),
-      (fa 2).(every 3 rev).(# g 0.32).(# s "cp"),
-      (db 0.45).(juxBy 0.5 rev).(# g 0.25)
+      (h 2).("q" ~>).(# g 0.55).(# pan 0.8),
+      (fa 2).(every 3 rev).(# g 0.42).(# s "cp"),
+      (db 0.45).(juxBy 0.5 rev).(# g 0.65)
     ]
     $ sound "bd [sn ~] hh*4"
-    # g 0.72
+    # g 0.82
     # rvb 0.15 0.35
 
 -- 5. Dense phrase with stock-safe damage.
@@ -83,16 +84,19 @@ do
 do
   let ar = 3
   d2
-    $ db 0.45
+    -- $ fast 4
+    $ superimpose (fast 4).(# lp (range 900 3500 $ slow 8 sine) 0.2)
+    $ superimpose (db 0.45).(# lp (range 900 3500 $ slow 8 sine) 0.2)
     $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
     $ every 5 (linger 0.25)
     $ sb 0.20 (si ((h 2).(# pan rand).(# g 0.75)))
     $ sb 0.12 (juxBy 0.6 ((|* sp (-1)).rev))
-    $ sound "[hh cp*2]"
-    # g 0.34
+    $ sound "<sin arpy*2>"
+    # g 0.64
     # scc 0.12 2 3
     # lp (range 900 3500 $ slow 8 sine) 0.2
     # rvb 0.3 0.6
+    # octave 2
 
 -- 6. Remove one transform at a time and listen for its job.
 -- First hear the full local cut-up; then remove `gap` and `chew` so students
@@ -102,14 +106,14 @@ do
   d2
     $ chunk ar ((iter ar).(h ar).(gap (ar+1)).(chew ar 5))
     $ sound "[hh cp*2]"
-    # g 0.34
+    # g 0.64
 
 do
   let ar = 3
   d2
     $ chunk ar ((iter ar).(h ar))
     $ sound "[hh cp*2]"
-    # g 0.34
+    # g 0.64
 
 -- 7. Recovery.
 -- This returns to a known pulse and clears the transformed layer without using

@@ -46,12 +46,12 @@ d1
 -- The anchor stays on d1. d2 occasionally pulls a reversed cycle into the
 -- foreground, like a live transition trick rather than a permanent loop.
 do
-  d1 $ sound "bd ~ sn ~" # g 0.75
+  -- d1 $ sound "bd ~ sn ~" # g 0.75
   d2
     $ sb 0.20 (rinse 2 4)
     $ sound "arpy"
     # n 0
-    # g 0.32
+    # g 0.8
     # rvb 0.35 0.65
 
 -- 3. Sieve translation A: OR-like masks.
@@ -81,9 +81,9 @@ do
   d1
     $ layer [
       id,
-      (h 2).(# end 0.08).(# g 0.35),
-      (str 9).(# pan rand).(# g 0.28),
-      (|* sp 0.5).(# end 0.35).(# g 0.34)
+      (h 2).(# end 0.08).(# g 0.55),
+      (str 9).(# pan rand).(# g 0.58),
+      (|* sp 0.5).(# end 0.35).(# g 0.54)
     ]
     $ sound "arpy"
     # n "0 1 2 3"
@@ -107,7 +107,7 @@ do
 -- introducing real controller input.
 d2
   $ sound "hh*8"
-  # g (range 0.15 0.45 $ slow 8 sine)
+  # g (range 0.45 0.85 $ slow 8 sine)
   # cutoff (range 600 5000 $ slow 10 cosine)
 
 -- 7. Live global color states.

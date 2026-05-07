@@ -13,6 +13,7 @@
 -- do the same with stock or common SuperDirt names.
 
 hush
+
 setcps (150/60/4)
 
 -- 1. Anchor first. Keep this running while scanning sample bodies.
