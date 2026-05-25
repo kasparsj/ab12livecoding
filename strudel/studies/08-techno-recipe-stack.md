@@ -1,5 +1,12 @@
 # Techno Recipe Stack
 
+## Study Metadata
+
+- Primary axis: genre/domain recipe.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: source repository declares AGPL-3.0; this study is still a
+  structural summary rather than a reuse grant.
+
 ## Source Examples
 
 - [sueszli/strudel-recipes: `trance.js`](https://github.com/sueszli/strudel-recipes/blob/main/trance.js)

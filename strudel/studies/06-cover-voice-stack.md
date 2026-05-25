@@ -1,23 +1,32 @@
 # Cover Voice Stack
 
+## Study Metadata
+
+- Primary axis: transcription and role lanes.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; sources are cover/remake studies from
+  repositories with no detected license.
+
 ## Source Examples
 
 - [Claffystic/StudelProjects: `TobyFoxDetermination.js`](https://github.com/Claffystic/StudelProjects/blob/main/TobyFoxDetermination.js)
 - [gitgernit/strudel: `igorTheme.js`](https://github.com/gitgernit/strudel/blob/main/igorTheme.js)
-- [gitgernit/strudel: `neverSeeMeAgain.js`](https://github.com/gitgernit/strudel/blob/main/neverSeeMeAgain.js)
 
 ## Structure
 
-This structure transcribes a known piece into role-based lanes: lead, harmony,
-bass, and percussion. Instead of abstracting the song into generative rules, it
-keeps long written lines but separates them by musical job.
+This structure transcribes a known piece into role-based lanes when the source
+material supports that split. The strongest example separates lead, harmony,
+and bass lanes; the secondary example shows a simpler remake split between
+piano material and drums. Instead of abstracting the song into generative rules,
+the pattern keeps long written lines but separates them by musical job.
 
 ## Why It Works
 
 - Long note patterns preserve recognizable contour.
 - Named lanes make dense transcription readable.
 - Harmony and bass can be checked independently from lead.
-- Drums can be added as a separate remake layer rather than baked into the melody.
+- Drums can be added as a separate remake layer when the arrangement includes
+  a rhythm remake.
 
 ## Arrangement Map
 

@@ -1,5 +1,11 @@
 # Sample-Slice Groove
 
+## Study Metadata
+
+- Primary axis: performance/sample workflow.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; source repository has no detected license.
+
 ## Source Examples
 
 - [smaudd/strudel-sessions: `lofi-1.js`](https://github.com/smaudd/strudel-sessions/blob/master/lofi-1.js)

@@ -1,5 +1,12 @@
 # Tablature Translation
 
+## Study Metadata
+
+- Primary axis: material translation.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; sources are cover/arrangement studies from a
+  repository with no detected license.
+
 ## Source Examples
 
 - [eefano/strudel-songs-collection: `blackbird.js`](https://github.com/eefano/strudel-songs-collection/blob/main/blackbird.js)

@@ -1,5 +1,12 @@
 # Tracker Voice Split
 
+## Study Metadata
+
+- Primary axis: voice architecture.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; source repository has no detected license and
+  credits a third-party composition.
+
 ## Source Examples
 
 - [eefano/strudel-songs-collection: `aztecchallenge.js`](https://github.com/eefano/strudel-songs-collection/blob/main/aztecchallenge.js)

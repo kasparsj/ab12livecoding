@@ -1,5 +1,11 @@
 # Lettered Cue Score
 
+## Study Metadata
+
+- Primary axis: formal mechanism.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; source repository has no detected license.
+
 ## Source Examples
 
 - [eefano/strudel-songs-collection: `epicbiopic.js`](https://github.com/eefano/strudel-songs-collection/blob/main/epicbiopic.js)

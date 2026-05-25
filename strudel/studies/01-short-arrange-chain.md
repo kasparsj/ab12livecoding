@@ -1,5 +1,12 @@
 # Short Arrange Chain
 
+## Study Metadata
+
+- Primary axis: formal mechanism.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; source repository has no detected license and
+  credits a third-party composition.
+
 ## Source Examples
 
 - [eefano/strudel-songs-collection: `budsandspawn.js`](https://github.com/eefano/strudel-songs-collection/blob/main/budsandspawn.js)

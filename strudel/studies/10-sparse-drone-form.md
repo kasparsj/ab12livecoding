@@ -1,8 +1,20 @@
 # Sparse Drone Form
 
+## Study Metadata
+
+- Primary axis: density profile.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: AI-authored supplemental evidence from a repository with no
+  detected license; analysis-only.
+
 ## Source Examples
 
 - [SvetimFM/cc-cloud-album-1: `04_substrate.js`](https://github.com/SvetimFM/cc-cloud-album-1/blob/claude/create-trance-masterpiece-01WfPDroT6TEXobjZGjYyXn1/04_substrate.js)
+
+Provenance note: the repository album notes identify this project as
+AI-authored by Claude. This study uses it as supplemental evidence for a clear
+Strudel code structure, not as evidence of established human composition
+practice.
 
 ## Structure
 
@@ -52,3 +64,6 @@ $: stack(drone, pulse, slowBass, rareTone)
 
 Sparse forms depend on sound design. If the tones are too plain, the structure
 can feel empty rather than intentional.
+
+Because this example is AI-authored and has no detected license, treat it as an
+analysis-only source.

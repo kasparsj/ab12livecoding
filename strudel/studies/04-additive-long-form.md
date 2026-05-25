@@ -1,5 +1,12 @@
 # Additive Long Form
 
+## Study Metadata
+
+- Primary axis: temporal layering.
+- Evidence source: [source-map study evidence](../source-map.md#study-evidence).
+- Reuse posture: analysis-only; source repository has no detected license and
+  includes third-party composition credits.
+
 ## Source Examples
 
 - [eefano/strudel-songs-collection: `swimmingsnake.js`](https://github.com/eefano/strudel-songs-collection/blob/main/swimmingsnake.js)
