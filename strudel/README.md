@@ -35,3 +35,7 @@ license state, and exact source links.
 - [08 - Techno Recipe Stack](studies/08-techno-recipe-stack.md)
 - [09 - Named Phase Album Track](studies/09-named-phase-album-track.md)
 - [10 - Sparse Drone Form](studies/10-sparse-drone-form.md)
+- [11 - EDM Pop Section Journey](studies/11-edm-pop-section-journey.md)
+- [12 - Industrial Trance Macro Form](studies/12-industrial-trance-macro-form.md)
+- [13 - Relentless Additive Pressure Build](studies/13-relentless-additive-pressure-build.md)
+- [14 - Staged Color Layer Accumulation](studies/14-staged-color-layer-accumulation.md)

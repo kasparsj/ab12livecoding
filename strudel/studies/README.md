@@ -7,7 +7,7 @@ the arrangement logic in reusable terms.
 Public source availability is not a reuse grant. Several examples are
 unlicensed repositories, covers, or studies of credited third-party
 compositions, so these notes should be treated as analysis-only unless a source
-license clearly allows more. Studies 09 and 10 use an AI-authored repository as
+license clearly allows more. Studies 09-14 use an AI-authored repository as
 supplemental structure evidence and are marked accordingly.
 
 ## Selection Criteria
@@ -38,3 +38,7 @@ too close to a single static loop.
 | 08 | [Techno Recipe Stack](08-techno-recipe-stack.md) | Genre/domain recipe | Assemble a genre track from reusable kick, hat, bass, lead, and effect modules. |
 | 09 | [Named Phase Album Track](09-named-phase-album-track.md) | Narrative phase form | Write a track as named narrative phases, with AI-authored evidence marked as supplemental. |
 | 10 | [Sparse Drone Form](10-sparse-drone-form.md) | Density profile | Use silence, long sustains, and rare events as the structure, with AI-authored evidence marked as supplemental. |
+| 11 | [EDM Pop Section Journey](11-edm-pop-section-journey.md) | Sectional pop/EDM macro-form | Build a full intro/build/pre-drop/drop/breakdown/final-drop journey from shared motifs. |
+| 12 | [Industrial Trance Macro Form](12-industrial-trance-macro-form.md) | Four-state macro-form | Build intro, main, breakdown, and climax states from reusable industrial layer groups. |
+| 13 | [Relentless Additive Pressure Build](13-relentless-additive-pressure-build.md) | Monotonic density escalation | Keep a constant foundation while pressure layers enter one by one without release. |
+| 14 | [Staged Color Layer Accumulation](14-staged-color-layer-accumulation.md) | Conceptual layer accumulation | Map a concept to named voices, then reveal them with staged masks. |
