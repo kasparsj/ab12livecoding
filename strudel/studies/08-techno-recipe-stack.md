@@ -39,14 +39,14 @@ creates form through mute choices, filter motion, and periodic transformations.
 ## Reusable Template
 
 ```js
-const kick = s("bd*4").gain(1)
+const kick = s("bd*4").gain(0.5)
 const rumble = s("bd*4").lpf(80).room(0.9)
 const hats = s("hh*8").hpf(1000)
-const lead = n("hook pattern").scale("minor").s("lead")
+const lead = n("c4 a3 f4 e4").s("gm_lead_3_calliope")
 const filter = slider(0, 0, 1200)
 
 $: stack(kick, rumble, hats, lead)
-  .every(16, x => x.lpf("<4000 2000 1000 500>"))
+  .every(4, x => x.lpf("4000 2000 1000 500"))
   .hpf(filter)
 ```
 
