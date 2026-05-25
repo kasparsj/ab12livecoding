@@ -42,20 +42,68 @@ active.
 ## Reusable Template
 
 ```js
+const melody_A = note("d4 e4 fs4 a4 b4 a4 fs4 e4")
+
+const bass_melody = note("<d2 a2 b2 fs2>*2")
+
+const pad = note("D")
+  .sound("square")
+  .lpf(600)
+  .gain(0.3)
+  .room(0.9)
+  .sustain(16)
+  .attack(4)
+
+  // Soft arpeggio - stars twinkling
+const softArp = note("d4 fs4 a4 d5")
+    .sound("triangle")
+    .lpf(1200)
+    .gain(0.25)
+    .room(0.7)
+    .sustain(0.3)
+    .slow("<1 2>")
+
+  // Distant synth - the horizon calling
+const hook = melody_A
+    .sound("sine")
+    .lpf(1000)
+    .gain(0.2)
+    .room(0.9)
+    .slow("<1 4 1 2>")
+
+const kick = s("bd ~ ~ ~ bd ~ ~ ~")
+    .gain(0.7)
+    .lpf(200)
+
+  // Bass melody - here we go!
+const bass = bass_melody
+    .sound("sawtooth")
+    .lpf(400)
+    .gain(0.6)
+    .sustain(0.4)
+
+// Main melody enters clearly
+const riser = melody_A
+    .sound("sawtooth")
+    .lpf(1400)
+    .gain(0.5)
+    .delay(0.4)
+    .delaytime(0.375)
+
 const intro = stack(pad, softArp, hook.slow(4))
-const build = stack(kick, bass, hook, hats)
-const preDrop = stack(kick.fast(2), bass, hook, riser, snare)
-const drop = stack(kick, bass, hookLead, chords, drums)
-const breakdown = stack(sparseKick, hook.slow(2), pad)
-const finalDrop = stack(drop, counterLead, shimmer)
+const build = stack(kick, bass, hook)
+const preDrop = stack(kick.fast(2), bass, hook, riser)
+const drop = stack(kick, bass, riser)
+const breakdown = stack(kick, hook.slow(2), pad)
+const finalDrop = stack(drop, hook)
 
 $: stack(
-  intro.mask("1 0 0 0 0 0 0 0"),
-  build.mask("0 1 1 0 0 0 0 0"),
-  preDrop.mask("0 0 0 1 0 0 0 0"),
-  drop.mask("0 0 0 0 1 1 0 0"),
-  breakdown.mask("0 0 0 0 0 0 1 0"),
-  finalDrop.mask("0 0 0 0 0 0 0 1")
+  intro.mask("<1 0 0 0 0 0 0 0>/8"),
+  build.mask("<0 1 1 0 0 0 0 0>/8"),
+  preDrop.mask("<0 0 0 1 0 0 0 0>/8"),
+  drop.mask("<0 0 0 0 1 1 0 0>/8"),
+  breakdown.mask("<0 0 0 0 0 0 1 0>/8"),
+  finalDrop.mask("<0 0 0 0 0 0 0 1>/8")
 )
 ```
 
