@@ -9,11 +9,11 @@ hush
 d1 $ sound "bd ~ sn ~"
 
 -- Add eight hi-hats per cycle on d2 at reduced gain.
-d2 $ sound "hh*8" # gain 0.45
+d2 $ sound "hh*8" # gain 0.65
 
 -- Basic chord pattern using chord names.
 -- Play C major, E minor, and F major chord events with the supermandolin sound.
-d3 $ n "c'maj e'min f'maj" # sound "supermandolin" # sustain 1.2 # gain 0.75
+d3 $ n "c'maj e'min f'maj" # sound "superpiano" # sustain 1.2 # gain 0.75
 
 -- Chord octave choices and inversions/open voicing.
 -- Play the same chord movement in octave 4 with open voicing on F major, reverb room, and longer sustain.
@@ -21,7 +21,7 @@ d3 $ n "c4'maj e4'min f4'maj'o" # sound "superpiano" # sustain 1.5 # room 0.25 #
 
 -- Bass layer.
 -- Add a low bass note pattern with rests between notes.
-d4 $ n "c2 ~ e2 ~ f2 ~ e2 ~" # sound "bass" # gain 0.8
+d4 $ n "c ~ e ~ f ~ e ~" # sound "bass" # gain 0.8
 
 -- Arpeggio from a chord.
 -- Turn four-note C major and E minor chords into upward arpeggios.
