@@ -38,25 +38,25 @@ aligned.
 ```js
 const form = "<a b a c d e c f>"
 
-const harmony = form.pickRestart({
-  a: "home chords",
-  b: "lift chords",
-  c: "bridge chords",
-  d: "dark chords",
-  e: "return chords",
-  f: "ending chord"
-})
+const chords = form.pickRestart({
+  a: "A",
+  b: "B",
+  c: "C",
+  d: "D",
+  e: "E",
+  f: "F"
+}).sub(12)
 
 const melody = form.pickRestart({
-  a: "main phrase",
-  b: "answer phrase",
-  c: "bridge phrase",
-  d: "peak phrase",
-  e: "return phrase",
+  a: "a c e",
+  b: "b d f",
+  c: "c a f e",
+  d: "d f",
+  e: "e c",
   f: "~"
-})
+}).add(24).gain(0.2)
 
-stack(chord(harmony), note(melody), drumsFrom(form))
+stack(chord(chords).s("gm_epiano2"), note(melody).s("gm_violin"))
 ```
 
 ## Practice Prompts
